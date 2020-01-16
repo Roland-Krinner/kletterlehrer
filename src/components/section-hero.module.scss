@@ -1,0 +1,79 @@
+.section {
+	position: relative;
+	> div > div::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0) 120px);
+	}
+	ol {
+		position: relative;
+		display: flex;
+		bottom: 2.5rem;
+		width: 100%;
+		padding-right: 20px;
+		padding-left: 20px;
+		margin-right: auto;
+		margin-left: auto;
+
+		@media (min-width: 576px) {
+			max-width: 540px;
+		}
+		@media (min-width: 768px) {
+			max-width: 720px;
+		}
+		@media (min-width: 992px) {
+			max-width: 960px;
+		}
+		@media (min-width: 1200px) {
+			max-width: 1040px;
+		}
+
+		li {
+			flex: auto;
+			height: 2px !important;
+			border-radius: 0 !important;
+			background-color: #fff !important;
+			margin-left: 0 !important;
+			// margin-right: 8px;
+			&:last-child {margin-right: 0 !important;}
+		}
+	}
+}
+
+.slide {
+	width: 100%;
+}
+
+.content {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.gradient {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(to right top, #000000, rgba(0, 0, 0, 0) 56%);
+}
+
+.container {
+	// background-color: rebeccapurple;
+	height: 100%;
+}
+
+.text-box {
+	// background-color: orange;
+	position: absolute;
+	width: 50%;
+	bottom: 3rem;
+	z-index: 1;
+}
