@@ -68,7 +68,7 @@ const Contact = () => {
 									<Form.Control as="textarea" rows="3" placeholder="Deine Nachricht" name="message" required />
 								</Form.Group>
 								<Form.Group>
-									<ReCAPTCHA sitekey={process.env.GATSBY_RECAPTCHA_KEY} />
+									<ReCAPTCHA sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY} />
 								</Form.Group>
 								<Button variant="success" type="submit" className="btn-sm btn-submit">
 									Nachricht senden <i className="fe fe-send ml-2"></i>
