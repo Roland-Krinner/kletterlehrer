@@ -55,16 +55,16 @@ const Contact = () => {
 								<Form.Row>
 									<Form.Group as={Col} controlId="formName">
 										<Form.Label>Name</Form.Label>
-										<Form.Control type="text" placeholder="Dein Name" required />
+										<Form.Control type="text" placeholder="Dein Name" name="name" required />
 									</Form.Group>
 									<Form.Group as={Col} controlId="formEmail">
 										<Form.Label>E-Mail</Form.Label>
-										<Form.Control type="email" placeholder="Deine E-Mail Adresse" required />
+										<Form.Control type="email" placeholder="Deine E-Mail Adresse" name="email" required />
 									</Form.Group>
 								</Form.Row>
 								<Form.Group controlId="formTextarea">
 									<Form.Label>Nachricht</Form.Label>
-									<Form.Control as="textarea" rows="3" placeholder="Deine Nachricht" required />
+									<Form.Control as="textarea" rows="3" placeholder="Deine Nachricht" name="message" required />
 								</Form.Group>
 								<Button variant="success" type="submit" className="btn-sm btn-submit">
 									Nachricht senden <i className="fe fe-send ml-2"></i>
