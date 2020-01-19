@@ -2,25 +2,7 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import Flickity from './flickity'
-import heroStyles from './section-hero.module.scss'
-
-// import { BLOCKS } from '@contentful/rich-text-types'
-// import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-
-// const options = {
-// 	renderNode: {
-// 		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted">{children}</p>,
-// 		[BLOCKS.UL_LIST]: (node, children) => <div className="pb-5">{children}</div>,
-// 		[BLOCKS.LIST_ITEM]: (node, children) => (
-// 			<div className="d-flex list-item">
-// 				<div className="badge badge-rounded-circle badge-success-soft mt-1 mr-4">
-// 					<i className="fe fe-check"></i>
-// 				</div>
-// 				<span className="mb-4">{children}</span>
-// 			</div>
-// 		),
-// 	},
-// }
+import '../scss/__hero.scss'
 
 const Hero = () => {
 	const data = useStaticQuery(graphql`
@@ -57,8 +39,8 @@ const Hero = () => {
 	const heroSlides = data.allContentfulHero.edges[0].node.heroSlides
 
 	return (
-		<section className={heroStyles.section}>
-			<Flickity options={{ wrapAround: true, pageDots: true, prevNextButtons: false, adaptiveHeight: true, autoPlay: 12500 }}>
+		<section className="hero-section">
+			<Flickity options={{ wrapAround: true, pageDots: true, prevNextButtons: false, adaptiveHeight: true, autoPlay: 2500 }}>
 				{heroSlides.map((slide, idx) => {
 					//const url = slide.image.file.url
 					const alt = slide.image.title
@@ -68,15 +50,23 @@ const Hero = () => {
 					const excerpt = slide.excerpt.excerpt
 
 					return (
-						<div className={heroStyles.slide}>
+						<div className="hero-slide" key={idx}>
 							<img src={fluidURL} style={{ width: '100%' }} kry={idx} alt={alt} />
-							<div className={heroStyles.content}>
-								<div className={heroStyles.gradient}></div>
-								<Container xfluid className={heroStyles.container}>
-									<div className={heroStyles.textBox}>
-										<h1 className="text-white">{headline}</h1>
+							<div className="hero-slide-content">
+								<div className="hero-slide-gradient"></div>
+								<Container className="hero-slide-container">
+									<div className="hero-slide-text-box d-none d-sm-block d-lg-none">
+										<h1 className="h5 text-white mb-0">{headline}</h1>
+										<h3 className="h6 text-white">{subline}</h3>
+									</div>
+									<div className="hero-slide-text-box d-none d-lg-block d-xl-none">
+										<h1 className="h2 text-white mb-0">{headline}</h1>
+										<h3 className="h4 text-white mb-0">{subline}</h3>
+									</div>
+									<div className="hero-slide-text-box d-none d-xl-block">
+										<h1 className="h2 text-white">{headline}</h1>
 										<h3 className="text-white">{subline}</h3>
-										<p className="text-white">{excerpt}</p>
+										<p className="text-white mb-0">{excerpt}</p>
 									</div>
 								</Container>
 							</div>
@@ -84,20 +74,6 @@ const Hero = () => {
 					)
 				})}
 			</Flickity>
-			{/* <div className="container">
-				<div className="row align-items-center">
-					<div className="col-12 col-md-8 col-lg-6">
-						<h1 className="display-3 font-weight-bold text-white">
-							Remote positions for <br />
-							<span className="text-warning">Ruby Develop</span>
-						</h1>
-						<p className="font-size-lg text-white-80 mb-6">We help place the world's top tech talent at the some of the greatest companies in the world.</p>
-					</div>
-				</div>
-			</div> */}
-			{/* <div id="jarallax-container-0" style="position: absolute; top: 0px; left: 0px; width: 100%; height: 100%; overflow: hidden; pointer-events: none; z-index: -100;">
-				<div style='background-position: 50% 50%; background-size: cover; background-repeat: no-repeat; background-image: url("https://landkit.goodthemes.co/assets/img/covers/cover-3.jpg"); position: absolute; top: 0px; left: 0px; width: 1354px; height: 839.55px; overflow: hidden; pointer-events: none; margin-top: 228.725px; transform: translate3d(0px, -228.725px, 0px);'></div>
-			</div> */}
 		</section>
 	)
 }

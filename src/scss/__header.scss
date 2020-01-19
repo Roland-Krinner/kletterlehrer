@@ -1,0 +1,82 @@
+.navbar {
+	transition: none !important;
+	@media (max-width: 320px) {
+		padding: 1rem calc(20px - 0.75rem) 1rem 20px !important;
+	}
+}
+
+nav.transparent-navbar {
+	@media (min-width: 992px) {
+		position: absolute !important;
+		width: 100%;
+		background-color: transparent !important;
+	}
+
+	// @media (min-width: 992px) {
+	// 	background-color: rgba(0,0,0, .15) !important;
+	// 	border-bottom: 1px solid rgba(255,255,255, .25);
+	// }
+}
+
+$BrandHeight: 38px;
+
+.brand {
+	div {
+		height: $BrandHeight;
+	}
+	svg {
+		height: $BrandHeight;
+		width: auto;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	// lg
+	@media (min-width: 992px) {
+		$BrandHeight: 50px;
+		div {
+			height: $BrandHeight;
+		}
+		svg {
+			height: $BrandHeight;
+		}
+	}
+
+	// xl
+	@media (min-width: 1200px) {
+		$BrandHeight: 65px;
+		div {
+			height: $BrandHeight;
+		}
+		svg {
+			height: $BrandHeight;
+		}
+	}
+}
+
+.nav-link {
+	@media (min-width: 992px) {
+		span {
+			position: relative;
+			&::before {
+				content: '';
+				display: block;
+				position: absolute;
+				width: calc(100% + 4px);
+				height: 2px;
+				bottom: -4px;
+				left: -2px;
+			}
+		}
+		&:hover span::before,
+		&.active span::before {
+			background-color: #bad251;
+		}
+	}
+}
+
+.nav-item {
+	a:hover {
+		text-decoration: none;
+	}
+}

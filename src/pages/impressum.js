@@ -1,7 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { useStaticQuery, graphql } from 'gatsby'
-import { Link } from 'gatsby'
+import { useStaticQuery, graphql, Link } from 'gatsby'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
@@ -11,19 +10,20 @@ import Head from '../components/head'
 const Imprint = () => {
 	const data = useStaticQuery(graphql`
 		query {
-			allContentfulImprint {
+			allContentfulStaticPages {
 				edges {
 					node {
-						headline
-						subline
-						displaySubline
-						displayHeadline
-						body {
+						imprintHeadline
+						showImprintHeadline
+						imprintSubline
+						showImprintSubline
+						imprintBody {
 							json
 						}
 					}
 				}
 			}
+
 			allContentfulPersonalData {
 				edges {
 					node {
@@ -41,11 +41,11 @@ const Imprint = () => {
 			}
 		}
 	`)
-	const headline = data.allContentfulImprint.edges[0].node.headline
-	const subline = data.allContentfulImprint.edges[0].node.subline
-	const displayHeadline = data.allContentfulImprint.edges[0].node.displayHeadline
-	const displaySubline = data.allContentfulImprint.edges[0].node.displaySubline
-	const bodyJSON = data.allContentfulImprint.edges[0].node.body.json
+	const headline = data.allContentfulStaticPages.edges[0].node.imprintHeadline
+	const displayHeadline = data.allContentfulStaticPages.edges[0].node.showImprintHeadline
+	const subline = data.allContentfulStaticPages.edges[0].node.imprintSubline
+	const displaySubline = data.allContentfulStaticPages.edges[0].node.showImprintSubline
+	const bodyJSON = data.allContentfulStaticPages.edges[0].node.imprintBody.json
 
 	const name = data.allContentfulPersonalData.edges[0].node.name
 	const street = data.allContentfulPersonalData.edges[0].node.street
@@ -61,9 +61,27 @@ const Imprint = () => {
 			[BLOCKS.PARAGRAPH]: (node, children) => {
 				const value = node.content[0].value
 				if (value === '##imprintAddress##') {
-					return (<p className="text-gray-800 mb-6 mb-md-8">{name}<br />{street}<br />{zipCode} {city}<br />{country}</p>)
+					return (
+						<p className="text-gray-800 mb-6 mb-md-8">
+							{name}
+							<br />
+							{street}
+							<br />
+							{zipCode} {city}
+							<br />
+							{country}
+						</p>
+					)
 				} else if (value === '##imprintContact##') {
-					return (<p className="text-gray-800 mb-6 mb-md-8">Telefon: {phone}<br />E-Mail: {eMail}<br />Webseite: {website}</p>)
+					return (
+						<p className="text-gray-800 mb-6 mb-md-8">
+							Telefon: {phone}
+							<br />
+							E-Mail: {eMail}
+							<br />
+							Webseite: {website}
+						</p>
+					)
 				} else {
 					return <p className="text-gray-800 mb-6 mb-md-8">{children}</p>
 				}
@@ -88,6 +106,22 @@ const Imprint = () => {
 	return (
 		<Layout pageInfo={{ pageName: 'impressum', pageType: 'subPage' }}>
 			<Head title="Impressum" />
+			<section className="bg-light">
+				<Container>
+					<nav aria-label="breadcrumb">
+						<ol className="breadcrumb breadcrumb-scroll">
+							<li className="breadcrumb-item">
+								<Link className="text-gray-700" to="/">
+									Startseite
+								</Link>
+							</li>
+							<li className="breadcrumb-item active" aria-current="page">
+								Impressum
+							</li>
+						</ol>
+					</nav>
+				</Container>
+			</section>
 			<section className="pt-8 pt-md-11 bg-light">
 				<Container>
 					<Row className="align-items-center">

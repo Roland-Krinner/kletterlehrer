@@ -27,23 +27,22 @@ const Intro = () => {
 			allContentfulHome {
 				edges {
 					node {
-						introSection {
-							body {
-								json
-							}
+						introText {
+							json
 						}
 					}
 				}
 			}
 		}
 	`)
-	const introBodyJSON = data.allContentfulHome.edges[0].node.introSection.body.json
+	const introBodyJSON = data.allContentfulHome.edges[0].node.introText.json
 	return (
 		<section className="py-8 py-md-11 bg-gray-200">
 			<Container>
 				{documentToReactComponents(introBodyJSON, options)}
-				<Link to="/ueber-mich" class="font-weight-bold text-decoration-none">
-					Weiterlesen <i class="fe fe-arrow-right ml-3"></i>
+				<Link to="/ueber-mich" className="xx__text-uppercase font-size-sm font-weight-bold text-decoration-none text-dark">
+					{/* Weiterlesen <i className="fe fe-chevron-right ml-2"></i> */}
+					Weiterlesen <i className="fe fe-arrow-right ml-3"></i>
 				</Link>
 			</Container>
 		</section>

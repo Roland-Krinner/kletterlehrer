@@ -1,6 +1,24 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
+import { BLOCKS } from '@contentful/rich-text-types'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+
+const options = {
+	renderNode: {
+		[BLOCKS.HEADING_2]: (node, children) => <h2 className="text-white">{children}</h2>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted mb-7 mb-md-9">{children}</p>,
+		[BLOCKS.UL_LIST]: (node, children) => <div className="pb-5">{children}</div>,
+		[BLOCKS.LIST_ITEM]: (node, children) => (
+			<div className="d-flex list-item">
+				<div className="badge badge-rounded-circle badge-success-soft mt-1 mr-4">
+					<i className="fe fe-check"></i>
+				</div>
+				<span className="mb-4">{children}</span>
+			</div>
+		),
+	},
+}
 
 const FAQ = props => {
 	var { q, a, index } = props
@@ -23,16 +41,13 @@ const FAQs = () => {
 			allContentfulHome {
 				edges {
 					node {
-						faqSection {
-							headline
-							subline {
-								subline
-							}
-							faqList {
-								question
-								answer {
-									answer
-								}
+						faQsText {
+							json
+						}
+						faQsList {
+							question
+							answer {
+								answer
 							}
 						}
 					}
@@ -41,9 +56,8 @@ const FAQs = () => {
 		}
 	`)
 
-	const faqsHeadline = data.allContentfulHome.edges[0].node.faqSection.headline
-	const faqsSubline = data.allContentfulHome.edges[0].node.faqSection.subline.subline
-	const faqList = data.allContentfulHome.edges[0].node.faqSection.faqList
+	const bodyJSON = data.allContentfulHome.edges[0].node.faQsText.json
+	const faqList = data.allContentfulHome.edges[0].node.faQsList
 	const faqsLength = faqList.length
 
 	return (
@@ -54,8 +68,9 @@ const FAQs = () => {
 						<span className="badge badge-pill badge-gray-700-soft mb-3">
 							<span className="h6 text-uppercase">FAQ</span>
 						</span>
-						<h2 className="text-white">{faqsHeadline}</h2>
-						<p className="font-size-lg text-muted mb-7 mb-md-9">{faqsSubline}</p>
+						{documentToReactComponents(bodyJSON, options)}
+						{/* <h2 className="text-white">{faqsHeadline}</h2>
+						<p className="font-size-lg text-muted mb-7 mb-md-9">{faqsSubline}</p> */}
 					</Col>
 				</Row>
 				<Row>

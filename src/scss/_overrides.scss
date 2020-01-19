@@ -26,8 +26,11 @@
 	padding: 1rem;
 }
 
-.btn.btn-default {
-	padding: 0.375rem 0.75rem;
+.btn,
+.btn.btn-sm,
+.card,
+.rounded {
+	border-radius: 0.2353rem !important;
 }
 
 .no-select {
@@ -271,38 +274,25 @@
 	}
 }
 
+/* ------------- KLETTERLEHRER STYLES ------------- */
+
+.container {
+	// xxxl
+	@media (min-width: 1920px) {
+		max-width: 1400px;
+	}
+}
+
 .list-item p {
 	margin-bottom: 0 !important;
 }
 
-.quotes .flickity-page-dots {
-	display: none;
-	bottom: 15px;
-	@media (max-width: 767px) {
-		display: block;
-	}
+.lift:focus,
+.lift:hover {
+	transform: translateY(-0.25rem);
+	box-shadow: rgba(46, 41, 51, 0.08) 0px 4px 8px, rgba(71, 63, 79, 0.16) 0px 8px 16px !important;
 }
 
-.quotes .flickity-button {
-	@media (max-width: 767px) {
-		display: none;
-	}
+.shadow-dark-sm {
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.1), 0 2px 4px 0 rgba(14, 30, 37, 0.12);
 }
-
-.nav-item {
-	a:hover {
-		text-decoration: none;
-	}
-}
-
-// .quotes .previous {
-// 	@media (max-width: 767px) {
-// 		margin-left: -20px;
-// 	}
-// }
-
-// .quotes .next {
-// 	@media (max-width: 767px) {
-// 		margin-right: -20px;
-// 	}
-// }

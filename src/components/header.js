@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Navbar, Nav } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
-import headerStyles from './header.module.scss'
+
+import '../scss/__header.scss'
 
 const Image = ({ svg, file, alt }) => {
 	if (file.contentType === 'image/svg+xml') {
@@ -42,7 +43,7 @@ const NavContent = ({ pageInfo }) => {
 	const file = data.allContentfulSiteMetadata.edges[0].node.brandLogoHorizontal.file
 	return (
 		<>
-			<Link to="/" className={headerStyles.brand}>
+			<Link to="/" className="brand">
 				<Image svg={svg} file={file} alt={alt} />
 			</Link>
 			<Navbar.Toggle />
@@ -52,37 +53,37 @@ const NavContent = ({ pageInfo }) => {
 				</Navbar.Toggle>
 				<Nav className="ml-auto" activeKey={pageInfo && pageInfo.pageName}>
 					<Nav.Item className="d-block d-lg-none ">
-						<Link to="/" className="link-no-style">
+						<Link to="/">
 							<Nav.Link as="span" eventKey="startseite">
-								Startseite
+								<span>Startseite</span>
 							</Nav.Link>
 						</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Link to="/kurse" className="link-no-style">
+						<Link to="/kurse">
 							<Nav.Link as="span" eventKey="kurse">
-								Kurse
+								<span>Kurse</span>
 							</Nav.Link>
 						</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Link to="/touren" className="link-no-style">
+						<Link to="/touren">
 							<Nav.Link as="span" eventKey="touren">
-								Touren
+								<span>Touren</span>
 							</Nav.Link>
 						</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Link to="/ueber-mich" className="link-no-style">
+						<Link to="/ueber-mich">
 							<Nav.Link as="span" eventKey="ueber-mich">
-								Über mich
+								<span>Über mich</span>
 							</Nav.Link>
 						</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Link to="/kontakt" className="link-no-style">
+						<Link to="/kontakt">
 							<Nav.Link as="span" eventKey="kontakt">
-								Kontakt
+								<span>Kontakt</span>
 							</Nav.Link>
 						</Link>
 					</Nav.Item>
@@ -96,7 +97,7 @@ const Header = ({ pageInfo }) => {
 	return (
 		<header>
 			{pageInfo.pageType && pageInfo.pageType === 'homePage' ? (
-				<Navbar expand="lg" variant="dark" collapseOnSelect className={headerStyles.navbar}>
+				<Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect className="transparent-navbar">
 					<NavContent pageInfo={pageInfo} />
 				</Navbar>
 			) : (

@@ -4,22 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Flickity from './flickity'
-import quotesStyles from './section-quotes.module.scss'
-
-// class Carousel extends React.Component {
-// 	render() {
-// 		return (
-// 			<Flickity options={{ pageDots: false }}>
-// 				<img src="https://via.placeholder.com/800x400?text=Hero1" />
-// 				<img src="https://via.placeholder.com/800x400?text=Hero2" />
-// 				<img src="https://via.placeholder.com/800x400?text=Hero3" />
-// 				<img src="https://via.placeholder.com/800x400?text=Hero4" />
-// 				<img src="https://via.placeholder.com/800x400?text=Hero5" />
-// 				<img src="https://via.placeholder.com/800x400?text=Hero6" />
-// 			</Flickity>
-// 		)
-// 	}
-// }
+import '../scss/__quotes.scss'
 
 const options = {
 	renderNode: {
@@ -42,16 +27,14 @@ const Quotes = () => {
 			allContentfulHome {
 				edges {
 					node {
-						quotesSection {
-							body {
-								json
+						quotesText {
+							json
+						}
+						quotesList {
+							quote {
+								quote
 							}
-							quotesList {
-								quote {
-									quote
-								}
-								author
-							}
+							author
 						}
 					}
 				}
@@ -59,17 +42,16 @@ const Quotes = () => {
 		}
 	`)
 
-	const quotesBodyJSON = data.allContentfulHome.edges[0].node.quotesSection.body.json
-	const quotesList = data.allContentfulHome.edges[0].node.quotesSection.quotesList
+	const quotesBodyJSON = data.allContentfulHome.edges[0].node.quotesText.json
+	const quotesList = data.allContentfulHome.edges[0].node.quotesList
 
 	return (
-		<section className="py-8 pt-md-11 pb-md-12">
+		<section className="py-8 pt-md-11 pb-md-12 quotes-section">
 			<Container>
 				<Row className="justify-content-center">
 					<div className="col-12 col-md-10 col-lg-8 text-center">{documentToReactComponents(quotesBodyJSON, options)}</div>
 				</Row>
-				{/* <Carousel /> */}
-				<Row className="quotes mt-6 mt-md-8">
+				<Row className="mt-6 mt-md-8">
 					<Col xs={12}>
 						<Card className="card-row shadow-light-lg">
 							<Row noGutters="true">
@@ -80,10 +62,10 @@ const Quotes = () => {
 												<div className="w-100" key={idx}>
 													<Row noGutters="true" className="justify-content-center">
 														<Col xs={12} md={8}>
-															<Card.Body className={`${quotesStyles.cardBody} py-xxl-10`}>
+															<Card.Body className="py-xxl-10">
 																<blockquote className="blockquote mb-0">
 																	<p>{quoteItem.quote.quote}</p>
-																	<footer className={`${quotesStyles.blockquoteFooter} text-muted`}>{quoteItem.author}</footer>
+																	<footer className="text-muted">{quoteItem.author}</footer>
 																</blockquote>
 															</Card.Body>
 														</Col>

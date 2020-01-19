@@ -1,0 +1,41 @@
+@import 'colors';
+@function tint($color, $percentage) {
+    @return mix(white, $color, $percentage);
+}
+$colors: ( primary: $primaryBase, secondary: $secondaryBase, success: $successBase, info: $infoBase, warning: $warningBase, danger: $dangerBase, light: $lightBase, dark: $darkBase, black: $blackBase);
+$steps: (0: 0%, 100:10%, 200: 20%, 300:30%, 400: 40%, 500:50%, 600: 60%, 700:70%, 800: 80%, 900:90%);
+@each $colorKey, $color in $colors {
+    @each $stepKey, $step in $steps {
+        @if($stepKey==0) {
+            .bg-#{$colorKey} {
+                background-color: $color !important;
+            }
+            .text-#{$colorKey} {
+                color: $color !important;
+            }
+        }
+        @else {
+            .bg-#{$colorKey}-light-#{$stepKey} {
+                background-color: lighten( $color, $step) !important;
+            }
+            .bg-#{$colorKey}-dark-#{$stepKey} {
+                background-color: darken( $color, $step) !important;
+            }
+            .bg-#{$colorKey}-tint-#{$stepKey} {
+                background-color: tint( $color, $step) !important;
+            }
+            .text-#{$colorKey}-light-#{$stepKey} {
+                color: lighten( $color, $step) !important;
+            }
+            .text-#{$colorKey}-dark-#{$stepKey} {
+                color: darken( $color, $step) !important;
+            }
+            .text-#{$colorKey}-tint-#{$stepKey} {
+                color: tint( $color, $step) !important;
+            }
+        }
+    }
+}
+.text-muted {
+    color: tint( $secondaryBase, 30%) !important;
+}

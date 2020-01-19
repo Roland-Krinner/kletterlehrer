@@ -1,0 +1,40 @@
+.course-slider {
+	.flickity-button {
+		position: absolute;
+		top: -20px;
+		right: 10px;
+		background-color: transparent;
+		box-shadow: none;
+		width: calc(2em + 2px);
+		height: calc(2em + 2px);
+		color: #fff !important;
+		// &.next::before {
+		// 	content: '\E930';
+		// }
+		// &.previous::before {
+		// 	content: '\E92F';
+		// }
+	}
+
+	.previous {
+		right: 10px;
+		left: auto;
+	}
+	.flickity-slider {
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.slider-item {
+		width: 40%;
+		padding-right: 16px;
+		// min-height: 100%;
+		display: flex;
+		.card {
+			display: flex;
+			flex-direction: column;
+			.card-body {
+				flex: 1 1 auto;
+			}
+		}
+	}
+}

@@ -1,0 +1,145 @@
+.hero-section {
+	position: relative;
+	> div > div::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+
+		// lg
+		// @media (min-width: 992px) {
+		// 	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 100px);
+		// }
+
+		// xl
+		// @media (min-width: 1200px) {
+		// 	background: linear-gradient(to bottom, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0) 120px);
+		// }
+	}
+	ol {
+		position: relative;
+		display: flex;
+		bottom: 1rem;
+		@media (min-width: 992px) {
+			bottom: 2.3rem;
+		}
+		width: 100%;
+		padding-right: 20px;
+		padding-left: 20px;
+		margin-right: auto;
+		margin-left: auto;
+
+		// sm
+		@media (min-width: 576px) {
+			max-width: 540px;
+		}
+
+		//md
+		@media (min-width: 768px) {
+			max-width: 720px;
+		}
+
+		// lg
+		@media (min-width: 992px) {
+			max-width: 960px;
+		}
+
+		// xl
+		@media (min-width: 1200px) {
+			max-width: 1040px;
+		}
+
+		// xxxl
+		@media (min-width: 1920px) {
+			max-width: 80%;
+		}
+
+		li {
+			position: relative;
+			flex: auto;
+
+			height: 1px !important;
+			@media (min-width: 992px) {
+				height: 2px !important;
+			}
+
+			border-radius: 0 !important;
+			background-color: #fff !important;
+			margin-left: 0 !important;
+			&:last-child {
+				margin-right: 0 !important;
+			}
+			&::before {
+				content: '';
+				position: absolute;
+				display: block;
+				top: -10px;
+				left: 0;
+				width: 100%;
+				height: 20px;
+			}
+		}
+	}
+}
+
+.hero-slide {
+	width: 100%;
+}
+
+.hero-slide-content {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+}
+
+.hero-slide-gradient {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+
+	// sm
+	@media (min-width: 576px) {
+		background: linear-gradient(to right top, #000000, rgba(0, 0, 0, 0) 56%);
+	}
+
+	// lg
+	@media (min-width: 992px) {
+		background: linear-gradient(to right, rgba(10, 26, 98, 0.8), rgba(10, 26, 98, 0.4) 86%);
+		// background: linear-gradient(to right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4) 86%);
+	}
+}
+
+.hero-slide-container {
+	height: 100%;
+
+	// xxxl
+	@media (min-width: 1920px) {
+		max-width: 80%;
+	}
+}
+
+.hero-slide-text-box {
+	position: absolute;
+	width: 100%;
+	bottom: 1.5rem;
+	// lg
+	@media (min-width: 992px) {
+		width: 50%;
+		bottom: 4rem;
+	}
+
+	// xxxl
+	@media (min-width: 1920px) {
+		bottom: 25%;
+		.h2 {
+			font-size: 3.5rem;
+		}
+	}
+	z-index: 1;
+}
