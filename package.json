@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "build": "gatsby build",
-		"develop": "env-cmd -f .env gatsby develop -H 0.0.0.0 -p 8000",
-		"preview": "env-cmd -f .env.preview gatsby develop",
+    "develop": "env-cmd -f .env gatsby develop -H 0.0.0.0 -p 8000",
+    "preview": "env-cmd -f .env.preview gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
@@ -36,6 +36,7 @@
     "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0",
     "react-flickity-component": "^3.4.0",
+    "react-google-recaptcha": "^2.0.1",
     "react-helmet": "^5.2.1"
   },
   "devDependencies": {

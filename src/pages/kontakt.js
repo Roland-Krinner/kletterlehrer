@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Form, Row, Col, Button } from 'react-bootstrap'
+import ReCAPTCHA from 'react-google-recaptcha'
 import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import Head from '../components/head'
@@ -50,7 +51,7 @@ const Contact = () => {
 							<p>Benötigen Sie Informationen zu einer Tour oder möchten Sie eigene Vorschläge einbringen?</p>
 							<p>Senden Sie mir eine E-Mail (oder das nachfolgende Formular ausgefüllt zurück) und ich melde mich zeitnah bei Ihnen.</p>
 							{/* {documentToReactComponents(bodyJSON, options)} */}
-							<Form name="Nachricht Test" method="POST" data-netlify="true" action="/danke-fuer-die-nachricht">
+							<Form name="Nachricht Test" method="POST" data-netlify="true" data-netlify-recaptcha="true" action="/danke-fuer-die-nachricht">
 								<input type="hidden" name="form-name" value="Nachricht Test" />
 								<Form.Row>
 									<Form.Group as={Col} controlId="formName">
@@ -65,6 +66,9 @@ const Contact = () => {
 								<Form.Group controlId="formTextarea">
 									<Form.Label>Nachricht</Form.Label>
 									<Form.Control as="textarea" rows="3" placeholder="Deine Nachricht" name="message" required />
+								</Form.Group>
+								<Form.Group>
+									<ReCAPTCHA sitekey={process.env.GATSBY_RECAPTCHA_KEY} />
 								</Form.Group>
 								<Button variant="success" type="submit" className="btn-sm btn-submit">
 									Nachricht senden <i className="fe fe-send ml-2"></i>
