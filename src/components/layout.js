@@ -9,7 +9,7 @@ import '../scss/default.scss'
 const Layout = ({ children, pageInfo }) => {
 	return (
 		<div className={layoutStyles.container}>
-			<div className={layoutStyles.content}>
+			<div className={`${layoutStyles.content} bg-light`}>
 				<Header pageInfo={pageInfo} />
 				{children}
 			</div>
