@@ -83,6 +83,7 @@ const Tours = () => {
 													<img src={authorImg} alt={authorAlt} className="avatar-img rounded-circle" />
 												</div>
 												<h6 className="text-uppercase text-muted mr-2 mb-0">{authorName}</h6>
+												<h6 className="text-uppercase text-muted mr-2 mb-0">{authorName}</h6>
 											</Link>
 										</Card>
 									</div>

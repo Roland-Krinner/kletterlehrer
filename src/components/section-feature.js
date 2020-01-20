@@ -1,18 +1,17 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { Link, useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql, Link } from 'gatsby'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 const options = {
 	renderNode: {
-		[BLOCKS.HEADING_2]: (node, children) => <h2 className="mb-2">{children}</h2>,
-		[BLOCKS.HEADING_3]: (node, children) => <h3 className="mb-5">{children}</h3>,
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted">{children}</p>,
+		[BLOCKS.HEADING_2]: (node, children) => <h2 className="text-white">{children}</h2>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted mb-7 mb-md-9">{children}</p>,
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return (
-					<Link to={node.data.uri} className="font-size-sm font-weight-bold text-decoration-none text-dark">
+					<Link to={node.data.uri} className="btn btn-success btn-sm mb-6 mb-xl-8">
 						{children}
 						<i className="fe fe-arrow-right ml-3"></i>
 					</Link>
@@ -37,13 +36,13 @@ const options = {
 	},
 }
 
-const Intro = () => {
+const Feature = () => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulHome {
 				edges {
 					node {
-						introText {
+						contactFeature {
 							json
 						}
 					}
@@ -51,13 +50,18 @@ const Intro = () => {
 			}
 		}
 	`)
-	const introBodyJSON = data.allContentfulHome.edges[0].node.introText.json
+
+	const bodyJSON = data.allContentfulHome.edges[0].node.contactFeature.json
+
 	return (
-		<section className="py-8 py-md-11 bg-white">
+		<section className="py-8 py-md-11 bg-secondary-dark-300">
 			<Container>
-				<Row>
-					<Col xs={12} lg={8}>
-						{documentToReactComponents(introBodyJSON, options)}
+				<Row className="justify-content-center">
+					<Col className="col-12 col-md-10 col-md-8 text-center">
+						<span className="badge badge-pill badge-gray-700-soft mb-3">
+							<span className="h6 text-uppercase">Kontakt</span>
+						</span>
+						{documentToReactComponents(bodyJSON, options)}
 					</Col>
 				</Row>
 			</Container>
@@ -65,4 +69,4 @@ const Intro = () => {
 	)
 }
 
-export default Intro
+export default Feature

@@ -15,7 +15,7 @@ const Courses = () => {
 						<li className="breadcrumb-item active" aria-current="page">Kurse</li>
 					</ol>
 				</nav>
-				<h1>Contact Page</h1>
+				<h1>Kurs Übersicht</h1>
 				<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nobis beatae, incidunt amet repellendus vitae reiciendis in consequuntur voluptas laborum adipisci deleniti iste ipsam! Voluptatibus libero fugit voluptates amet vel. Nam!</p>
 			</Container>
 		</Layout>

@@ -7,7 +7,7 @@ import '../scss/__hero.scss'
 const Hero = () => {
 	const data = useStaticQuery(graphql`
 		query {
-			allContentfulHero {
+			allContentfulHome {
 				edges {
 					node {
 						heroSlides {
@@ -36,10 +36,10 @@ const Hero = () => {
 			}
 		}
 	`)
-	const heroSlides = data.allContentfulHero.edges[0].node.heroSlides
+	const heroSlides = data.allContentfulHome.edges[0].node.heroSlides
 
 	return (
-		<section className="hero-section">
+		<section className="hero-section bg-white">
 			<Flickity options={{ wrapAround: true, pageDots: true, prevNextButtons: false, adaptiveHeight: true, autoPlay: 2500 }}>
 				{heroSlides.map((slide, idx) => {
 					//const url = slide.image.file.url
