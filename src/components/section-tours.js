@@ -58,7 +58,7 @@ const DesktopCard = ({ node }) => {
 	const url = `${baseURL}/${node.slug}`
 	return (
 		<div className="slider-item">
-			<Card className="mb-6 mb-xl-0 shadow-light-lg">
+			<Card className="mb-6 mb-xl-0 xx__shadow-light-lg">
 				<Link className="card-img-top" to={url}>
 					<img src={featureImg} alt={featureAlt} className="img-fluid" />
 				</Link>
@@ -87,11 +87,11 @@ const MobileCard = ({ customClass, node }) => {
 	const location = node.location
 	const duration = node.duration
 	return (
-		<div className={`card mobile-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
-			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
+		<div className={`card mobile-card bg-dark overflow-hidden ${customClass || ''}`}>
+			<Link className="card-img-top bg-dark" to={`${baseURL}/${node.slug}`}>
 				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
 			</Link>
-			<Link className="card-body" to={`${baseURL}/${node.slug}`}>
+			<Link className="card-body bg-white" to={`${baseURL}/${node.slug}`}>
 				<h3 className="mb-0">{node.headline}</h3>
 				<p className="text-muted h6 mb-0">
 					<i className="fe fe-map-pin mr-1"></i>
@@ -100,7 +100,7 @@ const MobileCard = ({ customClass, node }) => {
 				</p>
 				<h6 className="h6 text-muted mt-4 mb-0 ml-auto d-lg-none">Dauer: {duration}</h6>
 			</Link>
-			<Link className="card-meta" to={`${baseURL}/${node.slug}`}>
+			<Link className="card-meta bg-white" to={`${baseURL}/${node.slug}`}>
 				<hr className="card-meta-divider" />
 				<h6 className="text-uppercase text-muted mr-2 mb-0">
 					Mehr erfahren <i className="fe fe-arrow-right ml-1"></i>
