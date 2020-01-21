@@ -1,46 +1,41 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
-// import Flickity from './flickity'
 import { Link, useStaticQuery, graphql } from 'gatsby'
-
+import { BLOCKS, INLINES } from '@contentful/rich-text-types'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import '../scss/__courses.scss'
 
-// const DummyCard = ({ customClass }) => {
-// 	return (
-// 		<div className={`card shadow-dark-sm ${customClass}`}>
-// 			<a className="card-body" href="#!">
-// 				<h3>Photos should appeal to a sense of adventure</h3>
-// 				<p className="mb-0 text-muted">Cozy vibes are out and this summer you should focus on making customer's feel brave.</p>
-// 			</a>
-// 			<a className="card-meta" href="#!">
-// 				<hr className="card-meta-divider" />
-// 				<div className="avatar avatar-sm mr-2">
-// 					<img src="http://placehold.it/50x50" alt="..." className="avatar-img rounded-circle" />
-// 				</div>
-// 				<h6 className="text-uppercase text-muted mr-2 mb-0">Danny Devito</h6>
-// 				<p className="h6 text-uppercase text-muted mb-0 ml-auto">
-// 					<time dateTime="2019-05-02">May 02</time>
-// 				</p>
-// 			</a>
-// 		</div>
-// 	)
-// }
+const baseURL = '/kurse'
 
-// const CardsArray = [1, 2, 3, 4, 5]
+const options = {
+	renderNode: {
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted">{children}</p>,
+		[INLINES.HYPERLINK]: (node, children) => {
+			if (node.data.uri && node.data.uri.startsWith('/')) {
+				return (
+					<Link to={node.data.uri} className="btn btn-success btn-sm xbtn-default mb-6 mb-xl-8">
+						{children}
+						<i className="fe fe-arrow-right ml-3"></i>
+					</Link>
+				)
+			} else {
+				return (
+					<a href={node.data.uri} target="_blank" rel="noopener noreferrer">
+						{children}
+					</a>
+				)
+			}
+		},
+	},
+}
 
-// const DummyCards = ({ customClass }) => {
-// 	return CardsArray.map((item, idx) => {
-// 		return <DummyCard customClass={customClass} key={idx} />
-// 	})
-// }
-
-const CtaCard = ({ customClass }) => {
+const CtaCard = ({ customClass, ctaJSON }) => {
 	return (
 		<div className="card-cta rounded shadow-dark-sm">
-			<Link to="/kurse" className={`font-weight-bold text-decoration-none ${customClass}`}>
-				<span className="text-nowrap">Alle Kurse</span>
+			<Link to={ctaJSON.url} className={`font-weight-bold text-decoration-none ${customClass}`}>
+				<span className="text-nowrap">{ctaJSON.text[0]}</span>
 				<span className="text-nowrap">
-					ansehen <i className="fe fe-arrow-right ml-0"></i>
+					{ctaJSON.text[1]} <i className="fe fe-arrow-right ml-0"></i>
 				</span>
 			</Link>
 		</div>
@@ -53,7 +48,7 @@ const DesktopCard = ({ customClass, node }) => {
 	const duration = node.duration
 	return (
 		<div className={`card desktop-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
-			<Link className="card-img-top" to={`/kurse/${node.slug}`}>
+			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
 				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
 				<div>
 					<p className="text-white h6 mb-0">
@@ -64,7 +59,7 @@ const DesktopCard = ({ customClass, node }) => {
 					<h3 className="text-white mb-0">{node.headline}</h3>
 				</div>
 			</Link>
-			<Link className="card-meta" to={`/kurse/${node.slug}`}>
+			<Link className="card-meta" to={`${baseURL}/${node.slug}`}>
 				<h6 className="text-uppercase text-muted mr-2 mb-0">
 					Mehr erfahren <i className="fe fe-arrow-right ml-1"></i>
 				</h6>
@@ -80,10 +75,10 @@ const MobileCard = ({ customClass, node }) => {
 	const duration = node.duration
 	return (
 		<div className={`card mobile-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
-			<Link className="card-img-top" to={`/kurse/${node.slug}`}>
+			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
 				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
 			</Link>
-			<Link className="card-body" to={`/kurse/${node.slug}`}>
+			<Link className="card-body" to={`${baseURL}/${node.slug}`}>
 				<h3 className="mb-0">{node.headline}</h3>
 				<p className="text-muted h6 mb-0">
 					<i className="fe fe-map-pin mr-1"></i>
@@ -92,7 +87,7 @@ const MobileCard = ({ customClass, node }) => {
 				</p>
 				<h6 className="h6 text-muted mt-4 mb-0 ml-auto d-lg-none">Dauer: {duration}</h6>
 			</Link>
-			<Link className="card-meta" to={`/kurse/${node.slug}`}>
+			<Link className="card-meta" to={`${baseURL}/${node.slug}`}>
 				<hr className="card-meta-divider" />
 				<h6 className="text-uppercase text-muted mr-2 mb-0">
 					Mehr erfahren <i className="fe fe-arrow-right ml-1"></i>
@@ -106,6 +101,19 @@ const MobileCard = ({ customClass, node }) => {
 const Courses = () => {
 	const data = useStaticQuery(graphql`
 		query {
+			allContentfulHome {
+				edges {
+					node {
+						coursesText {
+							json
+						}
+						coursesMobileButton {
+							text
+							url
+						}
+					}
+				}
+			}
 			allContentfulCourseItem(sort: { fields: startDate, order: DESC }) {
 				edges {
 					node {
@@ -138,15 +146,15 @@ const Courses = () => {
 			}
 		}
 	`)
+
 	const courseData = data.allContentfulCourseItem.edges
+	const bodyJSON = data.allContentfulHome.edges[0].node.coursesText.json
+	const ctaJSON = data.allContentfulHome.edges[0].node.coursesMobileButton
+
 	return (
-		<section className="py-8 py-md-11 bg-light xxx__bg-gray-200">
+		<section className="py-8 py-md-11 bg-light">
 			<Container>
-				{/* <h6 className="text-uppercase text-muted font-weight-bold mb-2 mb-md-4">Kurse</h6> */}
-				<h2>Aktuelle Kursangebote</h2>
-				<Link to="/kurse" className="btn btn-success btn-sm xbtn-default mb-6 mb-xl-8">
-					Alle Kurse ansehen<i className="fe fe-arrow-right ml-3"></i>
-				</Link>
+				<div className="slider-description">{documentToReactComponents(bodyJSON, options)}</div>
 				<div className="desktop-posts d-none d-xl-flex">
 					<div className="posts-col">
 						<DesktopCard node={courseData[0].node} customClass="lift" />
@@ -156,7 +164,7 @@ const Courses = () => {
 						<DesktopCard node={courseData[2].node} customClass="lift" />
 						<div className="card-container">
 							<DesktopCard node={courseData[3].node} customClass="card-small lift" />
-							<CtaCard customClass="btn btn-success text-white" />
+							<CtaCard customClass="btn btn-success text-white" ctaJSON={ctaJSON} />
 						</div>
 					</div>
 				</div>
@@ -167,7 +175,7 @@ const Courses = () => {
 						{courseData.map(({ node }, idx) => {
 							return idx < 4 ? <MobileCard node={node} key={idx} /> : ''
 						})}
-						<CtaCard customClass="text-success" />
+						<CtaCard customClass="text-success" ctaJSON={ctaJSON} />
 					</div>
 				</div>
 			</div>
