@@ -46,26 +46,26 @@ const Quotes = () => {
 	const quotesList = data.allContentfulHome.edges[0].node.quotesList
 
 	return (
-		<section className="py-8 pt-md-11 pb-md-12 quotes-section">
+		<section className="py-8 py-md-11 quotes-section bg-white">
 			<Container>
 				<Row className="justify-content-center">
 					<div className="col-12 col-md-10 col-lg-8 text-center">{documentToReactComponents(quotesBodyJSON, options)}</div>
 				</Row>
-				<Row className="mt-6 mt-md-8">
+				<Row className="mt-6 quotes-wrapper">
 					<Col xs={12}>
-						<Card className="card-row shadow-light-lg">
+						<Card className="card-row bg-light shadow-dark-sm">
 							<Row noGutters="true">
 								<Col xs={12}>
-									<Flickity options={{ wrapAround: true, pageDots: true, adaptiveHeight: true }}>
+									<Flickity options={{ wrapAround: true, prevNextButtons: false, pageDots: true, adaptiveHeight: true }}>
 										{quotesList.map((quoteItem, idx) => {
 											return (
 												<div className="w-100" key={idx}>
 													<Row noGutters="true" className="justify-content-center">
 														<Col xs={12} md={8}>
-															<Card.Body className="py-xxl-10">
+															<Card.Body className="pt-8 pt-md-7 pb-md-8 pt-lg-9 pb-lg-9">
 																<blockquote className="blockquote mb-0">
-																	<p>{quoteItem.quote.quote}</p>
-																	<footer className="text-muted">{quoteItem.author}</footer>
+																	<p class="h3 font-weight-bold text-muted">{quoteItem.quote.quote}</p>
+																	<footer className="font-size-sm text-muted">{quoteItem.author}</footer>
 																</blockquote>
 															</Card.Body>
 														</Col>
@@ -74,6 +74,20 @@ const Quotes = () => {
 											)
 										})}
 									</Flickity>
+									<div class="quote-symbol">
+										<div class="background">
+											<div class="font">
+												<svg width="66" height="53" viewBox="0 0 66 53" xmlns="http://www.w3.org/2000/svg">
+													<title>“</title>
+													<text transform="translate(-41 -125)" fill="#2478CC" fill-rule="evenodd" font-family="Georgia" font-size="200">
+														<tspan x="34.984" y="274">
+															“
+														</tspan>
+													</text>
+												</svg>
+											</div>
+										</div>
+									</div>
 								</Col>
 							</Row>
 						</Card>

@@ -59,6 +59,18 @@
 	}
 }
 
+.one-post {
+	.posts-col:last-child {
+		top: 0;
+	}
+}
+
+.three-posts {
+	.card-cta {
+		margin-left: 0;
+	}
+}
+
 .desktop-card {
 	flex-shrink: 0;
 	margin-bottom: 2.5rem;

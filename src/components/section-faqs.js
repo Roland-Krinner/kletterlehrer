@@ -61,7 +61,7 @@ const FAQs = () => {
 	const faqsLength = faqList.length
 
 	return (
-		<section className="py-8 py-md-11 bg-dark">
+		<section className="py-8 py-md-11 bg-secondary">
 			<Container>
 				<Row className="justify-content-center">
 					<Col className="col-12 col-md-10 col-md-8 text-center">

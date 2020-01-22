@@ -45,37 +45,22 @@ const CtaCard = ({ customClass, ctaJSON }) => {
 }
 
 const DesktopCard = ({ node }) => {
-	const featureImg = node.image.file.url
-	const featureAlt = node.image.title
-	const headline = node.headline
-	const subline = node.subline
-	const startDate = node.startDate
-	const location = node.location
-	const duration = node.duration
-	const authorName = node.author.name
-	const authorImg = node.author.portrait.file.url
-	const authorAlt = node.author.portrait.title
 	const url = `${baseURL}/${node.slug}`
 	return (
 		<div className="slider-item">
-			<Card className="mb-6 mb-xl-0 xx__shadow-light-lg">
+			<Card className="mb-6 mb-xl-0 bg-dark overflow-hidden">
 				<Link className="card-img-top" to={url}>
-					<img src={featureImg} alt={featureAlt} className="img-fluid" />
+					<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
 				</Link>
-				<Link className="card-body" to={url}>
-					<h3>{headline}</h3>
-					<p className="mb-6 text-muted">{subline}</p>
-					<p className="mb-0 text-gray-700 font-size-sm">Location: {location}</p>
-					<p className="mb-0 text-gray-700 font-size-sm">Begin: {startDate}</p>
-					<p className="mb-0 text-gray-700 font-size-sm">Dauer: {duration}</p>
+				<Link className="card-body bg-white" to={url}>
+					<h3>{node.headline}</h3>
+					<p className="mb-6 text-muted">{node.subline}</p>
 				</Link>
-				<Link className="card-meta" to={url}>
+				<Link className="card-meta bg-white" to={url}>
 					<hr className="card-meta-divider" />
-					<div className="avatar avatar-sm mr-2">
-						<img src={authorImg} alt={authorAlt} className="avatar-img rounded-circle" />
-					</div>
-					<h6 className="text-uppercase text-muted mr-2 mb-0">{authorName}</h6>
-					{/* <h6 className="text-uppercase text-muted mr-2 mb-0">{authorName}</h6> */}
+					<h6 className="text-uppercase text-muted mr-2 mb-0">
+						Mehr erfahren <i className="fe fe-arrow-right ml-1"></i>
+					</h6>
 				</Link>
 			</Card>
 		</div>
@@ -83,29 +68,20 @@ const DesktopCard = ({ node }) => {
 }
 
 const MobileCard = ({ customClass, node }) => {
-	const startDate = node.startDate
-	const location = node.location
-	const duration = node.duration
 	return (
 		<div className={`card mobile-card bg-dark overflow-hidden ${customClass || ''}`}>
-			<Link className="card-img-top bg-dark" to={`${baseURL}/${node.slug}`}>
+			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
 				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
 			</Link>
 			<Link className="card-body bg-white" to={`${baseURL}/${node.slug}`}>
 				<h3 className="mb-0">{node.headline}</h3>
-				<p className="text-muted h6 mb-0">
-					<i className="fe fe-map-pin mr-1"></i>
-					{location}
-					<i className="fe fe-calendar ml-3 mr-1"></i> {startDate}
-				</p>
-				<h6 className="h6 text-muted mt-4 mb-0 ml-auto d-lg-none">Dauer: {duration}</h6>
+				<p className="mb-6 text-muted">{node.subline}</p>
 			</Link>
 			<Link className="card-meta bg-white" to={`${baseURL}/${node.slug}`}>
 				<hr className="card-meta-divider" />
 				<h6 className="text-uppercase text-muted mr-2 mb-0">
 					Mehr erfahren <i className="fe fe-arrow-right ml-1"></i>
 				</h6>
-				<h6 className="h6 text-uppercase text-muted mb-0 ml-auto d-none d-lg-block">Dauer: {duration}</h6>
 			</Link>
 		</div>
 	)
@@ -166,7 +142,7 @@ const Tours = () => {
 			<Container>
 				<Row>
 					<Col>
-						<div className="slider-description">{documentToReactComponents(bodyJSON, options)}</div>
+						<div className="normalize-last-p">{documentToReactComponents(bodyJSON, options)}</div>
 						<div className="d-none d-xl-block">
 							<Flickity options={{ cellAlign: 'left', wrapAround: true, pageDots: false, freeScroll: true }}>
 								{tourData.map(({ node }, idx) => {

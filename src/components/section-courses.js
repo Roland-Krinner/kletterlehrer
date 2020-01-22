@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { utils } from '../utils/'
 import '../scss/__courses.scss'
 
 const baseURL = '/kurse'
@@ -13,7 +14,7 @@ const options = {
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return (
-					<Link to={node.data.uri} className="btn btn-success btn-sm xbtn-default mb-6 mb-xl-8">
+					<Link to={node.data.uri} className="btn btn-success btn-sm mb-6 mb-xl-8">
 						{children}
 						<i className="fe fe-arrow-right ml-3"></i>
 					</Link>
@@ -43,9 +44,7 @@ const CtaCard = ({ customClass, ctaJSON }) => {
 }
 
 const DesktopCard = ({ customClass, node }) => {
-	const startDate = node.startDate
-	const location = node.location
-	const duration = node.duration
+	const startDate = utils.formatDate(node.startDate)
 	return (
 		<div className={`card desktop-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
 			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
@@ -53,7 +52,7 @@ const DesktopCard = ({ customClass, node }) => {
 				<div>
 					<p className="text-white h6 mb-0">
 						<i className="fe fe-map-pin mr-1"></i>
-						{location}
+						{node.location}
 						<i className="fe fe-calendar ml-3 mr-1"></i> {startDate}
 					</p>
 					<h3 className="text-white mb-0">{node.headline}</h3>
@@ -63,16 +62,14 @@ const DesktopCard = ({ customClass, node }) => {
 				<h6 className="text-uppercase text-muted mr-2 mb-0">
 					Mehr erfahren <i className="fe fe-arrow-right ml-1"></i>
 				</h6>
-				<h6 className="h6 text-uppercase text-muted mb-0 ml-auto">Dauer: {duration}</h6>
+				<h6 className="h6 text-uppercase text-muted mb-0 ml-auto">Dauer: {node.duration}</h6>
 			</Link>
 		</div>
 	)
 }
 
 const MobileCard = ({ customClass, node }) => {
-	const startDate = node.startDate
-	const location = node.location
-	const duration = node.duration
+	const startDate = utils.formatDate(node.startDate)
 	return (
 		<div className={`card mobile-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
 			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
@@ -82,18 +79,76 @@ const MobileCard = ({ customClass, node }) => {
 				<h3 className="mb-0">{node.headline}</h3>
 				<p className="text-muted h6 mb-0">
 					<i className="fe fe-map-pin mr-1"></i>
-					{location}
+					{node.location}
 					<i className="fe fe-calendar ml-3 mr-1"></i> {startDate}
 				</p>
-				<h6 className="h6 text-muted mt-4 mb-0 ml-auto d-lg-none">Dauer: {duration}</h6>
+				<h6 className="h6 text-muted mt-4 mb-0 ml-auto d-lg-none">Dauer: {node.duration}</h6>
 			</Link>
 			<Link className="card-meta" to={`${baseURL}/${node.slug}`}>
 				<hr className="card-meta-divider" />
 				<h6 className="text-uppercase text-muted mr-2 mb-0">
 					Mehr erfahren <i className="fe fe-arrow-right ml-1"></i>
 				</h6>
-				<h6 className="h6 text-uppercase text-muted mb-0 ml-auto d-none d-lg-block">Dauer: {duration}</h6>
+				<h6 className="h6 text-uppercase text-muted mb-0 ml-auto d-none d-lg-block">Dauer: {node.duration}</h6>
 			</Link>
+		</div>
+	)
+}
+
+const OneCard = ({ data: { courseData, ctaJSON } }) => {
+	return (
+		<div className="desktop-posts one-post d-none d-xl-flex">
+			<div className="posts-col">
+				<DesktopCard node={courseData[0].node} customClass="lift" />
+			</div>
+		</div>
+	)
+}
+
+const TwoCards = ({ data: { courseData, ctaJSON } }) => {
+	return (
+		<div className="desktop-posts d-none d-xl-flex">
+			<div className="posts-col">
+				<DesktopCard node={courseData[0].node} customClass="lift" />
+			</div>
+			<div className="posts-col">
+				<DesktopCard node={courseData[1].node} customClass="lift" />
+			</div>
+		</div>
+	)
+}
+
+const ThreeCards = ({ data: { courseData, ctaJSON } }) => {
+	return (
+		<div className="desktop-posts three-posts d-none d-xl-flex">
+			<div className="posts-col">
+				<DesktopCard node={courseData[0].node} customClass="lift" />
+				<DesktopCard node={courseData[1].node} customClass="card-small lift" />
+			</div>
+			<div className="posts-col">
+				<DesktopCard node={courseData[2].node} customClass="lift" />
+				<div className="card-container">
+					<CtaCard customClass="btn btn-success text-white" ctaJSON={ctaJSON} />
+				</div>
+			</div>
+		</div>
+	)
+}
+
+const MultipleCards = ({ data: { courseData, ctaJSON } }) => {
+	return (
+		<div className="desktop-posts d-none d-xl-flex">
+			<div className="posts-col">
+				<DesktopCard node={courseData[0].node} customClass="lift" />
+				<DesktopCard node={courseData[1].node} customClass="card-small lift" />
+			</div>
+			<div className="posts-col">
+				<DesktopCard node={courseData[2].node} customClass="lift" />
+				<div className="card-container">
+					<DesktopCard node={courseData[3].node} customClass="card-small lift" />
+					<CtaCard customClass="btn btn-success text-white" ctaJSON={ctaJSON} />
+				</div>
+			</div>
 		</div>
 	)
 }
@@ -124,7 +179,6 @@ const Courses = () => {
 							}
 						}
 						headline
-						subline
 						slug
 						location
 						duration
@@ -137,7 +191,7 @@ const Courses = () => {
 								}
 							}
 						}
-						startDate(formatString: "DD. MMM  YYYY")
+						startDate(formatString: "DD. MMM YYYY")
 						body {
 							json
 						}
@@ -154,20 +208,11 @@ const Courses = () => {
 	return (
 		<section className="py-8 py-md-11 bg-light">
 			<Container>
-				<div className="slider-description">{documentToReactComponents(bodyJSON, options)}</div>
-				<div className="desktop-posts d-none d-xl-flex">
-					<div className="posts-col">
-						<DesktopCard node={courseData[0].node} customClass="lift" />
-						<DesktopCard node={courseData[1].node} customClass="card-small lift" />
-					</div>
-					<div className="posts-col">
-						<DesktopCard node={courseData[2].node} customClass="lift" />
-						<div className="card-container">
-							<DesktopCard node={courseData[3].node} customClass="card-small lift" />
-							<CtaCard customClass="btn btn-success text-white" ctaJSON={ctaJSON} />
-						</div>
-					</div>
-				</div>
+				<div className="normalize-last-p">{documentToReactComponents(bodyJSON, options)}</div>
+				{courseData.length === 1 ? <OneCard data={{ courseData, ctaJSON }} /> : ''}
+				{courseData.length === 2 ? <TwoCards data={{ courseData, ctaJSON }} /> : ''}
+				{courseData.length === 3 ? <ThreeCards data={{ courseData, ctaJSON }} /> : ''}
+				{courseData.length > 3 ? <MultipleCards data={{ courseData, ctaJSON }} /> : ''}
 			</Container>
 			<div className="scrollable-wrapper d-block d-xl-none">
 				<div className="scrollable">

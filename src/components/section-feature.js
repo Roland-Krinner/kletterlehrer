@@ -1,17 +1,24 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useStaticQuery, graphql, Link } from 'gatsby'
-import { BLOCKS, INLINES } from '@contentful/rich-text-types'
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 const options = {
 	renderNode: {
 		[BLOCKS.HEADING_2]: (node, children) => <h2 className="text-white">{children}</h2>,
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted mb-7 mb-md-9">{children}</p>,
+		[BLOCKS.HEADING_6]: (node, children) => {
+			return (
+				<span className="badge badge-pill bg-light-dark-600 text-white mb-3">
+					<span className="h6 text-uppercase">{children}</span>
+				</span>
+			)
+		},
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted">{children}</p>,
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return (
-					<Link to={node.data.uri} className="btn btn-success btn-sm mb-6 mb-xl-8">
+					<Link to={node.data.uri} className="btn btn-success btn-sm mt-3 mt-md-4 mb-2">
 						{children}
 						<i className="fe fe-arrow-right ml-3"></i>
 					</Link>
@@ -34,6 +41,15 @@ const options = {
 			</div>
 		),
 	},
+	// renderMark: {
+	// 	[MARKS.ITALIC]: text => {
+	// 		return (
+	// 			<span className="badge badge-pill bg-light-dark-600 text-white mb-3">
+	// 				<span className="h6 text-uppercase">{text}</span>
+	// 			</span>
+	// 		)
+	// 	},
+	// },
 }
 
 const Feature = () => {
@@ -54,15 +70,10 @@ const Feature = () => {
 	const bodyJSON = data.allContentfulHome.edges[0].node.contactFeature.json
 
 	return (
-		<section className="py-8 py-md-11 bg-secondary-dark-300">
+		<section className="py-6 py-md-9 bg-light-dark-700">
 			<Container>
 				<Row className="justify-content-center">
-					<Col className="col-12 col-md-10 col-md-8 text-center">
-						<span className="badge badge-pill badge-gray-700-soft mb-3">
-							<span className="h6 text-uppercase">Kontakt</span>
-						</span>
-						{documentToReactComponents(bodyJSON, options)}
-					</Col>
+					<Col className="col-12 col-md-10 col-md-8 text-center normalize-first-p normalize-last-p">{documentToReactComponents(bodyJSON, options)}</Col>
 				</Row>
 			</Container>
 		</section>

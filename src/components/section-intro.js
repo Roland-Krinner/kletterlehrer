@@ -53,7 +53,7 @@ const Intro = () => {
 	`)
 	const introBodyJSON = data.allContentfulHome.edges[0].node.introText.json
 	return (
-		<section className="py-8 py-md-11 bg-white">
+		<section className="py-8 py-md-11 bg-white normalize-last-p">
 			<Container>
 				<Row>
 					<Col xs={12} lg={8}>

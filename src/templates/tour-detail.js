@@ -10,11 +10,10 @@ import Head from '../components/head'
 
 export const query = graphql`
 	query($slug: String!) {
-		contentfulCourseItem(slug: { eq: $slug }) {
+		contentfulTourItem(slug: { eq: $slug }) {
 			headline
 			subline
 			slug
-			startDate(formatString: "MMMM DD YYYY")
 			body {
 				json
 			}
@@ -22,11 +21,8 @@ export const query = graphql`
 	}
 `
 const Course = ({ data }) => {
-	const headline = data.contentfulCourseItem.headline
-	// const displayHeadline = data.allContentfulStaticPages.edges[0].node.showPrivacyHeadline
-	// const subline = data.allContentfulStaticPages.edges[0].node.privacySubline
-	// const displaySubline = data.allContentfulStaticPages.edges[0].node.showPrivacySubline
-	const bodyJSON = data.contentfulCourseItem.body.json
+	const headline = data.contentfulTourItem.headline
+	const bodyJSON = data.contentfulTourItem.body.json
 
 	const options = {
 		renderNode: {
@@ -51,27 +47,6 @@ const Course = ({ data }) => {
 	return (
 		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
 			<Head title={headline} />
-			<section className="bg-light">
-				<Container>
-					<nav aria-label="breadcrumb">
-						<ol className="breadcrumb breadcrumb-scroll">
-							<li className="breadcrumb-item">
-								<Link className="text-gray-700" to="/">
-									Startseite
-								</Link>
-							</li>
-							<li className="breadcrumb-item">
-								<Link className="text-gray-700" to="/kurse">
-									Kurse
-								</Link>
-							</li>
-							<li className="breadcrumb-item active" aria-current="page">
-								{headline}
-							</li>
-						</ol>
-					</nav>
-				</Container>
-			</section>
 			<section className="pt-8 pt-md-11 bg-light">
 				<Container>
 					<Row className="align-items-center">
