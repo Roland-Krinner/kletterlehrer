@@ -29,6 +29,10 @@
 	border-radius: 0.2353rem !important;
 }
 
+.btn-sm {
+	min-width: 9.882rem;
+}
+
 .btn-submit {
 	i::before {
 		display: inline-block;
@@ -55,6 +59,14 @@
 		margin-bottom: 0 !important;
 	}
 }
+
+//md
+@media (min-width: 768px) {
+	.mb-md-20 {
+		margin-bottom: 20px;
+	}
+}
+
 // .collapse-toggler {
 // 	position: absolute;
 // 	top: 1rem;

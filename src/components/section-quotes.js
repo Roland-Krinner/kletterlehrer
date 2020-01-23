@@ -64,7 +64,7 @@ const Quotes = () => {
 														<Col xs={12} md={8}>
 															<Card.Body className="pt-8 pt-md-7 pb-md-8 pt-lg-9 pb-lg-9">
 																<blockquote className="blockquote mb-0">
-																	<p class="h3 font-weight-bold text-muted">{quoteItem.quote.quote}</p>
+																	<p className="h3 font-weight-bold text-muted">{quoteItem.quote.quote}</p>
 																	<footer className="font-size-sm text-muted">{quoteItem.author}</footer>
 																</blockquote>
 															</Card.Body>
@@ -74,12 +74,12 @@ const Quotes = () => {
 											)
 										})}
 									</Flickity>
-									<div class="quote-symbol">
-										<div class="background">
-											<div class="font">
+									<div className="quote-symbol">
+										<div className="background">
+											<div className="font">
 												<svg width="66" height="53" viewBox="0 0 66 53" xmlns="http://www.w3.org/2000/svg">
 													<title>“</title>
-													<text transform="translate(-41 -125)" fill="#2478CC" fill-rule="evenodd" font-family="Georgia" font-size="200">
+													<text transform="translate(-41 -125)" fill="#2478CC" fillRule="evenodd" fontFamily="Georgia" fontSize="200">
 														<tspan x="34.984" y="274">
 															“
 														</tspan>

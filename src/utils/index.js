@@ -17,7 +17,6 @@ const utils = {
 			February: 'Februar',
 			March: 'März',
 			April: 'April',
-			May: 'Mai',
 			June: 'Juni',
 			July: 'Juli',
 			August: 'August',

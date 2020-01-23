@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useStaticQuery, graphql, Link } from 'gatsby'
-import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
+import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
 const options = {

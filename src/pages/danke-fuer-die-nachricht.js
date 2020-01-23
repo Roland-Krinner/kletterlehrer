@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { useStaticQuery, graphql, Link } from 'gatsby'
+import { Link } from 'gatsby'
 // import { BLOCKS } from '@contentful/rich-text-types'
 // import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 
@@ -51,10 +51,10 @@ const ThankYou = () => {
 	// 	},
 	// }
 
-	const headline = 'Danke'
-	const displayHeadline = true
-	const subline = 'Subline'
-	const displaySubline = true
+	// const headline = 'Danke'
+	// const displayHeadline = true
+	// const subline = 'Subline'
+	// const displaySubline = true
 
 	return (
 		<Layout pageInfo={{ pageName: 'danke', pageType: 'subPage' }}>
