@@ -7,6 +7,14 @@
 }
 
 .recaptcha-form-group {
+	@media (max-width: 375px) {
+		margin-bottom: calc(1rem - 5px) !important;
+	}
+
+	@media (max-width: 320px) {
+		margin-bottom: calc(1rem - 5px) !important;
+	}
+
 	// lg - xl
 	@media (min-width: 992px) and (max-width: 1199px) {
 		margin-bottom: calc(1rem + 4px) !important;
@@ -14,15 +22,13 @@
 }
 
 .recaptcha-wrapper {
-	// xs
-	@media (max-width: 320px) {
-		transform: scale(0.94, 0.94);
+	@media (max-width: 375px) {
+		transform: scale(0.96, 0.96);
 		transform-origin: top left;
 	}
 
-	// xs
-	@media (max-width: 375px) {
-		transform: scale(0.96, 0.96);
+	@media (max-width: 320px) {
+		transform: scale(0.94, 0.94);
 		transform-origin: top left;
 	}
 
