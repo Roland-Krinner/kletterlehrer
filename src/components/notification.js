@@ -16,7 +16,7 @@ function Notification() {
 
 	return (
 		<div className="notification-wrapper">
-			<Toast onClose={() => setShow(false)} show={show} delay={3000} autohide animation={false}>
+			<Toast onClose={() => setShow(false)} show={show} delay={3000} autohide animation={false} className="no-select x_no-pointer-events">
 				<Toast.Header>
 					<strong className="mr-auto">Achtung</strong>
 				</Toast.Header>

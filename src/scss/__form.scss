@@ -6,6 +6,13 @@
 	border: 2px solid rgba(14, 30, 37, 0.09);
 }
 
+.recaptcha-form-group {
+	// lg - xl
+	@media (min-width: 992px) and (max-width: 1199px) {
+		margin-bottom: calc(1rem + 4px) !important;
+	}
+}
+
 .recaptcha-wrapper {
 	// xs
 	@media (max-width: 320px) {
@@ -16,6 +23,12 @@
 	// xs
 	@media (max-width: 375px) {
 		transform: scale(0.96, 0.96);
+		transform-origin: top left;
+	}
+
+	// lg - xl
+	@media (min-width: 992px) and (max-width: 1199px) {
+		transform: scale(1.07, 1.07);
 		transform-origin: top left;
 	}
 }

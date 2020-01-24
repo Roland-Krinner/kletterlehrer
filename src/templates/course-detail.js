@@ -153,8 +153,8 @@ const Course = ({ data }) => {
 						<Col xs={12} xmd={4} lg={5} className="mt-5 pl-lg-0 pl-lg-3 section" id="registrationForm">
 							<Card className="content-card shadow-dark-sm">
 								<Card.Body>
-									<h3 className="mb-5 font-weight-bold">Anmelden oder weitere Infos anfragen</h3>
-									<p className="text-gray-800">At vero eos et accusam et justo duo dolores et ea rebum est Lorem ipsum dolor sit amet.</p>
+									<h3 className="h5 mb-3 font-weight-bold">Anmelden oder weitere Infos anfragen</h3>
+									<p className="font-size-sm text-gray-800">At vero eos et accusam et justo duo dolores et ea rebum est Lorem ipsum dolor sit amet.</p>
 									<RegisterForm data={{ prefilledText }} />
 								</Card.Body>
 							</Card>

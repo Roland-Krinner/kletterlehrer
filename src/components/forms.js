@@ -95,37 +95,34 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 			return
 		}
 		if (~document.location.host.indexOf('localhost')) {
-			//onRegisterSuccess(successUrl)
-			console.log('Form submit')
+			onRegisterSuccess(successUrl)
 		} else {
 			fetch('/', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				body: encode({
 					...fieldValue,
-					'g-recaptcha-response': recaptchaValue, //must set the recaptcha field or submissions will fail (without error)
+					'g-recaptcha-response': recaptchaValue, // must set the recaptcha field or submissions will fail (without error)
 					'form-name': form.getAttribute('name'),
 				}),
 			})
 				.then(response => {
 					if (response.status === 200 && !response.redirected) {
-						//netlify doesnt give an error on recaptcha fail (only 303 redirect...) :(
+						// netlify doesnt give an error on recaptcha fail (only 303 redirect...) :(
 						onRegisterSuccess(successUrl)
 					} else {
-						console.log('!!!!!!!!!!! form server response: ', response)
-						//setError('error occurred, please try again.')
+						// console.log('!!!!!!!!!!! form server response: ', response)
 						setNotificationData({
 							showNotification: true,
-							messages: ['error occurred, please try again.'],
+							messages: ['Ein Fehler ist aufgetreten, bitte nochmal versuchen.'],
 						})
 					}
 				})
 				.catch(err => {
-					console.log('!!!!!!!!! FORM ERROR ', err)
-					//setError('error occurred, please try again.')
+					// console.log('!!!!!!!!! FORM ERROR ', err)
 					setNotificationData({
 						showNotification: true,
-						messages: ['error occurred, please try again.'],
+						messages: ['Ein Fehler ist aufgetreten, bitte nochmal versuchen.'],
 					})
 				})
 		}
@@ -148,7 +145,7 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 				<Form.Label className="h6 text-gray-800 mb-1">Nachricht</Form.Label>
 				<Form.Control as="textarea" rows="3" placeholder="Nachricht" name="message" value={fieldValue.message} onChange={onFieldChange} className={'border-' + fieldsValidation.message} />
 			</Form.Group>
-			<Form.Group className="mb-md-20 mb-lg-4">
+			<Form.Group className="mb-md-20 mb-lg-4 recaptcha-form-group">
 				<div className="recaptcha-wrapper">
 					<ReCAPTCHA sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY} onChange={setRecaptchaValue} />
 				</div>
