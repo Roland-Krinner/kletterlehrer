@@ -1,72 +1,96 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-import { Link } from 'gatsby'
+import { Container, Row, Col, Card } from 'react-bootstrap'
 import { graphql } from 'gatsby'
-import { BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-
+import { introTextOptions, options, formTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
 import Head from '../components/head'
+import { RegisterForm } from '../components/forms'
+import { utils } from '../utils/'
+import '../scss/__tour-detail.scss'
 
 export const query = graphql`
 	query($slug: String!) {
 		contentfulTourItem(slug: { eq: $slug }) {
+			image {
+				title
+				file {
+					url
+				}
+			}
 			headline
 			subline
-			slug
+			costs
+			introText {
+				json
+			}
 			body {
+				json
+			}
+			formText {
 				json
 			}
 		}
 	}
 `
-const Course = ({ data }) => {
+const Tour = ({ data }) => {
+	const imageURL = data.contentfulTourItem.image.file.url
+	const imageAlt = data.contentfulTourItem.image.title
 	const headline = data.contentfulTourItem.headline
+	const costs = data.contentfulTourItem.costs
+	const introTextJSON = data.contentfulTourItem.introText.json
 	const bodyJSON = data.contentfulTourItem.body.json
-
-	const options = {
-		renderNode: {
-			[BLOCKS.PARAGRAPH]: (node, children) => <p className="text-gray-800 mb-6 mb-md-8">{children}</p>,
-			[BLOCKS.UL_LIST]: (node, children) => <div className="pb-5">{children}</div>,
-			[BLOCKS.LIST_ITEM]: (node, children) => (
-				<div className="d-flex list-item">
-					<div className="badge badge-rounded-circle badge-success-soft mt-1 mr-4">
-						<i className="fe fe-check"></i>
-					</div>
-					<span className="mb-4">{children}</span>
-				</div>
-			),
-			'embedded-asset-block': node => {
-				const url = node.data.target.fields.file['en-US'].url
-				const alt = node.data.target.fields.title['en-US']
-				return <img src={url} alt={alt} />
-			},
-		},
-	}
+	const formTextJSON = data.contentfulTourItem.formText.json
+	const prefilledText = `Ich interessiere mich für das Angebot "${headline}"`
 
 	return (
-		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
+		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
 			<Head title={headline} />
-			<section className="pt-8 pt-md-11 bg-light">
+			<section className="pt-5 pb-8 pb-sm-10 tour-detail">
 				<Container>
-					<Row className="align-items-center">
-						<Col xs={12}>
-							<Link to="/kurse" className="font-weight-bold font-size-sm text-decoration-none mb-3">
-								<i className="fe fe-arrow-left mr-3"></i> Zur Übersicht
-							</Link>
-							<h1>{headline}</h1>
-							{/* {displayHeadline === true ? <h1 className="display-4 mb-2">{headline}</h1> : ''}
-							{displaySubline === true ? <p className="font-size-lg text-gray-700 mb-5 mb-md-0">{subline}</p> : ''} */}
-						</Col>
-					</Row>
 					<Row>
-						<Col xs={12}>
-							<hr className="my-6 my-md-8 border-gray-300" />
+						<Col xs={12} lg={7} className="pr-lg-0 pr-lg-3 section">
+							<Card className="detail-card content-card bg-dark overflow-hidden shadow-dark-sm">
+								<div className="card-img-top">
+									<img src={imageURL} alt={imageAlt} className="img-fluid" />
+									<div>
+										<div>
+											<h1 className="h3 text-white mb-0">{headline}</h1>
+										</div>
+									</div>
+								</div>
+								<Card.Body className="bg-white">
+									<div className="d-flex align-items-start">
+										<span className="badge badge-secondary rounded mb-3">Preis: {costs}</span>
+									</div>
+									<div className="normalize-last-p">
+										{documentToReactComponents(introTextJSON, introTextOptions)}
+										<a
+											href="#!"
+											className="btn btn-success btn-sm"
+											data-target="registrationForm"
+											onClick={e => {
+												utils.ScrollTo(e)
+											}}
+										>
+											Angebot anfragen
+										</a>
+									</div>
+								</Card.Body>
+							</Card>
 						</Col>
-					</Row>
-					<Row>
-						<Col xs={12} md={8}>
-							{documentToReactComponents(bodyJSON, options)}
+						<Col xs={12} lg={7} className="mt-5 pr-lg-0 pr-lg-3 section">
+							<Card className="content-card shadow-dark-sm">
+								<Card.Body className="normalize-last-p">{documentToReactComponents(bodyJSON, options)}</Card.Body>
+							</Card>
+						</Col>
+						<Col xs={12} lg={5} className="mt-5 pl-lg-0 pl-lg-3 section" id="registrationForm">
+							<Card className="content-card shadow-dark-sm">
+								<Card.Body>
+									{documentToReactComponents(formTextJSON, formTextOptions)}
+									<RegisterForm data={{ prefilledText }} />
+								</Card.Body>
+							</Card>
 						</Col>
 					</Row>
 				</Container>
@@ -75,4 +99,4 @@ const Course = ({ data }) => {
 	)
 }
 
-export default Course
+export default Tour

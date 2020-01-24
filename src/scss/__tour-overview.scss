@@ -1,0 +1,15 @@
+@import './mixins';
+
+.tour-overview {
+	.detail-card {
+		.card-img-top > div {
+			@include cardImgTopDiv;
+		}
+	}
+
+	.card.content-card {
+		.card-body {
+			@include cardContentCardCardBody;
+		}
+	}
+}

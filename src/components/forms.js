@@ -62,7 +62,7 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 		}
 
 		if (recaptchaValue === null) {
-			errorMessages.push('Bitte ReCAPTCHA bestätigen')
+			errorMessages.push('Bitte reCAPTCHA bestätigen')
 		}
 
 		// set border colors from temp obj

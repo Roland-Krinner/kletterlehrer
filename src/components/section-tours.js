@@ -4,7 +4,7 @@ import Flickity from './flickity'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import '../scss/__tours.scss'
+import '../scss/__section-tours.scss'
 
 const baseURL = '/touren'
 
@@ -115,15 +115,6 @@ const Tours = () => {
 						headline
 						subline
 						slug
-						author {
-							name
-							portrait {
-								title
-								file {
-									url
-								}
-							}
-						}
 						body {
 							json
 						}

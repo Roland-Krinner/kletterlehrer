@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Flickity from './flickity'
-import '../scss/__quotes.scss'
+import '../scss/__section-quotes.scss'
 
 const options = {
 	renderNode: {

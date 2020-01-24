@@ -4,7 +4,7 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { utils } from '../utils/'
-import '../scss/__courses.scss'
+import '../scss/__section-courses.scss'
 
 const baseURL = '/kurse'
 
@@ -169,7 +169,7 @@ const Courses = () => {
 					}
 				}
 			}
-			allContentfulCourseItem(sort: { fields: startDate, order: DESC }) {
+			allContentfulCourseItem(sort: { fields: startDate, order: ASC }) {
 				edges {
 					node {
 						image {
@@ -182,15 +182,6 @@ const Courses = () => {
 						slug
 						location
 						duration
-						author {
-							name
-							portrait {
-								title
-								file {
-									url
-								}
-							}
-						}
 						startDate(formatString: "DD. MMM YYYY")
 						body {
 							json

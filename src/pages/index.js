@@ -8,6 +8,7 @@ import SectionCourses from '../components/section-courses'
 import SectionTours from '../components/section-tours'
 import SectionQuotes from '../components/section-quotes'
 import SectionFeature from '../components/section-feature'
+import SectionFeatureQualification from '../components/section-feature-qualification'
 import SectionFAQs from '../components/section-faqs'
 
 const IndexPage = () => {
@@ -16,10 +17,11 @@ const IndexPage = () => {
 			<Head title="Home" />
 			<SectionHero/>
 			<SectionIntro />
+			<SectionFeatureQualification />
 			<SectionCourses />
 			<SectionTours />
-			<SectionQuotes />
 			<SectionFeature />
+			<SectionQuotes />
 			<SectionFAQs />
 			{/* <SectionFAQs data={{ faqsHeadline, faqsSubline, faqList }} /> */}
 		</Layout>

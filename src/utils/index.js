@@ -33,6 +33,12 @@ const utils = {
 		const startYear = startDate.split(' ')[2] || ''
 		return [startDay, this.getMonthName(startMonth), startYear].join(' ')
 	},
+	ScrollTo: function(e) {
+		e.preventDefault()
+		const target = e.target.dataset.target
+		const element = document.getElementById(target)
+		element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+	}
 }
 
 export { utils }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Card } from 'react-bootstrap'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
@@ -53,11 +53,29 @@ const Intro = () => {
 	`)
 	const introBodyJSON = data.allContentfulHome.edges[0].node.introText.json
 	return (
-		<section className="py-8 py-md-11 bg-white normalize-last-p">
+		<section className="py-8 py-md-11 bg-white bg-light normalize-last-p">
 			<Container>
 				<Row>
-					<Col xs={12} lg={8}>
-						{documentToReactComponents(introBodyJSON, options)}
+					<Col xs={12} xx__lg={8}>
+						{/* {documentToReactComponents(introBodyJSON, options)} */}
+						<h2 className="mb-1">Dein Kletterlehrer</h2>
+						<h3 className="mb-5 text-muted">Mit Sicherheit ein guter Seilpartner</h3>
+						<Card className="shadow-dark-sm">
+							<Card.Body>
+								<p className="font-size-lg text-gray-800">Manche nehmen lieber den direkten Weg nach oben anstatt den Weg des geringsten Widerstands zu wählen. Klettern ist ein anspruchsvoller aber auch faszinierender und natürlicher Sport und schließlich liegt das Klettern in der Natur des Menschen. Alles Gründe, weshalb sich diese Trendsportart einer immer größeren Beliebtheit erfreut – egal ob in der Halle oder draußen am Fels.</p>
+								<Link className="xbtn xbtn-success xbtn-sm font-weight-bold text-decoration-none text-success" to="/ueber-mich">
+									Mehr erfahren<i className="fe fe-arrow-right ml-3"></i>
+								</Link>
+								
+								{/* <Link className="btn btn-success btn-sm" to="/ueber-mich">
+									Zum Profil
+									
+								</Link> */}
+								{/* <Link className="xbtn xbtn-success xbtn-sm font-weight-bold text-decoration-none text-success" to="/ueber-mich">
+									Zum Profil<i className="fe fe-arrow-right ml-3"></i>
+								</Link> */}
+							</Card.Body>
+						</Card>
 					</Col>
 				</Row>
 			</Container>
