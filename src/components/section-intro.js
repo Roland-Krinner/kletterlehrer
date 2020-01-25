@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { introTextOptions } from './format-options'
+import Section from './section'
 
 const Intro = () => {
 	const data = useStaticQuery(graphql`
@@ -20,15 +21,15 @@ const Intro = () => {
 	`)
 	const introBodyJSON = data.allContentfulHome.edges[0].node.introText.json
 	return (
-		<section className="py-8 py-md-11 bg-white bg-light normalize-last-p">
+		<Section data={{ classes: 'normalize-last-p' }}>
 			<Container>
 				<Row>
-					<Col xs={12} xx__xl={8}>
+					<Col xs={12}>
 						{documentToReactComponents(introBodyJSON, introTextOptions)}
 					</Col>
 				</Row>
 			</Container>
-		</section>
+		</Section>
 	)
 }
 

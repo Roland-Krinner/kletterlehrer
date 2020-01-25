@@ -3,6 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import Section from './section'
 
 const options = {
 	renderNode: {
@@ -61,7 +62,7 @@ const FAQs = () => {
 	const faqsLength = faqList.length
 
 	return (
-		<section className="py-8 py-md-11 bg-secondary">
+		<Section data={{ classes: 'bg-dark' }}>
 			<Container>
 				<Row className="justify-content-center">
 					<Col className="col-12 col-md-10 col-md-8 text-center">
@@ -94,7 +95,7 @@ const FAQs = () => {
 					</Col>
 				</Row>
 			</Container>
-		</section>
+		</Section>
 	)
 }
 

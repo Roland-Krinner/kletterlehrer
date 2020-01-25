@@ -39,10 +39,9 @@ const Hero = () => {
 	const heroSlides = data.allContentfulHome.edges[0].node.heroSlides
 
 	return (
-		<section className="hero-section bg-light">
+		<section className="hero-section">
 			<Flickity options={{ wrapAround: true, pageDots: true, prevNextButtons: false, adaptiveHeight: true, autoPlay: 2500 }}>
 				{heroSlides.map((slide, idx) => {
-					//const url = slide.image.file.url
 					const alt = slide.image.title
 					const fluidURL = slide.image.fluid.src
 					const headline = slide.headline

@@ -1,6 +1,8 @@
 @import './mixins';
 
 .course-overview {
+	@include cardsCol;
+
 	.detail-card {
 		.card-img-top > div {
 			@include cardImgTopDiv;

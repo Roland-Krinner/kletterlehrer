@@ -4,9 +4,12 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styles from './section-feature-profile.module.scss'
+import Section from './section'
 
 const imgOptions = {
 	renderNode: {
+		[BLOCKS.HEADING_1]: (node, children) => '',
+		[BLOCKS.HEADING_2]: (node, children) => '',
 		[BLOCKS.HEADING_3]: (node, children) => '',
 		[BLOCKS.PARAGRAPH]: (node, children) => '',
 		[BLOCKS.EMBEDDED_ASSET]: (node, children) => {
@@ -62,13 +65,11 @@ const Feature = () => {
 			}
 		}
 	`)
-
 	const profileBodyJSON = data.allContentfulHome.edges[0].node.profileText.json
-
 	return (
-		<section className="py-8 py-md-11 bg-white">
+		<Section data={{ classes: 'bg-white' }}>
 			<Container>
-				<Row className="justify-content-center align-items-center ">
+				<Row className="justify-content-center align-items-center">
 					<Col xs={6} sm={4} lg={3} className={styles.imgWrapper}>
 						{documentToReactComponents(profileBodyJSON, imgOptions)}
 					</Col>
@@ -77,7 +78,7 @@ const Feature = () => {
 					</Col>
 				</Row>
 			</Container>
-		</section>
+		</Section>
 	)
 }
 

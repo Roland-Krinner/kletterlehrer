@@ -1,3 +1,19 @@
+@import '../scss/colors';
+
+.navbar-dark .navbar-nav .nav-item .nav-link.active,
+.navbar-dark .navbar-nav .nav-item.active .nav-link {
+	@media (max-width: 991.98px) {
+		color: $successBase !important;
+	}
+}
+
+.navbar-dark .navbar-nav .nav-item .nav-link:focus,
+.navbar-dark .navbar-nav .nav-item .nav-link:hover {
+	@media (max-width: 991.98px) {
+		color: $successBase !important;
+	}
+}
+
 .navbar {
 	transition: none !important;
 	@media (max-width: 320px) {

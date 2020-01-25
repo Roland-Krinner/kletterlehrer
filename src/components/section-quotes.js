@@ -5,6 +5,7 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Flickity from './flickity'
 import { introTextOptions } from './format-options'
 import '../scss/__section-quotes.scss'
+import Section from './section'
 
 const Quotes = () => {
 	const data = useStaticQuery(graphql`
@@ -26,12 +27,10 @@ const Quotes = () => {
 			}
 		}
 	`)
-
 	const quotesBodyJSON = data.allContentfulHome.edges[0].node.quotesText.json
 	const quotesList = data.allContentfulHome.edges[0].node.quotesList
-
 	return (
-		<section className="py-8 py-md-11 quotes-section bg-white">
+		<Section data={{ classes: 'bg-white quotes-section' }}>
 			<Container>
 				<Row className="justify-content-center">
 					<div className="col-12 col-md-10 col-lg-8 text-center">{documentToReactComponents(quotesBodyJSON, introTextOptions)}</div>
@@ -79,7 +78,7 @@ const Quotes = () => {
 					</Col>
 				</Row>
 			</Container>
-		</section>
+		</Section>
 	)
 }
 

@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Navbar, Nav } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
-
 import '../scss/__header.scss'
 
 const Image = ({ svg, file, alt }) => {

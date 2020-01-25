@@ -13,8 +13,8 @@ import SectionFAQs from '../components/section-faqs'
 
 const IndexPage = () => {
 	return (
-		<Layout pageInfo={{ pageName: 'index', pageType: 'homePage' }}>
-			<Head title="Home" />
+		<Layout pageInfo={{ pageName: 'startseite', pageType: 'homePage' }}>
+			<Head title="Startseite" />
 			<SectionHero/>
 			<SectionIntro />
 			<SectionFeatureProfile />

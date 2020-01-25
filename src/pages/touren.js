@@ -6,6 +6,7 @@ import { cardBodyTextOptions, introTextOptions } from '../components/format-opti
 import Layout from '../components/layout'
 import Head from '../components/head'
 import '../scss/__tour-overview.scss'
+import CTA from '../components/cta'
 
 const baseURL = '/touren'
 
@@ -26,9 +27,7 @@ const PreviewCard = ({ node }) => {
 				</div>
 				<div className="normalize-last-p">
 					{documentToReactComponents(node.introText.json, cardBodyTextOptions)}
-					<Link className="btn btn-success btn-sm" to={`${baseURL}/${node.slug}`}>
-						Details anzeigen
-					</Link>
+					<CTA data={{ to: `${baseURL}/${node.slug}`, classes: '' }}>Details anzeigen</CTA>
 				</div>
 			</Card.Body>
 		</Card>
@@ -57,10 +56,10 @@ const Tours = () => {
 					}
 				}
 			}
-			allContentfulToursPage {
+			allContentfulDynamicPages {
 				edges {
 					node {
-						introText {
+						toursIntroText {
 							json
 						}
 					}
@@ -70,31 +69,31 @@ const Tours = () => {
 	`)
 
 	const tourData = data.allContentfulTourItem.edges
-	const introTextJSON = data.allContentfulToursPage.edges[0].node.introText.json
+	const introTextJSON = data.allContentfulDynamicPages.edges[0].node.toursIntroText.json
 
 	return (
 		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
 			<Head title="Touren" />
-			<section className="pt-5 pt-lg-8 pb-8 pb-sm-10 course-overview">
+			<section className="pt-5 pt-lg-8 pb-8 pb-sm-10 tour-overview">
 				<Container>
 					<Row>
 						<Col xs={12}>
 							{documentToReactComponents(introTextJSON, introTextOptions)}
 							<Row className="d-md-none">
-								<Col xs={12}>
+								<Col xs={12} className="cards-col">
 									{tourData.map(({ node }, idx) => {
 										return <PreviewCard node={node} key={idx} />
 									})}
 								</Col>
 							</Row>
 							<Row className="d-none d-md-flex">
-								<Col xs={6}>
-									{tourData.map(({ node }, idx, self) => {
+								<Col xs={6} className="cards-col">
+									{tourData.map(({ node }, idx) => {
 										return idx % 2 === 0 ? <PreviewCard node={node} key={idx} /> : ''
 									})}
 								</Col>
-								<Col xs={6} className="pt-8">
-									{tourData.map(({ node }, idx, self) => {
+								<Col xs={6} className="pt-8 cards-col">
+									{tourData.map(({ node }, idx) => {
 										return idx % 2 === 1 ? <PreviewCard node={node} key={idx} /> : ''
 									})}
 								</Col>

@@ -1,8 +1,10 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { useStaticQuery, graphql, Link } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import Section from './section'
+import CTA from './cta'
 
 const options = {
 	renderNode: {
@@ -17,12 +19,7 @@ const options = {
 		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted">{children}</p>,
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
-				return (
-					<Link to={node.data.uri} className="btn btn-success btn-sm mt-3 mt-md-4">
-						{children}
-						{/* <i className="fe fe-arrow-right ml-3"></i> */}
-					</Link>
-				)
+				return <CTA data={{ to: node.data.uri, classes: 'mt-3 mt-md-4' }}>{children}</CTA>
 			} else {
 				return (
 					<a href={node.data.uri} target="_blank" rel="noopener noreferrer">
@@ -57,17 +54,15 @@ const Feature = () => {
 			}
 		}
 	`)
-
 	const bodyJSON = data.allContentfulHome.edges[0].node.contactFeature.json
-
 	return (
-		<section className="py-8 py-md-11 bg-dark-light-100">
+		<Section data={{ classes: 'bg-dark-light-100' }}>
 			<Container>
 				<Row className="justify-content-center">
 					<Col className="col-12 col-md-10 col-md-8 text-center normalize-first-p normalize-last-p">{documentToReactComponents(bodyJSON, options)}</Col>
 				</Row>
 			</Container>
-		</section>
+		</Section>
 	)
 }
 

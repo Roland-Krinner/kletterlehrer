@@ -5,6 +5,8 @@ import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { utils } from '../utils/'
 import '../scss/__section-courses.scss'
+import Section from './section'
+import CTA from './cta'
 
 const baseURL = '/kurse'
 
@@ -14,10 +16,7 @@ const options = {
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return (
-					<Link to={node.data.uri} className="btn btn-success btn-sm mb-6 mb-xl-8">
-						{children}
-						{/* <i className="fe fe-arrow-right ml-3"></i> */}
-					</Link>
+					<CTA data={{ to: node.data.uri, classes: 'mb-6 mb-xl-8' }}>{children}</CTA>
 				)
 			} else {
 				return (
@@ -191,13 +190,11 @@ const Courses = () => {
 			}
 		}
 	`)
-
 	const courseData = data.allContentfulCourseItem.edges
 	const bodyJSON = data.allContentfulHome.edges[0].node.coursesText.json
 	const ctaJSON = data.allContentfulHome.edges[0].node.coursesMobileButton
-
 	return (
-		<section className="py-8 py-md-11 bg-light">
+		<Section data={{ classes: '' }}>
 			<Container>
 				<div className="normalize-last-p">{documentToReactComponents(bodyJSON, options)}</div>
 				{courseData.length === 1 ? <OneCard data={{ courseData, ctaJSON }} /> : ''}
@@ -215,7 +212,7 @@ const Courses = () => {
 					</div>
 				</div>
 			</div>
-		</section>
+		</Section>
 	)
 }
 

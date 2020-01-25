@@ -1,12 +1,13 @@
 import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
-import { Link, useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { cardBodyTextOptions, introTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
 import Head from '../components/head'
 import { utils } from '../utils/'
 import '../scss/__course-overview.scss'
+import CTA from '../components/cta'
 
 const baseURL = '/kurse'
 
@@ -35,9 +36,7 @@ const PreviewCard = ({ node }) => {
 				</div>
 				<div className="normalize-last-p">
 					{documentToReactComponents(node.introText.json, cardBodyTextOptions)}
-					<Link className="btn btn-success btn-sm" to={`${baseURL}/${node.slug}`}>
-						Details anzeigen
-					</Link>
+					<CTA data={{ to: `${baseURL}/${node.slug}`, classes: '' }}>Details anzeigen</CTA>
 				</div>
 			</Card.Body>
 		</Card>
@@ -69,10 +68,10 @@ const Courses = () => {
 					}
 				}
 			}
-			allContentfulCoursesPage {
+			allContentfulDynamicPages {
 				edges {
 					node {
-						introText {
+						coursesIntroText {
 							json
 						}
 					}
@@ -82,7 +81,7 @@ const Courses = () => {
 	`)
 
 	const courseData = data.allContentfulCourseItem.edges
-	const introTextJSON = data.allContentfulCoursesPage.edges[0].node.introText.json
+	const introTextJSON = data.allContentfulDynamicPages.edges[0].node.coursesIntroText.json
 
 	return (
 		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
@@ -93,20 +92,20 @@ const Courses = () => {
 						<Col xs={12}>
 							{documentToReactComponents(introTextJSON, introTextOptions)}
 							<Row className="d-md-none">
-								<Col xs={12}>
+								<Col xs={12} className="cards-col">
 									{courseData.map(({ node }, idx) => {
 										return <PreviewCard node={node} key={idx} />
 									})}
 								</Col>
 							</Row>
 							<Row className="d-none d-md-flex">
-								<Col xs={6}>
-									{courseData.map(({ node }, idx, self) => {
+								<Col xs={6} className="cards-col">
+									{courseData.map(({ node }, idx) => {
 										return idx % 2 === 0 ? <PreviewCard node={node} key={idx} /> : ''
 									})}
 								</Col>
-								<Col xs={6} className="pt-8">
-									{courseData.map(({ node }, idx, self) => {
+								<Col xs={6} className="pt-8 cards-col">
+									{courseData.map(({ node }, idx) => {
 										return idx % 2 === 1 ? <PreviewCard node={node} key={idx} /> : ''
 									})}
 								</Col>
