@@ -73,9 +73,9 @@ const NavContent = ({ pageInfo }) => {
 						</Link>
 					</Nav.Item>
 					<Nav.Item>
-						<Link to="/ueber-mich">
-							<Nav.Link as="span" eventKey="ueber-mich">
-								<span>Über mich</span>
+						<Link to="/profil">
+							<Nav.Link as="span" eventKey="profil">
+								<span>Profil</span>
 							</Nav.Link>
 						</Link>
 					</Nav.Item>

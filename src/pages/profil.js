@@ -68,8 +68,8 @@ const AboutPage = () => {
 	// }
 
 	return (
-		<Layout pageInfo={{ pageName: 'ueber-mich', pageType: 'subPage' }}>
-			<Head title="Über mich" />
+		<Layout pageInfo={{ pageName: 'profil', pageType: 'subPage' }}>
+			<Head title="Profil" />
 			<section className="pt-0 pt-lg-8 pb-8 pb-sm-10 course-overview">
 				<Container>
 					<Row>
