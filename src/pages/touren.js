@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
-import { Link, useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { cardBodyTextOptions, introTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
