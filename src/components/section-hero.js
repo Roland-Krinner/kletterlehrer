@@ -39,7 +39,7 @@ const Hero = () => {
 	const heroSlides = data.allContentfulHome.edges[0].node.heroSlides
 
 	return (
-		<section className="hero-section bg-white">
+		<section className="hero-section bg-light">
 			<Flickity options={{ wrapAround: true, pageDots: true, prevNextButtons: false, adaptiveHeight: true, autoPlay: 2500 }}>
 				{heroSlides.map((slide, idx) => {
 					//const url = slide.image.file.url

@@ -16,7 +16,7 @@ const options = {
 				return (
 					<Link to={node.data.uri} className="btn btn-success btn-sm mb-6 mb-xl-8">
 						{children}
-						<i className="fe fe-arrow-right ml-3"></i>
+						{/* <i className="fe fe-arrow-right ml-3"></i> */}
 					</Link>
 				)
 			} else {

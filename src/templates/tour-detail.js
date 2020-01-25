@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { introTextOptions, options, formTextOptions } from '../components/format-options'
+import { cardBodyTextOptions, options, formTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
 import Head from '../components/head'
 import { RegisterForm } from '../components/forms'
@@ -64,7 +64,7 @@ const Tour = ({ data }) => {
 										<span className="badge badge-secondary rounded mb-3">Preis: {costs}</span>
 									</div>
 									<div className="normalize-last-p">
-										{documentToReactComponents(introTextJSON, introTextOptions)}
+										{documentToReactComponents(introTextJSON, cardBodyTextOptions)}
 										<a
 											href="#!"
 											className="btn btn-success btn-sm"

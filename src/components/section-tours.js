@@ -17,7 +17,7 @@ const options = {
 				return (
 					<Link to={node.data.uri} className="btn btn-success btn-sm xbtn-default mb-6 mb-xl-8">
 						{children}
-						<i className="fe fe-arrow-right ml-3"></i>
+						{/* <i className="fe fe-arrow-right ml-3"></i> */}
 					</Link>
 				)
 			} else {
@@ -74,8 +74,8 @@ const MobileCard = ({ customClass, node }) => {
 				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
 			</Link>
 			<Link className="card-body bg-white" to={`${baseURL}/${node.slug}`}>
-				<h3 className="mb-0">{node.headline}</h3>
-				<p className="mb-6 text-muted">{node.subline}</p>
+				<h3 className="mb-2">{node.headline}</h3>
+				<p className="mb-0 text-muted">{node.subline}</p>
 			</Link>
 			<Link className="card-meta bg-white" to={`${baseURL}/${node.slug}`}>
 				<hr className="card-meta-divider" />

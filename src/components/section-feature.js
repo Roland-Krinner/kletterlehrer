@@ -18,9 +18,9 @@ const options = {
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return (
-					<Link to={node.data.uri} className="btn btn-success btn-sm mt-3 mt-md-4 mb-2">
+					<Link to={node.data.uri} className="btn btn-success btn-sm mt-3 mt-md-4">
 						{children}
-						<i className="fe fe-arrow-right ml-3"></i>
+						{/* <i className="fe fe-arrow-right ml-3"></i> */}
 					</Link>
 				)
 			} else {
@@ -41,15 +41,6 @@ const options = {
 			</div>
 		),
 	},
-	// renderMark: {
-	// 	[MARKS.ITALIC]: text => {
-	// 		return (
-	// 			<span className="badge badge-pill bg-light-dark-600 text-white mb-3">
-	// 				<span className="h6 text-uppercase">{text}</span>
-	// 			</span>
-	// 		)
-	// 	},
-	// },
 }
 
 const Feature = () => {
@@ -70,7 +61,7 @@ const Feature = () => {
 	const bodyJSON = data.allContentfulHome.edges[0].node.contactFeature.json
 
 	return (
-		<section className="py-6 py-md-9 bg-light-dark-700">
+		<section className="py-8 py-md-11 bg-dark-light-100">
 			<Container>
 				<Row className="justify-content-center">
 					<Col className="col-12 col-md-10 col-md-8 text-center normalize-first-p normalize-last-p">{documentToReactComponents(bodyJSON, options)}</Col>

@@ -1,25 +1,10 @@
 import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
-import { BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Flickity from './flickity'
+import { introTextOptions } from './format-options'
 import '../scss/__section-quotes.scss'
-
-const options = {
-	renderNode: {
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted">{children}</p>,
-		[BLOCKS.UL_LIST]: (node, children) => <div className="pb-5">{children}</div>,
-		[BLOCKS.LIST_ITEM]: (node, children) => (
-			<div className="d-flex list-item">
-				<div className="badge badge-rounded-circle badge-success-soft mt-1 mr-4">
-					<i className="fe fe-check"></i>
-				</div>
-				<span className="mb-4">{children}</span>
-			</div>
-		),
-	},
-}
 
 const Quotes = () => {
 	const data = useStaticQuery(graphql`
@@ -49,7 +34,7 @@ const Quotes = () => {
 		<section className="py-8 py-md-11 quotes-section bg-white">
 			<Container>
 				<Row className="justify-content-center">
-					<div className="col-12 col-md-10 col-lg-8 text-center">{documentToReactComponents(quotesBodyJSON, options)}</div>
+					<div className="col-12 col-md-10 col-lg-8 text-center">{documentToReactComponents(quotesBodyJSON, introTextOptions)}</div>
 				</Row>
 				<Row className="mt-6 quotes-wrapper">
 					<Col xs={12}>

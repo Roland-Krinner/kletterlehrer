@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { introTextOptions } from '../components/format-options'
+import { cardBodyTextOptions, introTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
 import Head from '../components/head'
 import { utils } from '../utils/'
@@ -34,7 +34,7 @@ const PreviewCard = ({ node }) => {
 					<span className="badge badge-secondary rounded mr-auto mr-sm-0 ml-sm-auto mr-md-auto ml-md-0 mr-lg-0 ml-lg-auto mb-3">Preis: {node.costs}</span>
 				</div>
 				<div className="normalize-last-p">
-					{documentToReactComponents(node.introText.json, introTextOptions)}
+					{documentToReactComponents(node.introText.json, cardBodyTextOptions)}
 					<Link className="btn btn-success btn-sm" to={`${baseURL}/${node.slug}`}>
 						Details anzeigen
 					</Link>
@@ -69,10 +69,20 @@ const Courses = () => {
 					}
 				}
 			}
+			allContentfulCoursesPage {
+				edges {
+					node {
+						introText {
+							json
+						}
+					}
+				}
+			}
 		}
 	`)
 
 	const courseData = data.allContentfulCourseItem.edges
+	const introTextJSON = data.allContentfulCoursesPage.edges[0].node.introText.json
 
 	return (
 		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
@@ -81,15 +91,21 @@ const Courses = () => {
 				<Container>
 					<Row>
 						<Col xs={12}>
-							<h2 className="mb-1">Kurse</h2>
-							<h3 className="mb-0 text-muted">Alle Kursangebote im Überblick</h3>
-							<Row>
-								<Col xs={12} md={6}>
+							{documentToReactComponents(introTextJSON, introTextOptions)}
+							<Row className="d-md-none">
+								<Col xs={12}>
+									{courseData.map(({ node }, idx) => {
+										return <PreviewCard node={node} key={idx} />
+									})}
+								</Col>
+							</Row>
+							<Row className="d-none d-md-flex">
+								<Col xs={6}>
 									{courseData.map(({ node }, idx, self) => {
 										return idx % 2 === 0 ? <PreviewCard node={node} key={idx} /> : ''
 									})}
 								</Col>
-								<Col xs={12} md={6} className="pt-8">
+								<Col xs={6} className="pt-8">
 									{courseData.map(({ node }, idx, self) => {
 										return idx % 2 === 1 ? <PreviewCard node={node} key={idx} /> : ''
 									})}
