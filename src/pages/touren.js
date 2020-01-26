@@ -2,11 +2,11 @@ import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { cardBodyTextOptions, introTextOptions } from '../components/format-options'
+import { cardBodyTextOptions, defaultTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
 import Head from '../components/head'
+import { SubPage, CTA } from '../components/kletterlehrer'
 import '../scss/__tour-overview.scss'
-import CTA from '../components/cta'
 
 const baseURL = '/touren'
 
@@ -74,11 +74,11 @@ const Tours = () => {
 	return (
 		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
 			<Head title="Touren" />
-			<section className="pt-5 pt-lg-8 pb-8 pb-sm-10 tour-overview">
+			<SubPage data={{ classes: 'tour-overview' }}>
 				<Container>
 					<Row>
 						<Col xs={12}>
-							{documentToReactComponents(introTextJSON, introTextOptions)}
+							{documentToReactComponents(introTextJSON, defaultTextOptions)}
 							<Row className="d-md-none">
 								<Col xs={12} className="cards-col">
 									{tourData.map(({ node }, idx) => {
@@ -101,7 +101,7 @@ const Tours = () => {
 						</Col>
 					</Row>
 				</Container>
-			</section>
+			</SubPage>
 		</Layout>
 	)
 }

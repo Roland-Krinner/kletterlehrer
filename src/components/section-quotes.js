@@ -4,8 +4,8 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Flickity from './flickity'
 import { introTextOptions } from './format-options'
+import { Section } from './kletterlehrer'
 import '../scss/__section-quotes.scss'
-import Section from './section'
 
 const Quotes = () => {
 	const data = useStaticQuery(graphql`

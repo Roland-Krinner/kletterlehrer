@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { introTextOptions } from './format-options'
-import Section from './section'
+import { Section } from './kletterlehrer'
 
 const Intro = () => {
 	const data = useStaticQuery(graphql`
@@ -24,9 +24,7 @@ const Intro = () => {
 		<Section data={{ classes: 'normalize-last-p' }}>
 			<Container>
 				<Row>
-					<Col xs={12}>
-						{documentToReactComponents(introBodyJSON, introTextOptions)}
-					</Col>
+					<Col xs={12}>{documentToReactComponents(introBodyJSON, introTextOptions)}</Col>
 				</Row>
 			</Container>
 		</Section>

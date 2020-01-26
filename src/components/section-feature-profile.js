@@ -4,7 +4,7 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import styles from './section-feature-profile.module.scss'
-import Section from './section'
+import { Section } from './kletterlehrer'
 
 const imgOptions = {
 	renderNode: {
@@ -70,10 +70,10 @@ const Feature = () => {
 		<Section data={{ classes: 'bg-white' }}>
 			<Container>
 				<Row className="justify-content-center align-items-center">
-					<Col xs={6} sm={4} lg={3} className={styles.imgWrapper}>
+					<Col xs={6} sm={4} lg={3} className={styles.profileImgWrapper}>
 						{documentToReactComponents(profileBodyJSON, imgOptions)}
 					</Col>
-					<Col md={12} lg={9} className="mt-5 mt-lg-0 pl-lg-8">
+					<Col md={12} lg={9} className="mt-5 mt-lg-0 pl-lg-8 normalize-last-p">
 						{documentToReactComponents(profileBodyJSON, textOptions)}
 					</Col>
 				</Row>

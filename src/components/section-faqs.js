@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import Section from './section'
+import { Section } from './kletterlehrer'
 
 const options = {
 	renderNode: {

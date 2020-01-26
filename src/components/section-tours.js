@@ -5,8 +5,7 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import '../scss/__section-tours.scss'
-import Section from './section'
-import CTA from './cta'
+import { Section, CTA } from './kletterlehrer'
 
 const baseURL = '/touren'
 
@@ -16,9 +15,7 @@ const options = {
 		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted">{children}</p>,
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
-				return (
-					<CTA data={{ to: node.data.uri, classes: 'mb-6 mb-xl-8' }}>{children}</CTA>
-				)
+				return <CTA data={{ to: node.data.uri, classes: 'mb-6 mb-xl-8' }}>{children}</CTA>
 			} else {
 				return (
 					<a href={node.data.uri} target="_blank" rel="noopener noreferrer">

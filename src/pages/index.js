@@ -15,14 +15,16 @@ const IndexPage = () => {
 	return (
 		<Layout pageInfo={{ pageName: 'startseite', pageType: 'homePage' }}>
 			<Head title="Startseite" />
-			<SectionHero/>
-			<SectionIntro />
-			<SectionFeatureProfile />
-			<SectionCourses />
-			<SectionTours />
-			<SectionQuotes />
-			<SectionFeature />
-			<SectionFAQs />
+			<SectionHero />
+			<main>
+				<SectionIntro />
+				<SectionFeatureProfile />
+				<SectionCourses />
+				<SectionTours />
+				<SectionQuotes />
+				<SectionFeature />
+				<SectionFAQs />
+			</main>
 		</Layout>
 	)
 }

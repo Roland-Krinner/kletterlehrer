@@ -1,99 +1,117 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
-// import { useStaticQuery, graphql, Link } from 'gatsby'
-// import { BLOCKS } from '@contentful/rich-text-types'
-// import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-
+import { Container, Row, Col, Card } from 'react-bootstrap'
+import { useStaticQuery, graphql } from 'gatsby'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { defaultTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
 import Head from '../components/head'
+import { SubPage } from '../components/kletterlehrer'
+import styles from './profil.module.scss'
 
-const AboutPage = () => {
-	// const data = useStaticQuery(graphql`
-	// 	query {
-	// 		allContentfulStaticPages {
-	// 			edges {
-	// 				node {
-	// 					aboutHeadline
-	// 					showAboutHeadline
-	// 					aboutSubline
-	// 					showAboutSubline
-	// 					aboutBody {
-	// 						json
-	// 					}
-	// 					aboutPortrait {
-	// 						title
-	// 						file {
-	// 							url
-	// 							contentType
-	// 						}
-	// 						fluid(maxWidth: 1600, quality: 100) {
-	// 							sizes
-	// 							src
-	// 							srcWebp
-	// 							srcSet
-	// 							srcSetWebp
-	// 						}
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// `)
-	// const headline = data.allContentfulStaticPages.edges[0].node.aboutHeadline
-	// const displayHeadline = data.allContentfulStaticPages.edges[0].node.showAboutHeadline
-	// const subline = data.allContentfulStaticPages.edges[0].node.aboutSubline
-	// const displaySubline = data.allContentfulStaticPages.edges[0].node.showAboutSubline
-	// const bodyJSON = data.allContentfulStaticPages.edges[0].node.aboutBody.json
-	// const imageURL = data.allContentfulStaticPages.edges[0].node.aboutPortrait.file.url
-	// const imageAlt = data.allContentfulStaticPages.edges[0].node.aboutPortrait.title
+const Image = ({ data: { img, classes } }) => {
+	const alt = img.title ? img.title : ''
+	const src = img.file && img.file.url ? img.file.url : ''
+	return <img src={src} alt={alt} className={classes || ''} />
+}
 
-	// const options = {
-	// 	renderNode: {
-	// 		[BLOCKS.PARAGRAPH]: (node, children) => <p className="text-gray-800 mb-6 mb-md-8">{children}</p>,
-	// 		[BLOCKS.UL_LIST]: (node, children) => <div className="pb-5">{children}</div>,
-	// 		[BLOCKS.LIST_ITEM]: (node, children) => (
-	// 			<div className="d-flex list-item">
-	// 				<div className="badge badge-rounded-circle badge-success-soft mt-1 mr-4">
-	// 					<i className="fe fe-check"></i>
-	// 				</div>
-	// 				<span className="mb-4">{children}</span>
-	// 			</div>
-	// 		),
-	// 		'embedded-asset-block': node => {
-	// 			const url = node.data.target.fields.file['en-US'].url
-	// 			const alt = node.data.target.fields.title['en-US']
-	// 			return <img src={url} alt={alt} />
-	// 		},
-	// 	},
-	// }
+const CardSection = ({ data: { section } }) => {
+	return section.displayText === true ? (
+		<Card className="shadow-dark-sm mt-20 mt-sm-7">
+			<Row>
+				<Col xs={12}>
+					<Card.Body className={styles.cardBody}>{documentToReactComponents(section.text.json, defaultTextOptions)}</Card.Body>
+				</Col>
+			</Row>
+		</Card>
+	) : (
+		''
+	)
+}
 
+const Profil = () => {
+	const data = useStaticQuery(graphql`
+		query {
+			allContentfulProfilePage {
+				edges {
+					node {
+						introText {
+							json
+						}
+						featureBackgroundImage {
+							title
+							file {
+								url
+							}
+						}
+						featureProfileImage {
+							title
+							file {
+								url
+							}
+						}
+						featureHeadline
+						featureSubline
+						featureText {
+							json
+						}
+						sections {
+							text {
+								json
+							}
+							displayText
+						}
+					}
+				}
+			}
+		}
+	`)
+	const introTextJSON = data.allContentfulProfilePage.edges[0].node.introText.json
+	const featureBackgroundImage = data.allContentfulProfilePage.edges[0].node.featureBackgroundImage
+	const featureProfileImage = data.allContentfulProfilePage.edges[0].node.featureProfileImage
+	const featureHeadline = data.allContentfulProfilePage.edges[0].node.featureHeadline
+	const featureSubline = data.allContentfulProfilePage.edges[0].node.featureSubline
+	const featureTextJSON = data.allContentfulProfilePage.edges[0].node.featureText.json
+	const sections = data.allContentfulProfilePage.edges[0].node.sections
 	return (
 		<Layout pageInfo={{ pageName: 'profil', pageType: 'subPage' }}>
 			<Head title="Profil" />
-			<section className="pt-0 pt-lg-8 pb-8 pb-sm-10 course-overview">
+			<SubPage data={{ classes: 'profile-page' }}>
 				<Container>
 					<Row>
 						<Col xs={12}>
-							<h2 className="mb-1">Ein Leben für den Bergsport</h2>
-							<h3 className="mb-0 text-muted">At vero eos et accusam et justo duo dolores</h3>
-							{/* <Row>
-								<Col xs={12} md={6}>
-									{tourData.map(({ node }, idx, self) => {
-										return idx % 2 === 0 ? <PreviewCard node={node} key={idx} /> : ''
-									})}
-								</Col>
-								<Col xs={12} md={6} className="pt-8">
-									{tourData.map(({ node }, idx, self) => {
-										return idx % 2 === 1 ? <PreviewCard node={node} key={idx} /> : ''
-									})}
-								</Col>
-							</Row> */}
+							{documentToReactComponents(introTextJSON, defaultTextOptions)}
+							<Card className="shadow-dark-sm overflow-hidden">
+								<Row noGutters>
+									<Col xs={4} className="d-none d-md-flex">
+										<div style={{ backgroundImage: `url(${featureBackgroundImage.file.url})` }} className={styles.bgImgWrapper}></div>
+									</Col>
+									<Col xs={12} md={8}>
+										<Card.Body className={`${styles.cardBody} ${styles.minHeight}`}>
+											<Row className="justify-content-center mt-4">
+												<Col xs={4} sm={3} lg={3} className={styles.profileImgWrapper}>
+													<Image data={{ img: featureProfileImage, classes: `${styles.image} rounded-circle` }} />
+												</Col>
+												<Col xs={12} className="text-center">
+													<h3 className="font-weight-bold mt-3 mb-0">{featureHeadline}</h3>
+													<p className="text-muted">{featureSubline}</p>
+												</Col>
+											</Row>
+											<Row noGutters className="mt-4">
+												<Col>{documentToReactComponents(featureTextJSON, defaultTextOptions)}</Col>
+											</Row>
+										</Card.Body>
+									</Col>
+								</Row>
+							</Card>
+							{sections.map((section, idx) => {
+								return <CardSection data={{ section }} key={idx} />
+							})}
 						</Col>
 					</Row>
 				</Container>
-			</section>
+			</SubPage>
 		</Layout>
 	)
 }
 
-export default AboutPage
+export default Profil
