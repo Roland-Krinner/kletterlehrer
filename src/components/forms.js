@@ -57,7 +57,7 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 				errorMessages.push(msg)
 				tempFields[key] = 'danger'
 			} else {
-				tempFields[key] = 'success'
+				tempFields[key] = 'secondary'
 			}
 		}
 
@@ -133,17 +133,17 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 			<input type="hidden" name="form-name" value="Debug Test" />
 			<Form.Row>
 				<Form.Group as={Col} xs={12} md={6} lg={12} controlId="formName" className="mb-2">
-					<Form.Label className="h6 text-gray-800 mb-1">Name</Form.Label>
-					<Form.Control type="text" placeholder="Name" name="name" onChange={onFieldChange} className={'border-' + fieldsValidation.name} />
+					<Form.Label className="h6 text-gray-800 mb-1">Name (Pflichtfeld)</Form.Label>
+					<Form.Control type="text" placeholder="Name" name="name" spellcheck="false" onChange={onFieldChange} className={'border-' + fieldsValidation.name} />
 				</Form.Group>
 				<Form.Group as={Col} xs={12} md={6} lg={12} controlId="formEmail" className="mb-2">
-					<Form.Label className="h6 text-gray-800 mb-1">E-Mail</Form.Label>
-					<Form.Control type="email" placeholder="E-Mail Adresse" name="email" onChange={onFieldChange} className={'border-' + fieldsValidation.email} />
+					<Form.Label className="h6 text-gray-800 mb-1">E-Mail (Pflichtfeld)</Form.Label>
+					<Form.Control type="email" placeholder="E-Mail Adresse" name="email" spellcheck="false" onChange={onFieldChange} className={'border-' + fieldsValidation.email} />
 				</Form.Group>
 			</Form.Row>
 			<Form.Group controlId="formTextarea" className="mb-md-20 mb-lg-4">
-				<Form.Label className="h6 text-gray-800 mb-1">Nachricht</Form.Label>
-				<Form.Control as="textarea" rows="3" placeholder="Nachricht" name="message" value={fieldValue.message} onChange={onFieldChange} className={'border-' + fieldsValidation.message} />
+				<Form.Label className="h6 text-gray-800 mb-1">Nachricht (Pflichtfeld)</Form.Label>
+				<Form.Control as="textarea" rows="3" placeholder="Nachricht" name="message" spellcheck="false" value={fieldValue.message} onChange={onFieldChange} className={'border-' + fieldsValidation.message} />
 			</Form.Group>
 			<Form.Group className="mb-md-20 mb-lg-4 recaptcha-form-group">
 				<div className="recaptcha-wrapper">

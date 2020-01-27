@@ -3,7 +3,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import Flickity from './flickity'
-import { introTextOptions } from './format-options'
+import { defaultTextOptions } from './format-options'
 import { Section } from './kletterlehrer'
 import '../scss/__section-quotes.scss'
 
@@ -33,7 +33,7 @@ const Quotes = () => {
 		<Section data={{ classes: 'bg-white quotes-section' }}>
 			<Container>
 				<Row className="justify-content-center">
-					<div className="col-12 col-md-10 col-lg-8 text-center">{documentToReactComponents(quotesBodyJSON, introTextOptions)}</div>
+					<div className="col-12 col-md-10 col-lg-8 text-center">{documentToReactComponents(quotesBodyJSON, defaultTextOptions)}</div>
 				</Row>
 				<Row className="mt-6 quotes-wrapper">
 					<Col xs={12}>

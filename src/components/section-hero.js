@@ -47,25 +47,26 @@ const Hero = () => {
 					const headline = slide.headline
 					const subline = slide.subline
 					const excerpt = slide.excerpt.excerpt
-
 					return (
 						<div className="hero-slide" key={idx}>
 							<img src={fluidURL} style={{ width: '100%' }} kry={idx} alt={alt} />
 							<div className="hero-slide-content">
 								<div className="hero-slide-gradient"></div>
 								<Container className="hero-slide-container">
-									<div className="hero-slide-text-box d-none d-sm-block d-lg-none">
-										<h1 className="h5 text-white mb-0">{headline}</h1>
-										<h3 className="h6 text-white">{subline}</h3>
-									</div>
-									<div className="hero-slide-text-box d-none d-lg-block d-xl-none">
-										<h1 className="h2 text-white mb-0">{headline}</h1>
-										<h3 className="h4 text-white mb-0">{subline}</h3>
-									</div>
-									<div className="hero-slide-text-box d-none d-xl-block">
-										<h1 className="h2 text-white">{headline}</h1>
-										<h3 className="text-white">{subline}</h3>
-										<p className="text-white mb-0">{excerpt}</p>
+									<div className="hero-slide-text-box">
+										<div className="d-none d-sm-block d-lg-none">
+											<h2 className="h5 text-white mb-0">{headline}</h2>
+											<p className="h6 text-white">{subline}</p>
+										</div>
+										<div className="d-none d-lg-block d-xl-none">
+											<h2 className="text-white mb-0">{headline}</h2>
+											<p className="font-size-lg text-white mb-0">{subline}</p>
+										</div>
+										<div className="d-none d-xl-block">
+											<h2 className="text-white mb-0">{headline}</h2>
+											<p className="font-size-lg text-white mb-5">{subline}</p>
+											<p className="text-white mb-0">{excerpt}</p>
+										</div>
 									</div>
 								</Container>
 							</div>

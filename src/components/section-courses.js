@@ -1,30 +1,14 @@
 import React from 'react'
 import { Container } from 'react-bootstrap'
 import { Link, useStaticQuery, graphql } from 'gatsby'
-import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { utils } from '../utils/'
+import { Section } from './kletterlehrer'
+import {defaultTextOptions} from './format-options'
 import '../scss/__section-courses.scss'
-import { Section, CTA } from './kletterlehrer'
+
+import { utils } from '../utils/'
 
 const baseURL = '/kurse'
-
-const options = {
-	renderNode: {
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted">{children}</p>,
-		[INLINES.HYPERLINK]: (node, children) => {
-			if (node.data.uri && node.data.uri.startsWith('/')) {
-				return <CTA data={{ to: node.data.uri, classes: 'mb-6 mb-xl-8' }}>{children}</CTA>
-			} else {
-				return (
-					<a href={node.data.uri} target="_blank" rel="noopener noreferrer">
-						{children}
-					</a>
-				)
-			}
-		},
-	},
-}
 
 const CtaCard = ({ customClass, ctaJSON }) => {
 	return (
@@ -193,7 +177,7 @@ const Courses = () => {
 	return (
 		<Section data={{ classes: '' }}>
 			<Container>
-				<div className="normalize-last-p">{documentToReactComponents(bodyJSON, options)}</div>
+				<div className="mb-6 mb-xl-8 normalize-last-p">{documentToReactComponents(bodyJSON, defaultTextOptions)}</div>
 				{courseData.length === 1 ? <OneCard data={{ courseData, ctaJSON }} /> : ''}
 				{courseData.length === 2 ? <TwoCards data={{ courseData, ctaJSON }} /> : ''}
 				{courseData.length === 3 ? <ThreeCards data={{ courseData, ctaJSON }} /> : ''}

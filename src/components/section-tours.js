@@ -1,31 +1,14 @@
 import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
-import Flickity from './flickity'
 import { Link, useStaticQuery, graphql } from 'gatsby'
-import { BLOCKS, INLINES } from '@contentful/rich-text-types'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
+import { Section } from './kletterlehrer'
+import { defaultTextOptions } from './format-options'
 import '../scss/__section-tours.scss'
-import { Section, CTA } from './kletterlehrer'
+
+import Flickity from './flickity'
 
 const baseURL = '/touren'
-
-const options = {
-	renderNode: {
-		[BLOCKS.HEADING_2]: (node, children) => <h2 className="text-white">{children}</h2>,
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className="font-size-lg text-muted">{children}</p>,
-		[INLINES.HYPERLINK]: (node, children) => {
-			if (node.data.uri && node.data.uri.startsWith('/')) {
-				return <CTA data={{ to: node.data.uri, classes: 'mb-6 mb-xl-8' }}>{children}</CTA>
-			} else {
-				return (
-					<a href={node.data.uri} target="_blank" rel="noopener noreferrer">
-						{children}
-					</a>
-				)
-			}
-		},
-	},
-}
 
 const CtaCard = ({ customClass, ctaJSON }) => {
 	return (
@@ -127,7 +110,7 @@ const Tours = () => {
 			<Container>
 				<Row>
 					<Col>
-						<div className="normalize-last-p">{documentToReactComponents(bodyJSON, options)}</div>
+						<div className="mb-6 mb-xl-8 normalize-last-p text-white">{documentToReactComponents(bodyJSON, defaultTextOptions)}</div>
 						<div className="d-none d-xl-block">
 							<Flickity options={{ cellAlign: 'left', wrapAround: true, pageDots: false, freeScroll: true }}>
 								{tourData.map(({ node }, idx) => {
