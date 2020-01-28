@@ -8,6 +8,7 @@ import Head from '../components/head'
 import { RegisterForm } from '../components/forms'
 import { utils } from '../utils/'
 import '../scss/__tour-detail.scss'
+import Styles from './course-detail.module.scss'
 
 export const query = graphql`
 	query($slug: String!) {
@@ -42,24 +43,23 @@ const Tour = ({ data }) => {
 	const bodyJSON = data.contentfulTourItem.body.json
 	const formTextJSON = data.contentfulTourItem.formText.json
 	const prefilledText = `Ich interessiere mich für das Angebot "${headline}"`
-
 	return (
 		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
 			<Head title={headline} />
-			<section className="pt-5 pb-8 pb-sm-10 tour-detail">
-				<Container>
+			<section className={`pt-5 pb-8 pb-sm-10 tour-detail ${Styles.mobileSection}`}>
+				<Container className={Styles.mobileContainer}>
 					<Row>
-						<Col xs={12} lg={7} className="pr-lg-0 pr-lg-3 section">
+						<Col xs={12} lg={7} className="pr-lg-0 pr-lg-3">
 							<Card className="detail-card content-card bg-dark overflow-hidden shadow-dark-sm">
 								<div className="card-img-top">
 									<img src={imageURL} alt={imageAlt} className="img-fluid" />
-									<div>
+									<div className={Styles.mobileCardImgTopDiv}>
 										<div>
 											<h1 className="h3 text-white mb-0">{headline}</h1>
 										</div>
 									</div>
 								</div>
-								<Card.Body className="bg-white">
+								<Card.Body className={`bg-white ${Styles.mobileCardBody}`}>
 									<div className="d-flex align-items-start">
 										<span className="badge badge-secondary rounded mb-3">Preis: {costs}</span>
 									</div>
@@ -79,12 +79,12 @@ const Tour = ({ data }) => {
 								</Card.Body>
 							</Card>
 						</Col>
-						<Col xs={12} lg={7} className="mt-5 pr-lg-0 pr-lg-3 section">
-							<Card className="content-card shadow-dark-sm">
-								<Card.Body className="normalize-last-p">{documentToReactComponents(bodyJSON, options)}</Card.Body>
+						<Col xs={12} lg={7} className={`mt-5 pr-lg-0 pr-lg-3 ${Styles.contentCardSection}`}>
+							<Card className={`content-card shadow-dark-sm`}>
+								<Card.Body className={`normalize-last-p ${Styles.mobileCardBody}`}>{documentToReactComponents(bodyJSON, options)}</Card.Body>
 							</Card>
 						</Col>
-						<Col xs={12} lg={5} className="mt-5 pl-lg-0 pl-lg-3 section" id="registrationForm">
+						<Col xs={12} lg={5} className="mt-5 pl-lg-0 pl-lg-3" id="registrationForm">
 							<Card className="content-card shadow-dark-sm">
 								<Card.Body>
 									{documentToReactComponents(formTextJSON, formTextOptions)}

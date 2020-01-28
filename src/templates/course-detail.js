@@ -8,6 +8,7 @@ import Head from '../components/head'
 import { RegisterForm } from '../components/forms'
 import { utils } from '../utils/'
 import '../scss/__course-detail.scss'
+import Styles from './course-detail.module.scss'
 
 export const query = graphql`
 	query($slug: String!) {
@@ -47,18 +48,17 @@ const Course = ({ data }) => {
 	const startDate = utils.formatDate(data.contentfulCourseItem.startDate)
 	const endDate = utils.formatDate(data.contentfulCourseItem.endDate)
 	const prefilledText = `Ich interessiere mich für das Angebot "${headline}" im Zeitraum von ${startDate} bis ${endDate}`
-
 	return (
 		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
 			<Head title={headline} />
-			<section className="pt-5 pb-8 pb-sm-10 course-detail">
-				<Container>
+			<section className={`pt-5 pb-8 pb-sm-10 course-detail ${Styles.mobileSection}`}>
+				<Container className={Styles.mobileContainer}>
 					<Row>
-						<Col xs={12} lg={7} className="pr-lg-0 pr-lg-3 section">
+						<Col xs={12} lg={7} className="pr-lg-0 pr-lg-3">
 							<Card className="detail-card content-card bg-dark overflow-hidden shadow-dark-sm">
 								<div className="card-img-top">
 									<img src={imageURL} alt={imageAlt} className="img-fluid" />
-									<div>
+									<div className={Styles.mobileCardImgTopDiv}>
 										<div>
 											<p className="text-white h6 mb-0">
 												<i className="fe fe-map-pin mr-1"></i> {location}
@@ -67,7 +67,7 @@ const Course = ({ data }) => {
 										</div>
 									</div>
 								</div>
-								<Card.Body className="bg-white">
+								<Card.Body className={`bg-white ${Styles.mobileCardBody}`}>
 									<div className="d-flex flex-column-reverse flex-sm-row justify-content-start align-items-start">
 										<p className="h5 font-weight-bold">
 											{startDate} bis {endDate}
@@ -90,12 +90,12 @@ const Course = ({ data }) => {
 								</Card.Body>
 							</Card>
 						</Col>
-						<Col xs={12} lg={7} className="mt-5 pr-lg-0 pr-lg-3 section">
-							<Card className="content-card shadow-dark-sm">
-								<Card.Body className="normalize-last-p">{documentToReactComponents(bodyJSON, options)}</Card.Body>
+						<Col xs={12} lg={7} className={`mt-5 pr-lg-0 pr-lg-3 ${Styles.contentCardSection}`}>
+							<Card className={`content-card shadow-dark-sm`}>
+								<Card.Body className={`normalize-last-p ${Styles.mobileCardBody}`}>{documentToReactComponents(bodyJSON, options)}</Card.Body>
 							</Card>
 						</Col>
-						<Col xs={12} lg={5} className="mt-5 pl-lg-0 pl-lg-3 section" id="registrationForm">
+						<Col xs={12} lg={5} className="mt-5 pl-lg-0 pl-lg-3" id="registrationForm">
 							<Card className="content-card shadow-dark-sm">
 								<Card.Body>
 									{documentToReactComponents(formTextJSON, formTextOptions)}

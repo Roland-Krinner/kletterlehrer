@@ -150,10 +150,7 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 					<ReCAPTCHA sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY} onChange={setRecaptchaValue} />
 				</div>
 			</Form.Group>
-			<Button variant="success" type="submit" className="btn-sm btn-submit btn-block">
-				{/* Nachricht senden <i className="fe fe-send ml-2"></i> */}
-				Nachricht senden
-			</Button>
+			<Button variant="success" type="submit" className="btn-sm btn-submit btn-block">Nachricht senden</Button>
 		</Form>
 	)
 }

@@ -14,7 +14,7 @@ const Layout = ({ children, pageInfo }) => {
 					<Header pageInfo={pageInfo} />
 					{children}
 				</div>
-				<Footer />
+				<Footer pageInfo={pageInfo} />
 				<Notification />
 			</div>
 		</MyProvider>

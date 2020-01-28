@@ -2,8 +2,9 @@ import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import { CTA } from './kletterlehrer'
+import { utils } from '../utils'
 
-const textColor = 'text-gray-700' // 'text-info'
+const textMuted = utils.getColor('textMuted')
 
 const BrandData = ({ data: { searchStr } }) => {
 	const data = useStaticQuery(graphql`
@@ -11,67 +12,74 @@ const BrandData = ({ data: { searchStr } }) => {
 			allContentfulPersonalData {
 				edges {
 					node {
-						jobRole
 						name
+						jobRole
 						eMail
-						street
-						zipCode
 						city
+						street
 						country
 						phone
-						website
+						phonePlain
+						websiteName
+						websiteUrl
 					}
 				}
 			}
 		}
 	`)
 	const name = data.allContentfulPersonalData.edges[0].node.name
-	const street = data.allContentfulPersonalData.edges[0].node.street
-	const zipCode = data.allContentfulPersonalData.edges[0].node.zipCode
-	const city = data.allContentfulPersonalData.edges[0].node.city
-	const phone = data.allContentfulPersonalData.edges[0].node.phone
 	const eMail = data.allContentfulPersonalData.edges[0].node.eMail
+	const city = data.allContentfulPersonalData.edges[0].node.city
+	const street = data.allContentfulPersonalData.edges[0].node.street
 	const country = data.allContentfulPersonalData.edges[0].node.country
-	const website = data.allContentfulPersonalData.edges[0].node.website
+	const phone = data.allContentfulPersonalData.edges[0].node.phone
+	const phonePlain = data.allContentfulPersonalData.edges[0].node.phonePlain
+	const websiteName = data.allContentfulPersonalData.edges[0].node.websiteName
 	if (searchStr === '$$contactData$$') {
 		return (
 			<>
-				<p className={`${textColor}`}>
+				<p className={`${textMuted}`}>
 					{name}
 					<br />
 					{street}
 					<br />
-					{zipCode} {city}
+					{city}
 					<br />
 					{country}
 				</p>
-				<p className={`${textColor}`}>
-					Telefon: {phone}
+				<p className={`${textMuted}`}>
+					Telefon:{' '}
+					<a href={`tel:${phonePlain}`} className={`text-success text-decoration-none`}>
+						{phone}
+					</a>
 					<br />
-					E-Mail: {eMail}
+					E-Mail:{' '}
+					<a href={`mailto:${eMail}`} className={`text-success text-decoration-none`}>
+						{eMail}
+					</a>
 				</p>
 			</>
 		)
 	} else if (searchStr === '$$imprintAddress$$') {
 		return (
-			<p className={`${textColor}`}>
+			<p className={`${textMuted}`}>
 				{name}
 				<br />
 				{street}
 				<br />
-				{zipCode} {city}
+				{city}
 				<br />
 				{country}
 			</p>
 		)
 	} else if (searchStr === '$$imprintContact$$') {
 		return (
-			<p className={`${textColor}`}>
+			<p className={`${textMuted}`}>
 				Telefon: {phone}
 				<br />
 				E-Mail: {eMail}
 				<br />
-				Webseite: {website}
+				Webseite: {websiteName}
 			</p>
 		)
 	}
@@ -81,7 +89,7 @@ const BrandData = ({ data: { searchStr } }) => {
 const defaultTextOptions = {
 	renderNode: {
 		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-1`}>{children}</h1>,
-		[BLOCKS.HEADING_6]: (node, children) => <p className={`font-size-lg mb-5 ${textColor}`}>{children}</p>,
+		[BLOCKS.HEADING_6]: (node, children) => <p className={`font-size-lg mb-4 mb-lg-5 ${textMuted}`}>{children}</p>,
 		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`font-weight-bold`}>{children}</h3>,
 		[BLOCKS.PARAGRAPH]: (node, children) => {
 			if (node.content.length === 1 && node.content[0].value === '') {
@@ -89,7 +97,7 @@ const defaultTextOptions = {
 			} else if (node.content[0].value.indexOf('$$') !== -1) {
 				return <BrandData data={{ searchStr: node.content[0].value }} />
 			} else {
-				return <p className={`${textColor}`}>{children}</p>
+				return <p className={`${textMuted}`}>{children}</p>
 			}
 		},
 		[BLOCKS.HR]: (node, children) => <hr className={`border-gray-300 my-6`} />,
@@ -119,15 +127,39 @@ const defaultTextOptions = {
 	},
 }
 
+const faqTextOptions = {
+	renderNode: {
+		[BLOCKS.HEADING_6]: (node, children) => {
+			return (
+				<span className="badge badge-pill badge-gray-700-soft mb-3">
+					<span className={`h6 text-uppercase ${textMuted}`}>{children}</span>
+				</span>
+			)
+		},
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-lg ${textMuted} mb-7 mb-md-9`}>{children}</p>,
+		[INLINES.HYPERLINK]: (node, children) => {
+			if (node.data.uri && node.data.uri.startsWith('/')) {
+				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
+			} else {
+				return (
+					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
+						{children}
+					</a>
+				)
+			}
+		},
+	},
+}
+
 // const introTextOptions = {
 // 	renderNode: {
 // 		[BLOCKS.HEADING_2]: (node, children) => <h2 className={`mb-1`}>{children}</h2>,
-// 		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`mb-5 ${textColor}`}>{children}</h3>,
+// 		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`mb-5 ${textMuted}`}>{children}</h3>,
 // 		[BLOCKS.PARAGRAPH]: (node, children) => {
 // 			if (node.content.length === 1 && node.content[0].value === '') {
 // 				return ''
 // 			} else {
-// 				return <p className={`font-size-lg ${textColor}`}>{children}</p>
+// 				return <p className={`font-size-lg ${textMuted}`}>{children}</p>
 // 			}
 // 		},
 // 		[INLINES.HYPERLINK]: (node, children) => {
@@ -148,7 +180,7 @@ const options = {
 	renderNode: {
 		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`mb-5 font-weight-bold`}>{children}</h3>,
 		[BLOCKS.HEADING_2]: (node, children) => <h2 className={`mb-5 font-weight-bold`}>{children}</h2>,
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`${textColor}`}>{children}</p>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`${textMuted}`}>{children}</p>,
 		[BLOCKS.UL_LIST]: (node, children) => <div className={`pb-5`}>{children}</div>,
 		[BLOCKS.LIST_ITEM]: (node, children) => (
 			<div className={`d-flex list-item`}>
@@ -160,14 +192,14 @@ const options = {
 		),
 	},
 	renderMark: {
-		[MARKS.BOLD]: text => <span className={`${textColor} font-weight-bold`}>{text}</span>,
+		[MARKS.BOLD]: text => <span className={`${textMuted} font-weight-bold`}>{text}</span>,
 	},
 }
 
 const cardBodyTextOptions = {
 	renderNode: {
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`${textColor} xxx__${textColor}`}>{children}</p>,
-		[BLOCKS.HEADING_6]: (node, children) => <p className={`h6 ${textColor} mb-0`}>{children}</p>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`${textMuted} xxx__${textMuted}`}>{children}</p>,
+		[BLOCKS.HEADING_6]: (node, children) => <p className={`h6 ${textMuted} mb-0`}>{children}</p>,
 		[BLOCKS.UL_LIST]: (node, children) => <div className={`pb-5`}>{children}</div>,
 		[BLOCKS.LIST_ITEM]: (node, children) => (
 			<div className={`d-flex list-item`}>
@@ -179,14 +211,14 @@ const cardBodyTextOptions = {
 		),
 	},
 	renderMark: {
-		[MARKS.BOLD]: text => <span className={`${textColor} font-weight-bold`}>{text}</span>,
+		[MARKS.BOLD]: text => <span className={`${textMuted} font-weight-bold`}>{text}</span>,
 	},
 }
 
 const formTextOptions = {
 	renderNode: {
 		[BLOCKS.HEADING_5]: (node, children) => <h5 className={`mb-3 font-weight-bold`}>{children}</h5>,
-		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-sm ${textColor}`}>{children}</p>,
+		[BLOCKS.PARAGRAPH]: (node, children) => <p className={`font-size-sm ${textMuted}`}>{children}</p>,
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return (
@@ -205,4 +237,4 @@ const formTextOptions = {
 	},
 }
 
-export { options, formTextOptions, cardBodyTextOptions, defaultTextOptions }
+export { defaultTextOptions, faqTextOptions, formTextOptions, options, cardBodyTextOptions }

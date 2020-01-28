@@ -2,18 +2,8 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Navbar, Nav } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
+import { SVG } from './kletterlehrer'
 import '../scss/__header.scss'
-
-const Image = ({ svg, file, alt }) => {
-	if (file.contentType === 'image/svg+xml') {
-		if (svg && svg.content) {
-			return <div dangerouslySetInnerHTML={{ __html: svg.content }} />
-		}
-		return <img src={file.url} alt={alt} />
-	}
-	// Dummy
-	return <img src="" alt={alt} />
-}
 
 const NavContent = ({ pageInfo }) => {
 	const data = useStaticQuery(graphql`
@@ -43,7 +33,7 @@ const NavContent = ({ pageInfo }) => {
 	return (
 		<>
 			<Link to="/" className="brand">
-				<Image svg={svg} file={file} alt={alt} />
+				<SVG svg={svg} file={file} alt={alt} />
 			</Link>
 			<Navbar.Toggle />
 			<Navbar.Collapse>
@@ -96,11 +86,11 @@ const Header = ({ pageInfo }) => {
 	return (
 		<header>
 			{pageInfo.pageType && pageInfo.pageType === 'homePage' ? (
-				<Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect className="transparent-navbar">
+				<Navbar bg="black" expand="lg" variant="dark" collapseOnSelect className="transparent-navbar">
 					<NavContent pageInfo={pageInfo} />
 				</Navbar>
 			) : (
-				<Navbar bg="dark" expand="lg" variant="dark" collapseOnSelect>
+				<Navbar bg="black" expand="lg" variant="dark" collapseOnSelect>
 					<NavContent pageInfo={pageInfo} />
 				</Navbar>
 			)}

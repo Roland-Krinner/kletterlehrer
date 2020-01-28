@@ -38,7 +38,13 @@ const utils = {
 		const target = e.target.dataset.target
 		const element = document.getElementById(target)
 		element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-	}
+	},
+	getColor: function(name) {
+		const colorClass = {
+			textMuted: 'text-gray-700',
+		}
+		return colorClass[name]
+	},
 }
 
 export { utils }

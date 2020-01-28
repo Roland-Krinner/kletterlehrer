@@ -1,0 +1,19 @@
+.svg-wrapper {
+	position: relative;
+	height: calc(32px + 18.6px + 8px);
+	// background-color: rgba(255, 255, 255, 0.15);
+
+	> div {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 50px;
+		height: 50px;
+		// background-color: rgba(255, 255, 255, 0.15);
+		> svg {
+			position: relative;
+			// top: -0.5rem;
+			width: 100%;
+		}
+	}
+}

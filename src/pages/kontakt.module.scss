@@ -1,0 +1,22 @@
+.form-card-col {
+	// xs
+	@media (max-width: 320px) {
+		margin-top: 1rem !important;
+		padding-right: 0.5rem !important;
+		padding-left: 0.5rem !important;
+	}
+}
+
+.form-card-body {
+	// xs
+	@media (max-width: 320px) {
+		padding: 1.5rem 1.125rem 1.125rem 1.125rem !important;
+	}
+}
+
+.form-card-body-div {
+	// xs
+	@media (max-width: 320px) {
+		margin-top: 0 !important;
+	}
+}

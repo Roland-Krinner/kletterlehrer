@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
+import { Container, Card } from 'react-bootstrap'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Section } from './kletterlehrer'
@@ -26,7 +26,7 @@ const CtaCard = ({ customClass, ctaJSON }) => {
 const DesktopCard = ({ customClass, node }) => {
 	const startDate = utils.formatDate(node.startDate)
 	return (
-		<div className={`card desktop-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
+		<Card className={`desktop-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
 			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
 				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
 				<div>
@@ -44,7 +44,7 @@ const DesktopCard = ({ customClass, node }) => {
 				</h6>
 				<h6 className="h6 text-uppercase text-muted mb-0 ml-auto">Dauer: {node.duration}</h6>
 			</Link>
-		</div>
+		</Card>
 	)
 }
 

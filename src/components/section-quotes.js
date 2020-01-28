@@ -30,14 +30,14 @@ const Quotes = () => {
 	const quotesBodyJSON = data.allContentfulHome.edges[0].node.quotesText.json
 	const quotesList = data.allContentfulHome.edges[0].node.quotesList
 	return (
-		<Section data={{ classes: 'bg-white quotes-section' }}>
+		<Section data={{ classes: 'bg-light quotes-section' }}>
 			<Container>
 				<Row className="justify-content-center">
 					<div className="col-12 col-md-10 col-lg-8 text-center">{documentToReactComponents(quotesBodyJSON, defaultTextOptions)}</div>
 				</Row>
 				<Row className="mt-6 quotes-wrapper">
 					<Col xs={12}>
-						<Card className="card-row bg-light shadow-dark-sm">
+						<Card className="card-row bg-white">
 							<Row noGutters="true">
 								<Col xs={12}>
 									<Flickity options={{ wrapAround: true, prevNextButtons: false, pageDots: true, adaptiveHeight: true }}>
@@ -48,8 +48,8 @@ const Quotes = () => {
 														<Col xs={12} md={8}>
 															<Card.Body className="pt-8 pt-md-7 pb-md-8 pt-lg-9 pb-lg-9">
 																<blockquote className="blockquote mb-0">
-																	<p className="h3 font-weight-bold text-muted">{quoteItem.quote.quote}</p>
-																	<footer className="font-size-sm text-muted">{quoteItem.author}</footer>
+																	<p className="h3 font-weight-bold text-light-dark-700">{quoteItem.quote.quote}</p>
+																	<footer className="font-size-sm text-light-dark-700">{quoteItem.author}</footer>
 																</blockquote>
 															</Card.Body>
 														</Col>

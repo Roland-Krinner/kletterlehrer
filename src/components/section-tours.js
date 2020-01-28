@@ -4,9 +4,6 @@ import { Link, useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { Section } from './kletterlehrer'
 import { defaultTextOptions } from './format-options'
-import '../scss/__section-tours.scss'
-
-import Flickity from './flickity'
 
 const baseURL = '/touren'
 
@@ -26,37 +23,37 @@ const CtaCard = ({ customClass, ctaJSON }) => {
 const DesktopCard = ({ node }) => {
 	const url = `${baseURL}/${node.slug}`
 	return (
-		<div className="slider-item">
-			<Card className="mb-6 mb-xl-0 bg-dark overflow-hidden">
+		<Col xs={4}>
+			<Card className="overflow-hidden shadow-dark-sm lift">
 				<Link className="card-img-top" to={url}>
 					<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
 				</Link>
-				<Link className="card-body bg-white" to={url}>
+				<Link className="card-body" to={url}>
 					<h3>{node.headline}</h3>
 					<p className="mb-6 text-muted">{node.subline}</p>
 				</Link>
-				<Link className="card-meta bg-white" to={url}>
+				<Link className="card-meta" to={url}>
 					<hr className="card-meta-divider" />
 					<h6 className="text-uppercase text-muted mr-2 mb-0">
 						Mehr erfahren <i className="fe fe-arrow-right ml-1"></i>
 					</h6>
 				</Link>
 			</Card>
-		</div>
+		</Col>
 	)
 }
 
 const MobileCard = ({ customClass, node }) => {
 	return (
-		<div className={`card mobile-card bg-dark overflow-hidden ${customClass || ''}`}>
+		<div className={`card mobile-card overflow-hidden ${customClass || ''}`}>
 			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
 				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
 			</Link>
-			<Link className="card-body bg-white" to={`${baseURL}/${node.slug}`}>
+			<Link className="card-body" to={`${baseURL}/${node.slug}`}>
 				<h3 className="mb-2">{node.headline}</h3>
 				<p className="mb-0 text-muted">{node.subline}</p>
 			</Link>
-			<Link className="card-meta bg-white" to={`${baseURL}/${node.slug}`}>
+			<Link className="card-meta" to={`${baseURL}/${node.slug}`}>
 				<hr className="card-meta-divider" />
 				<h6 className="text-uppercase text-muted mr-2 mb-0">
 					Mehr erfahren <i className="fe fe-arrow-right ml-1"></i>
@@ -106,17 +103,23 @@ const Tours = () => {
 	const bodyJSON = data.allContentfulHome.edges[0].node.toursText.json
 	const ctaJSON = data.allContentfulHome.edges[0].node.toursMobileButton
 	return (
-		<Section data={{ classes: 'bg-dark tours-slider' }}>
+		<Section data={{ classes: 'bg-dark-light-700' }}>
+			{/* bg-dark-light-700 */}
+			{/* bg-light-dark-100 */}
 			<Container>
 				<Row>
 					<Col>
-						<div className="mb-6 mb-xl-8 normalize-last-p text-white">{documentToReactComponents(bodyJSON, defaultTextOptions)}</div>
+						<div className="mb-6 mb-xl-8 normalize-last-p">{documentToReactComponents(bodyJSON, defaultTextOptions)}</div>
 						<div className="d-none d-xl-block">
-							<Flickity options={{ cellAlign: 'left', wrapAround: true, pageDots: false, freeScroll: true }}>
+							<Row>
 								{tourData.map(({ node }, idx) => {
-									return <DesktopCard node={node} key={idx} />
+									if (idx < 3) {
+										return <DesktopCard node={node} key={idx} />
+									} else {
+										return ''
+									}
 								})}
-							</Flickity>
+							</Row>
 						</div>
 					</Col>
 				</Row>

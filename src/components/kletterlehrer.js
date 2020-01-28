@@ -18,4 +18,15 @@ const CTA = ({ children, data: { to, classes } }) => {
 	)
 }
 
-export { SubPage, Section, CTA }
+const SVG = ({ svg, file, alt }) => {
+	if (file.contentType === 'image/svg+xml') {
+		if (svg && svg.content) {
+			return <div dangerouslySetInnerHTML={{ __html: svg.content }} />
+		}
+		return <img src={file.url} alt={alt} />
+	}
+	// Dummy
+	return <img src="" alt={alt} />
+}
+
+export { SubPage, Section, CTA, SVG }
