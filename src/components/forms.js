@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect, useRef } from 'react'
-// import React, { useState, useEffect } from 'react'
 import { navigate } from 'gatsby'
 import { Form, Col, Button } from 'react-bootstrap'
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -19,10 +18,12 @@ const encode = data => {
 const RegisterForm = ({ data: { prefilledText } }) => {
 	const notificationContext = useRef(useContext(NotificationContext))
 
+	// independent states
 	const [fieldValue, setFields] = useState({ name: '', email: '', message: prefilledText })
 	const [fieldsValidation, setFieldsValidation] = useState({ name: 'secondary', email: 'secondary', message: 'secondary' })
 	const [recaptchaValue, setRecaptchaValue] = useState(null)
-	const [errorMessages, setErrorMessages] = useState(null)
+
+	// dependent states
 	const [formData, setFormData] = useState({})
 
 	const onFieldChange = e => {
@@ -39,6 +40,8 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 			successUrl: e.target.getAttribute('action'),
 			submitted: true,
 			toggleSubmit: typeof formData.toggleSubmit === 'undefined' ? true : !formData.toggleSubmit,
+			validationFinished: false,
+			errors: [],
 		})
 	}
 
@@ -80,18 +83,20 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 		if (recaptchaValue === null) {
 			errors.push('Bitte reCAPTCHA bestätigen')
 		}
-		setErrorMessages(errors)
+		setFormData(oldObj => {
+			return { ...oldObj, errors: errors, validationFinished: true }
+		})
 	}, [formData.toggleSubmit, formData.submitted, fieldValue, recaptchaValue])
 
 	useEffect(() => {
 		notificationContext.current.setNotificationData({
-			showNotification: errorMessages && errorMessages.length > 0,
-			messages: errorMessages,
+			showNotification: formData.errors && formData.errors.length > 0,
+			messages: formData.errors,
 		})
-	}, [errorMessages])
+	}, [formData.errors])
 
 	useEffect(() => {
-		if (errorMessages && errorMessages.length === 0) {
+		if (formData.submitted && formData.validationFinished && formData.errors && formData.errors.length === 0) {
 			if (~document.location.host.indexOf('localhost')) {
 				onRegisterSuccess(formData.successUrl)
 			} else {
@@ -109,15 +114,19 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 							// netlify doesnt give an error on recaptcha fail (only 303 redirect...) :(
 							onRegisterSuccess(formData.successUrl)
 						} else {
-							setErrorMessages(['Ein Fehler ist aufgetreten, bitte nochmal versuchen.'])
+							setFormData(oldObj => {
+								return { ...oldObj, errors: ['Ein Fehler ist aufgetreten, bitte nochmal versuchen.'] }
+							})
 						}
 					})
 					.catch(err => {
-						setErrorMessages(['Ein Fehler ist aufgetreten, bitte nochmal versuchen.'])
+						setFormData(oldObj => {
+							return { ...oldObj, errors: ['Ein Fehler ist aufgetreten, bitte nochmal versuchen.'] }
+						})
 					})
 			}
 		}
-	}, [formData.toggleSubmit])
+	}, [formData.validationFinished])
 
 	return (
 		<Form name="Debug Test" method="POST" data-netlify="true" data-netlify-recaptcha="true" action="/danke-fuer-die-nachricht" onSubmit={onSubmit} noValidate>
