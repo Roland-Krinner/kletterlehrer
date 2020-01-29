@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { Section, CTA } from './kletterlehrer'
+import { Section } from './kletterlehrer'
 import { faqTextOptions } from './format-options'
 import { utils } from '../utils'
 

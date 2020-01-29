@@ -78,7 +78,7 @@ const Footer = ({ pageInfo: { pageType } }) => {
 							</div>
 							{socialLinks.map((socialLink, idx) => {
 								return (
-									<div className={`${listItemWrapper}`}>
+									<div className={`${listItemWrapper}`} key={idx}>
 										<a href={socialLink.url} target="_blank" rel="noopener noreferrer" className={`${listItem}`} key={idx}>
 											{socialLink.name}
 										</a>
