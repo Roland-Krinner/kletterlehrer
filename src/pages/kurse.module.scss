@@ -1,3 +1,5 @@
+@import '../scss/mixins';
+
 .mobile-container {
 	// xs
 	@media (max-width: 320px) {
@@ -6,23 +8,22 @@
 	}
 }
 
-// .mobile-card {
-// 	// xs
-// 	@media (max-width: 320px) {
-// 		margin-top: 0.5rem;
-// 	}
-// }
+.first-card {
+	margin-top: 0 !important;
+}
 
-.mobile-card-body {
+.card-body {
+	@include cardBodyPaddingDefault;
 	// xs
 	@media (max-width: 320px) {
-		padding: 1.5rem 1.125rem 1.125rem 1.125rem  !important;
+		@include cardBodyPaddingXS;
 	}
 }
 
-.mobile-card-img-top-div {
+.card-img-top-div {
+	@include cardImgTopDiv;
 	// xs
 	@media (max-width: 320px) {
-		padding: 0 0 1rem 1.125rem !important;
+		@include cardImgTopDivPaddingXS;
 	}
 }

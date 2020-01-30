@@ -6,7 +6,6 @@ import { cardBodyTextOptions, defaultTextOptions } from '../components/format-op
 import Layout from '../components/layout'
 import Head from '../components/head'
 import { SubPage, CTA } from '../components/kletterlehrer'
-import '../scss/__tour-overview.scss'
 import Styles from './touren.module.scss'
 
 const baseURL = '/touren'
@@ -17,13 +16,13 @@ const PreviewCard = ({ node, customClass }) => {
 		<Card className={`detail-card content-card overflow-hidden shadow-dark-sm mt-20 mt-sm-7 ${classes}`}>
 			<div className={`card-img-top`}>
 				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
-				<div className={Styles.mobileCardImgTopDiv}>
+				<div className={Styles.cardImgTopDiv}>
 					<div>
 						<h2 className="h3 text-white mb-0">{node.headline}</h2>
 					</div>
 				</div>
 			</div>
-			<Card.Body className={Styles.mobileCardBody}>
+			<Card.Body className={Styles.cardBody}>
 				<div className="d-flex align-items-start">
 					<span className="badge badge-secondary rounded mb-3">Preis: {node.costs}</span>
 				</div>
@@ -74,26 +73,28 @@ const Tours = () => {
 	return (
 		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
 			<Head title="Touren" />
-			<SubPage data={{ classes: 'tour-overview' }}>
+			<SubPage data={{ classes: '' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
 				<Container className={Styles.mobileContainer}>
 					<Row className="d-md-none">
-						<Col xs={12} className="cards-col">
+						<Col xs={12}>
 							{tourData.map(({ node }, idx) => {
-								const classes = idx === 0 ? '' : Styles.mobileCard
+								const classes = idx === 0 ? Styles.firstCard : ''
 								return <PreviewCard node={node} key={idx} customClass={classes} />
 							})}
 						</Col>
 					</Row>
 					<Row className="d-none d-md-flex">
-						<Col xs={6} className="cards-col">
+						<Col xs={6}>
 							{tourData.map(({ node }, idx) => {
-								return idx % 2 === 0 ? <PreviewCard node={node} key={idx} /> : ''
+								const classes = idx === 0 ? Styles.firstCard : ''
+								return idx % 2 === 0 ? <PreviewCard node={node} key={idx} customClass={classes} /> : ''
 							})}
 						</Col>
-						<Col xs={6} className="pt-8 cards-col">
+						<Col xs={6} className="pt-8">
 							{tourData.map(({ node }, idx) => {
-								return idx % 2 === 1 ? <PreviewCard node={node} key={idx} /> : ''
+								const classes = idx === 1 ? Styles.firstCard : ''
+								return idx % 2 === 1 ? <PreviewCard node={node} key={idx} customClass={classes} /> : ''
 							})}
 						</Col>
 					</Row>

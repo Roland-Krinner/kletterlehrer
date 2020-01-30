@@ -19,6 +19,7 @@
     "fbjs": "^1.0.0",
     "flickity": "^2.2.1",
     "gatsby": "^2.18.12",
+    "gatsby-plugin-manifest": "^2.2.40",
     "gatsby-plugin-react-helmet": "^3.1.21",
     "gatsby-plugin-sass": "^2.1.27",
     "gatsby-plugin-sharp": "^2.3.13",

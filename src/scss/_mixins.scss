@@ -39,12 +39,3 @@
 @mixin cardBodyPaddingDefault {
 	padding: 1.765rem 1.412rem 1.412rem 1.412rem;
 }
-
-
-@mixin cardsCol {
-	.cards-col {
-		> div:first-child {
-			margin-top: 0 !important;
-		}
-	}
-}
