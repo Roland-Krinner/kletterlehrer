@@ -11,7 +11,7 @@
 
 	.card.content-card {
 		.card-body {
-			@include cardContentCardCardBody;
+			@include cardBodyPaddingDefault;
 		}
 	}
 }

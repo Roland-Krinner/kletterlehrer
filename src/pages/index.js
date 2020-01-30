@@ -6,7 +6,6 @@ import SectionIntro from '../components/section-intro'
 import SectionCourses from '../components/section-courses'
 import SectionTours from '../components/section-tours'
 import SectionQuotes from '../components/section-quotes'
-// import SectionFeature from '../components/section-feature'
 import SectionFeatureProfile from '../components/section-feature-profile'
 import SectionFAQs from '../components/section-faqs'
 
@@ -21,7 +20,6 @@ const IndexPage = () => {
 				<SectionCourses />
 				<SectionTours />
 				<SectionQuotes />
-				{/* <SectionFeature /> */}
 				<SectionFAQs />
 			</main>
 		</Layout>

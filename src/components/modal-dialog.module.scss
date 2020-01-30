@@ -1,0 +1,24 @@
+@import '../scss/mixins';
+
+.modal {
+	> div {
+		> div {
+			@include borderRadius;
+		}
+	}
+}
+
+.modal-body {
+	// overflow: hidden;
+	padding: 1.765rem 1.412rem 1.412rem 1.412rem;
+
+	// xs
+	@media (max-width: 320px) {
+		padding: 1.125rem !important;
+	}
+}
+
+// .modal-footer {
+// 	justify-content: flex-start;
+// 	padding: 1rem;
+// }

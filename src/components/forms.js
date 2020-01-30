@@ -1,9 +1,12 @@
-import React, { useState, useContext, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { navigate } from 'gatsby'
 import { Form, Col, Button } from 'react-bootstrap'
 import ReCAPTCHA from 'react-google-recaptcha'
-import { Context as NotificationContext } from '../context/context'
+import { GlobalDispatchContext } from '../context/GlobalContextProvider'
 import '../scss/__form.scss'
+import { utils } from '../utils'
+
+const textMuted = utils.getColor('textMuted')
 
 const onRegisterSuccess = navUrl => {
 	navigate(navUrl)
@@ -15,8 +18,8 @@ const encode = data => {
 		.join('&')
 }
 
-const RegisterForm = ({ data: { prefilledText } }) => {
-	const notificationContext = useRef(useContext(NotificationContext))
+const RegisterForm = ({ data: { prefilledText, lgCol } }) => {
+	const dispatch = useContext(GlobalDispatchContext)
 
 	// independent states
 	const [fieldValue, setFields] = useState({ name: '', email: '', message: prefilledText })
@@ -89,9 +92,10 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 	}, [formData.toggleSubmit, formData.submitted, fieldValue, recaptchaValue])
 
 	useEffect(() => {
-		notificationContext.current.setNotificationData({
-			showNotification: formData.errors && formData.errors.length > 0,
-			messages: formData.errors,
+		dispatch({
+			type: 'UPDATE_NOTIFICATION',
+			notificationVisible: (formData.errors && formData.errors.length > 0) || false,
+			messages: formData.errors || [],
 		})
 	}, [formData.errors])
 
@@ -128,24 +132,28 @@ const RegisterForm = ({ data: { prefilledText } }) => {
 		}
 	}, [formData.validationFinished])
 
+	const lgColName = lgCol || 5
+	const lgColEmail = lgCol || 7
+
 	return (
 		<Form name="Debug Test" method="POST" data-netlify="true" data-netlify-recaptcha="true" action="/danke-fuer-die-nachricht" onSubmit={onSubmit} noValidate>
 			<input type="hidden" name="form-name" value="Debug Test" />
 			<Form.Row>
-				<Form.Group as={Col} xs={12} md={6} lg={12} controlId="formName" className="mb-2">
-					<Form.Label className="h6 text-gray-800 mb-1">Name (Pflichtfeld)</Form.Label>
+				<Form.Group as={Col} xs={12} md={12} lg={lgColName} controlId="formName" className="mb-2">
+					<Form.Label className={`h6 no-select mb-1 ${textMuted}`}>Name (Pflichtfeld)</Form.Label>
 					<Form.Control type="text" placeholder="Name" name="name" spellCheck="false" onChange={onFieldChange} className={'border-' + fieldsValidation.name} />
 				</Form.Group>
-				<Form.Group as={Col} xs={12} md={6} lg={12} controlId="formEmail" className="mb-2">
-					<Form.Label className="h6 text-gray-800 mb-1">E-Mail (Pflichtfeld)</Form.Label>
+				<Form.Group as={Col} xs={12} md={12} lg={lgColEmail} controlId="formEmail" className="mb-2">
+					<Form.Label className={`h6 no-select mb-1 ${textMuted}`}>E-Mail (Pflichtfeld)</Form.Label>
 					<Form.Control type="email" placeholder="E-Mail Adresse" name="email" spellCheck="false" onChange={onFieldChange} className={'border-' + fieldsValidation.email} />
 				</Form.Group>
 			</Form.Row>
-			<Form.Group controlId="formTextarea" className="mb-md-20 mb-lg-4">
-				<Form.Label className="h6 text-gray-800 mb-1">Nachricht (Pflichtfeld)</Form.Label>
+			<Form.Group controlId="formTextarea" className="mb-2">
+				<Form.Label className={`h6 no-select mb-1 ${textMuted}`}>Nachricht (Pflichtfeld)</Form.Label>
 				<Form.Control as="textarea" rows="3" placeholder="Nachricht" name="message" spellCheck="false" value={fieldValue.message} onChange={onFieldChange} className={'border-' + fieldsValidation.message} />
 			</Form.Group>
-			<Form.Group className="mb-md-20 mb-lg-4 recaptcha-form-group">
+			<Form.Group className="mb-4">
+				<Form.Label className={`h6 no-select mb-1 ${textMuted}`}>reCAPTCHA (Pflichtfeld)</Form.Label>
 				<div className="recaptcha-wrapper">
 					<ReCAPTCHA sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY} onChange={setRecaptchaValue} />
 				</div>

@@ -1,5 +1,7 @@
 /* ------------- KLETTERLEHRER STYLES ------------- */
 
+@import 'mixins';
+
 .container {
 	// xxxl
 	@media (min-width: 1920px) {
@@ -37,19 +39,13 @@
 .btn,
 .btn.btn-sm, .card,
 .rounded {
-	border-radius: 0.2353rem !important;
+	@include borderRadius;
 }
 
 .btn-sm {
 	min-width: 9.882rem;
 }
 
-.btn-submit {
-	i::before {
-		display: inline-block;
-		transform: rotate(45deg);
-	}
-}
 
 .normalize-first-p {
 	p:first-child {
@@ -90,20 +86,27 @@
 	pointer-events: none;
 }
 
-// .collapse-toggler {
-// 	position: absolute;
-// 	top: 1rem;
-// 	right: 1rem;
-// 	z-index: 1;
-// 	color: #fff;
-// 	border-color: transparent;
-// 	padding: 0.25rem 0.75rem;
-// 	font-size: 1.1875rem;
-// 	line-height: 1;
-// 	background-color: transparent;
-// 	border: 1px solid transparent;
-// 	border-radius: 0.375rem;
+// .btn-submit {
+// 	i::before {
+// 		display: inline-block;
+// 		transform: rotate(45deg);
+// 	}
 // }
+
+// .collapse-toggler {
+	// 	position: absolute;
+	// 	top: 1rem;
+	// 	right: 1rem;
+	// 	z-index: 1;
+	// 	color: #fff;
+	// 	border-color: transparent;
+	// 	padding: 0.25rem 0.75rem;
+	// 	font-size: 1.1875rem;
+	// 	line-height: 1;
+	// 	background-color: transparent;
+	// 	border: 1px solid transparent;
+	// 	border-radius: 0.375rem;
+	// }
 
 // .collapse-toggler:hover,
 // .collapse-toggler:active {

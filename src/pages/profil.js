@@ -19,7 +19,7 @@ const CardSection = ({ data: { section } }) => {
 		<Card className="shadow-dark-sm mt-20 mt-sm-7">
 			<Row>
 				<Col xs={12}>
-					<Card.Body className={`${Styles.cardBody} ${Styles.mobileCardBody}` }>{documentToReactComponents(section.text.json, defaultTextOptions)}</Card.Body>
+					<Card.Body className={`${Styles.cardBody}` }>{documentToReactComponents(section.text.json, defaultTextOptions)}</Card.Body>
 				</Col>
 			</Row>
 		</Card>
@@ -84,7 +84,7 @@ const Profil = () => {
 								<div style={{ backgroundImage: `url(${featureBackgroundImage.file.url})` }} className={Styles.bgImgWrapper}></div>
 							</Col>
 							<Col xs={12} md={8}>
-								<Card.Body className={`${Styles.cardBody} ${Styles.mobileCardBody} ${Styles.minHeight}`}>
+								<Card.Body className={`${Styles.cardBody} ${Styles.minHeight}`}>
 									<Row className="justify-content-center mt-4">
 										<Col xs={4} sm={3} lg={3} className={Styles.profileImgWrapper}>
 											<Image data={{ img: featureProfileImage, classes: `${Styles.image} rounded-circle` }} />

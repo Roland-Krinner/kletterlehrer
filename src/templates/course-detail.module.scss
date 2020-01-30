@@ -1,5 +1,32 @@
-.mobile-section {
-	padding-top: 0.5rem !important;
+@import '../scss/mixins';
+
+.detail-view {
+	// xs
+	@media (max-width: 320px) {
+		padding-top: 0.5rem !important;
+	}
+}
+
+.detail-view::before {
+	// sm
+	@media (min-width: 576px) {
+		background: #0e1e24;
+		content: ' ';
+		display: block;
+		height: 230px;
+		left: 0;
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 0;
+	}
+}
+
+.detail-view::before {
+	// lg
+	@media (min-width: 992px) {
+		height: 264px;
+	}
 }
 
 .mobile-container {
@@ -10,23 +37,34 @@
 	}
 }
 
-// .content-card-section {
-// 	// xs
-// 	@media (max-width: 320px) {
-// 		margin-top: 0.5rem !important;
-// 	}
-// }
-
-.mobile-card-body {
+.card-img-top-div {
+	@include cardImgTopDiv;
 	// xs
 	@media (max-width: 320px) {
-		padding: 1.5rem 1.125rem 1.125rem 1.125rem  !important;
+		@include cardImgTopDivPaddingXS;
+	}
+	//md
+	@media (min-width: 768px) {
+		@include cardImgTopDivPaddingMD;
 	}
 }
 
-.mobile-card-img-top-div {
+.bade {
 	// xs
 	@media (max-width: 320px) {
-		padding: 0 0 1rem 1.125rem !important;
+		margin-left: 0 !important;
+		margin-right: auto;
+	}
+}
+
+.card-body {
+	@include cardBodyPaddingDefault;
+	// xs
+	@media (max-width: 320px) {
+		@include cardBodyPaddingXS;
+	}
+	//md
+	@media (min-width: 768px) {
+		@include cardBodyPaddingMD;
 	}
 }

@@ -10,9 +10,14 @@
 }
 
 .card-body {
-	// < sm
-	@media (max-width: 575px) {
-		@include cardContentCardCardBody;
+	@include cardBodyPaddingDefault;
+	// xs
+	@media (max-width: 320px) {
+		@include cardBodyPaddingXS;
+	}
+	//md
+	@media (min-width: 768px) {
+		@include cardBodyPaddingMD;
 	}
 }
 
@@ -52,19 +57,5 @@
 	@media (max-width: 320px) {
 		padding-right: 0.5rem;
 		padding-left: 0.5rem;
-	}
-}
-
-// .mobile-card {
-// 	// xs
-// 	@media (max-width: 320px) {
-// 		margin-top: 0.5rem;
-// 	}
-// }
-
-.mobile-card-body {
-	// xs
-	@media (max-width: 320px) {
-		padding: 1.5rem 1.125rem 1.125rem 1.125rem  !important;
 	}
 }

@@ -2,6 +2,11 @@
 	background: linear-gradient(to right, rgba(10, 26, 98, 0.8), rgba(10, 26, 98, 0.4) 86%);
 }
 
+@mixin borderRadius {
+	border-radius: 0.2353rem !important;
+}
+
+/* overview and detail pages! */
 @mixin cardImgTopDiv {
 	position: absolute;
 	width: 100%;
@@ -15,100 +20,31 @@
 	justify-content: flex-end;
 }
 
-@mixin cardContentCardCardBody {
+@mixin cardImgTopDivPaddingXS {
+	padding: 0 0 1rem 1.125rem !important;
+}
+
+@mixin cardImgTopDivPaddingMD {
+	padding: 0 0 1rem 2rem !important;
+}
+
+@mixin cardBodyPaddingXS {
+	padding: 1.5rem 1.125rem 1.125rem 1.125rem !important;
+}
+
+@mixin cardBodyPaddingMD {
+	padding: 2rem !important;
+}
+
+@mixin cardBodyPaddingDefault {
 	padding: 1.765rem 1.412rem 1.412rem 1.412rem;
 }
 
-// @mixin cardContentCardCardBodyXS {
-// padding: 1.5rem 1.125rem;
-// background-color: red !important;
-// }
 
 @mixin cardsCol {
 	.cards-col {
 		> div:first-child {
 			margin-top: 0 !important;
-			// @media (min-width: 992px) {
-			// 	margin-top: 1rem !important;
-			// }
-		}
-	}
-}
-
-/* Card Detail View */
-
-@mixin detailView {
-	// xs
-	// @media (max-width: 320px) {
-	// 	padding-top: 0 !important;
-	// 	padding-bottom: 0 !important;
-	// }
-
-	// .section {
-	// xs
-	// @media (max-width: 320px) {
-	// 	padding: 0 4px 4px 4px !important;
-	// 	margin: 4px 0 0 0 !important;
-	// 	padding: 0 !important;
-	// 	margin: 0 !important;
-	// }
-
-	// .card {
-	// xs
-	// @media (max-width: 320px) {
-	// 	box-shadow: none !important;
-	// 	border-radius: 0 !important;
-	// }
-	// }
-	// }
-
-	// sm
-	@media (min-width: 576px) {
-		&::before {
-			background: #0e1e24;
-			content: ' ';
-			display: block;
-			height: 230px;
-			left: 0;
-			position: absolute;
-			top: 0;
-			width: 100%;
-			z-index: 0;
-		}
-	}
-
-	// lg
-	@media (min-width: 992px) {
-		&::before {
-			height: 264px;
-		}
-	}
-
-	.detail-card {
-		.card-img-top > div {
-			@include cardImgTopDiv;
-			// xs
-			// @media (max-width: 320px) {
-			// 	padding: 0 0 1rem 1.125rem;
-			// }
-		}
-		.badge {
-			// xs
-			@media (max-width: 320px) {
-				margin-left: 0 !important;
-				margin-right: auto;
-			}
-		}
-	}
-
-	.card.content-card {
-		.card-body {
-			@include cardContentCardCardBody;
-			// xs
-			//@media (max-width: 320px) {
-			// padding: 1.5rem 1.125rem;
-			// @include cardContentCardCardBodyXS;
-			//}
 		}
 	}
 }

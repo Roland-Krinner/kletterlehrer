@@ -7,9 +7,14 @@ export const Provider = ({ children }) => {
 		showNotification: false,
 		messages: [],
 	})
+
+	const [modalVisible, setModalVisible] = useState(false);
+
 	const someContext = {
 		notificationData,
 		setNotificationData,
+		modalVisible,
+		setModalVisible
 	}
 
 	return <Context.Provider value={someContext}>{children}</Context.Provider>

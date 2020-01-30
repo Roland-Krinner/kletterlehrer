@@ -7,13 +7,13 @@ import Layout from '../components/layout'
 import Head from '../components/head'
 import { SubPage } from '../components/kletterlehrer'
 
-const ThankYou = () => {
+const Error404 = () => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulStaticPages {
 				edges {
 					node {
-						thankYouBody {
+						error404Body {
 							json
 						}
 					}
@@ -21,10 +21,10 @@ const ThankYou = () => {
 			}
 		}
 	`)
-	const bodyJSON = data.allContentfulStaticPages.edges[0].node.thankYouBody.json
+	const bodyJSON = data.allContentfulStaticPages.edges[0].node.error404Body.json
 	return (
-		<Layout pageInfo={{ pageName: 'danke', pageType: 'subPage' }}>
-			<Head title="Danke" />
+		<Layout pageInfo={{ pageName: 'page-not-found', pageType: 'subPage' }}>
+			<Head title="404" />
 			<SubPage data={{ classes: '' }}>
 				<Container>
 					<Row>
@@ -38,4 +38,4 @@ const ThankYou = () => {
 	)
 }
 
-export default ThankYou
+export default Error404

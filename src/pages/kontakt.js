@@ -39,9 +39,9 @@ const Contact = () => {
 						</Col>
 						<Col xs={12} lg={6} className={`mt-5 mt-lg-0 ${Styles.formCardCol}`}>
 							<Card className="shadow-dark-sm overflow-hidden">
-								<Card.Body className={`${Styles.formCardBody}`}>
-									<div className={`mt-5 ${Styles.formCardBodyDiv}`}>{documentToReactComponents(formTextJSON, formTextOptions)}</div>
-									<RegisterForm data={{ prefilledText: '' }} />
+								<Card.Body className={`${Styles.cardBody}`}>
+									<div className={`mt-md-5 ${Styles.cardBodyDiv}`}>{documentToReactComponents(formTextJSON, formTextOptions)}</div>
+									<RegisterForm data={{ prefilledText: '', lgCol: '12' }} />
 								</Card.Body>
 							</Card>
 						</Col>
