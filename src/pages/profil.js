@@ -28,7 +28,7 @@ const CardSection = ({ data: { section } }) => {
 	)
 }
 
-const Profil = () => {
+const Profil = (props) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulProfilePage {
@@ -74,7 +74,7 @@ const Profil = () => {
 	const sections = data.allContentfulProfilePage.edges[0].node.sections
 	return (
 		<Layout pageInfo={{ pageName: 'profil', pageType: 'subPage' }}>
-			<Head title="Profil" />
+			<Head title="Profil" props={props}/>
 			<SubPage data={{ classes: 'profile-page' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
 				<Container className={Styles.mobileContainer}>

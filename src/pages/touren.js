@@ -35,7 +35,7 @@ const PreviewCard = ({ node, customClass }) => {
 	)
 }
 
-const Tours = () => {
+const Tours = (props) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulTourItem {
@@ -72,7 +72,7 @@ const Tours = () => {
 	const introTextJSON = data.allContentfulDynamicPages.edges[0].node.toursIntroText.json
 	return (
 		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
-			<Head title="Touren" />
+			<Head title="Touren" props={props}/>
 			<SubPage data={{ classes: '' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
 				<Container className={Styles.mobileContainer}>

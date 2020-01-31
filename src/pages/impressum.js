@@ -7,7 +7,7 @@ import Layout from '../components/layout'
 import Head from '../components/head'
 import { SubPage } from '../components/kletterlehrer'
 
-const Imprint = () => {
+const Imprint = (props) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulStaticPages {
@@ -24,7 +24,7 @@ const Imprint = () => {
 	const bodyJSON = data.allContentfulStaticPages.edges[0].node.imprintBody.json
 	return (
 		<Layout pageInfo={{ pageName: 'impressum', pageType: 'subPage' }}>
-			<Head title="Impressum" />
+			<Head title="Impressum" props={props}/>
 			<SubPage data={{ classes: '' }}>
 				<Container>
 					<Row>

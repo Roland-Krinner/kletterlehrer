@@ -7,7 +7,7 @@ import Layout from '../components/layout'
 import Head from '../components/head'
 import { SubPage } from '../components/kletterlehrer'
 
-const ThankYou = () => {
+const ThankYou = (props) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulStaticPages {
@@ -24,7 +24,7 @@ const ThankYou = () => {
 	const bodyJSON = data.allContentfulStaticPages.edges[0].node.thankYouBody.json
 	return (
 		<Layout pageInfo={{ pageName: 'danke', pageType: 'subPage' }}>
-			<Head title="Danke" />
+			<Head title="Danke" props={props}/>
 			<SubPage data={{ classes: '' }}>
 				<Container>
 					<Row>

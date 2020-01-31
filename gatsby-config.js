@@ -4,12 +4,19 @@ module.exports = {
 			resolve: `gatsby-plugin-manifest`,
 			options: {
 				name: `Kletterlehrer`,
-				short_name: `KL`,
+				short_name: `Kletterlehrer`,
 				start_url: `/`,
-				background_color: `#f7f0eb`,
-				theme_color: `#a2466c`,
+				background_color: `#ffffff`,
+				theme_color: `#ffffff`, 
 				display: `standalone`,
-				icon: `src/images/icon.png`, // This path is relative to the root of the site.
+				icon: `src/images/icon.svg`, // This path is relative to the root of the site.
+				// icons: [
+				// 	{
+				// 		src: `/favicons/icon-48x48.png`,
+				// 		sizes: `48x48`,
+				// 		type: `image/png`,
+				// 	},
+				// ],
 			},
 		},
 		`gatsby-transformer-inline-svg`,

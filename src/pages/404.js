@@ -7,7 +7,7 @@ import Layout from '../components/layout'
 import Head from '../components/head'
 import { SubPage } from '../components/kletterlehrer'
 
-const Error404 = () => {
+const Error404 = (props) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulStaticPages {
@@ -24,7 +24,7 @@ const Error404 = () => {
 	const bodyJSON = data.allContentfulStaticPages.edges[0].node.error404Body.json
 	return (
 		<Layout pageInfo={{ pageName: 'page-not-found', pageType: 'subPage' }}>
-			<Head title="404" />
+			<Head title="404" props={props}/>
 			<SubPage data={{ classes: '' }}>
 				<Container>
 					<Row>

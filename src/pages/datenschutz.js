@@ -7,7 +7,7 @@ import Layout from '../components/layout'
 import Head from '../components/head'
 import { SubPage } from '../components/kletterlehrer'
 
-const Privacy = () => {
+const Privacy = (props) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulStaticPages {
@@ -24,7 +24,7 @@ const Privacy = () => {
 	const bodyJSON = data.allContentfulStaticPages.edges[0].node.privacyBody.json
 	return (
 		<Layout pageInfo={{ pageName: 'datenschutz', pageType: 'subPage' }}>
-			<Head title="Datenschutz" />
+			<Head title="Datenschutz" props={props}/>
 			<SubPage data={{ classes: '' }}>
 				<Container>
 					<Row>

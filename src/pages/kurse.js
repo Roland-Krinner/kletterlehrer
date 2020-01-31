@@ -44,7 +44,7 @@ const PreviewCard = ({ node, customClass }) => {
 	)
 }
 
-const Courses = () => {
+const Courses = (props) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulCourseItem(sort: { fields: startDate, order: ASC }) {
@@ -84,7 +84,7 @@ const Courses = () => {
 	const introTextJSON = data.allContentfulDynamicPages.edges[0].node.coursesIntroText.json
 	return (
 		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
-			<Head title="Kurse" />
+			<Head title="Kurse" props={props}/>
 			<SubPage data={{ classes: '' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
 				<Container className={Styles.mobileContainer}>

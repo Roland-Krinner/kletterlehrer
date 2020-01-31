@@ -9,10 +9,10 @@ import SectionQuotes from '../components/section-quotes'
 import SectionFeatureProfile from '../components/section-feature-profile'
 import SectionFAQs from '../components/section-faqs'
 
-const IndexPage = () => {
+const IndexPage = (props) => {
 	return (
 		<Layout pageInfo={{ pageName: 'startseite', pageType: 'homePage' }}>
-			<Head title="Startseite" />
+			<Head title="" props={props} />
 			<SectionHero />
 			<main>
 				<SectionIntro />

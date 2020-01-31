@@ -11,7 +11,7 @@ const NavContent = ({ pageInfo }) => {
 			allContentfulSiteMetadata {
 				edges {
 					node {
-						brandLogoHorizontal {
+						brandLogo {
 							title
 							svg {
 								content
@@ -27,9 +27,9 @@ const NavContent = ({ pageInfo }) => {
 			}
 		}
 	`)
-	const svg = data.allContentfulSiteMetadata.edges[0].node.brandLogoHorizontal.svg
-	const alt = data.allContentfulSiteMetadata.edges[0].node.brandLogoHorizontal.title
-	const file = data.allContentfulSiteMetadata.edges[0].node.brandLogoHorizontal.file
+	const svg = data.allContentfulSiteMetadata.edges[0].node.brandLogo.svg
+	const alt = data.allContentfulSiteMetadata.edges[0].node.brandLogo.title
+	const file = data.allContentfulSiteMetadata.edges[0].node.brandLogo.file
 	return (
 		<>
 			<Link to="/" className="brand">

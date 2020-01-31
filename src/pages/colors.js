@@ -5,14 +5,14 @@ import { Link } from 'gatsby'
 import Layout from '../components/layout'
 import Head from '../components/head'
 
-const Colors = () => {
+const Colors = (props) => {
 	const colors = ['primary', 'secondary', 'success', 'info', 'warning', 'danger', 'light', 'dark', 'black']
 	const steps = [900, 800, 700, 600, 500, 400, 300, 200, 100]
 	const stepsReversed = [...steps].reverse()
 
 	return (
 		<Layout pageInfo={{ pageName: 'datenschutz', pageType: 'subPage' }}>
-			<Head title="Colors" />
+			<Head title="Colors" props={props}/>
 			<section className="bg-light">
 				<Container>
 					<nav aria-label="breadcrumb">

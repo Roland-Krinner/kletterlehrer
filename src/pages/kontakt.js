@@ -9,7 +9,7 @@ import { RegisterForm } from '../components/forms'
 import { defaultTextOptions, formTextOptions } from '../components/format-options'
 import Styles from './kontakt.module.scss'
 
-const Contact = () => {
+const Contact = (props) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulContactPage {
@@ -30,7 +30,7 @@ const Contact = () => {
 	const formTextJSON = data.allContentfulContactPage.edges[0].node.formText.json
 	return (
 		<Layout pageInfo={{ pageName: 'kontakt', pageType: 'subPage' }}>
-			<Head title="Kontakt" />
+			<Head title="Kontakt" props={props}/>
 			<SubPage data={{ classes: 'kontakt-page' }}>
 				<Container>
 					<Row>
