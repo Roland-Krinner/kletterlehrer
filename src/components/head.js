@@ -23,26 +23,26 @@ const Head = ({ props , staticURL, title }) => {
 		}
 	`)
 
-	const url = props ? props.location.href : staticURL ? staticURL : 'xxx'
-
+	
 	const hotSpot = 'top_right'
 	const twitterSizes = '1200x628'
 	const ogSizes = '1200x630'
-
+	
 	const baseTitle = data.allContentfulSiteMetadata.edges[0].node.baseTitle
 	const siteName = data.allContentfulSiteMetadata.edges[0].node.siteName
 	const siteDescription = data.allContentfulSiteMetadata.edges[0].node.siteDescription
 	const baseUrl = data.allContentfulSiteMetadata.edges[0].node.baseUrl
 	const socialSharerImageBaseUrl = data.allContentfulSiteMetadata.edges[0].node.socialSharerImage.file.url
-
+	
 	const twitterImage = `${socialSharerImageBaseUrl}?fit=thumb&f=${hotSpot}&w=${twitterSizes.split('x')[0]}&h=${twitterSizes.split('x')[1]}`
 	const ogImage = `${socialSharerImageBaseUrl}?fit=thumb&f=${hotSpot}&w=${ogSizes.split('x')[0]}&h=${ogSizes.split('x')[1]}`
-
+	
 	const concatTitle = title !== '' ? `${title} | ${baseTitle}` : baseTitle
+	const url = props && props.location ? props.location.href : staticURL ? `${baseUrl}${staticURL}` : `${baseUrl}`
 
 	return (
 		<Helmet>
-			<title>{concatTitle}</title>
+<title>{concatTitle}{url}</title>
 			<link rel="shortcut icon" href="/favicon.ico" />
 			<meta name="copyright" content={siteName} />
 			<meta name="description" content={siteDescription} />
