@@ -59,7 +59,7 @@ const Course = ({ data }) => {
 	const slug = data.contentfulCourseItem.slug
 	const url = `/kurse/${slug}`
 	const sharerTitle = `${headline} / ${location}`
-	const excerpt = data.contentfulTourItem.excerpt
+	const excerpt = data.contentfulCourseItem.excerpt
 
 	return (
 		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
