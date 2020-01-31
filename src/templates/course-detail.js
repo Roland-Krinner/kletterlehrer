@@ -53,7 +53,7 @@ const Course = ({ data }) => {
 	const endDate = utils.formatDate(data.contentfulCourseItem.endDate)
 	const prefilledText = `Ich interessiere mich für das Angebot "${headline}" im Zeitraum von ${startDate} bis ${endDate}`
 	const dispatch = useContext(GlobalDispatchContext)
-
+ 
 	// Metdata
 	const slug = data.contentfulCourseItem.slug
 	const url = `/kurse/${slug}`
