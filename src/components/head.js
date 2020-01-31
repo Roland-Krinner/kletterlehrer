@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
-const Head = ({ props , staticURL, title, sharerTitle, sharerDescription, sharerImage }) => {
+const Head = ({ props, staticURL, title, sharerTitle, sharerDescription, sharerImage }) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSiteMetadata {
@@ -23,7 +23,6 @@ const Head = ({ props , staticURL, title, sharerTitle, sharerDescription, sharer
 		}
 	`)
 
-	
 	// Title Tag
 	const baseTitle = data.allContentfulSiteMetadata.edges[0].node.baseTitle
 	const pageTitle = title !== '' ? `${title} | ${baseTitle}` : baseTitle
@@ -36,9 +35,8 @@ const Head = ({ props , staticURL, title, sharerTitle, sharerDescription, sharer
 	const baseUrl = data.allContentfulSiteMetadata.edges[0].node.baseUrl
 	const og_url = props && props.location ? props.location.href : staticURL ? `${baseUrl}${staticURL}` : `${baseUrl}`
 
-
 	// Sharer Title
-const og_title = sharerTitle ? sharerTitle : pageTitle
+	const og_title = sharerTitle ? sharerTitle : pageTitle
 
 	// Sharer Description
 	const og_description = sharerDescription ? sharerDescription : defaultPageDescription
@@ -74,8 +72,8 @@ const og_title = sharerTitle ? sharerTitle : pageTitle
 			<meta property="og:image" content={og_image} />
 			<meta property="og:image:width" content={ogSizes.split('x')[0]} />
 			<meta property="og:image:height" content={ogSizes.split('x')[1]} />
-			
-			{/* Google/SEO */}
+
+			{/* Google / SEO */}
 			<meta itemprop="name" content={siteName} />
 			<meta itemprop="description" content={og_description} />
 			<meta itemprop="image" content={og_image} />

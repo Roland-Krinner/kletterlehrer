@@ -40,9 +40,6 @@ export const query = graphql`
 	}
 `
 const Course = ({ data }) => {
-	const slug = data.contentfulCourseItem.slug
-const url = `/kurse/${slug}`
-
 	const imageURL = data.contentfulCourseItem.image.file.url
 	const imageAlt = data.contentfulCourseItem.image.title
 	const headline = data.contentfulCourseItem.headline
@@ -56,9 +53,16 @@ const url = `/kurse/${slug}`
 	const endDate = utils.formatDate(data.contentfulCourseItem.endDate)
 	const prefilledText = `Ich interessiere mich für das Angebot "${headline}" im Zeitraum von ${startDate} bis ${endDate}`
 	const dispatch = useContext(GlobalDispatchContext)
+
+	// Metdata
+	const slug = data.contentfulCourseItem.slug
+	const url = `/kurse/${slug}`
+
+	const sharerTitle = `${headline} in ${location}`
+
 	return (
 		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
-			<Head title={headline} staticURL={url}/>
+			<Head title={headline} staticURL={url} sharerTitle={sharerTitle} />
 			<section className={`pt-5 pb-8 pb-sm-10 ${Styles.detailView}`}>
 				<Container className={Styles.mobileContainer}>
 					<Row>
