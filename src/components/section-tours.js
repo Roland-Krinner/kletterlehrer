@@ -30,7 +30,7 @@ const DesktopCard = ({ node }) => {
 				</Link>
 				<Link className="card-body" to={url}>
 					<h3>{node.headline}</h3>
-					<p className="mb-6 text-muted">{node.subline}</p>
+					<p className="mb-6 text-muted">{node.excerpt}</p>
 				</Link>
 				<Link className="card-meta" to={url}>
 					<hr className="card-meta-divider" />
@@ -51,7 +51,7 @@ const MobileCard = ({ customClass, node }) => {
 			</Link>
 			<Link className="card-body" to={`${baseURL}/${node.slug}`}>
 				<h3 className="mb-2">{node.headline}</h3>
-				<p className="mb-0 text-muted">{node.subline}</p>
+				<p className="mb-0 text-muted">{node.excerpt}</p>
 			</Link>
 			<Link className="card-meta" to={`${baseURL}/${node.slug}`}>
 				<hr className="card-meta-divider" />
@@ -89,7 +89,7 @@ const Tours = () => {
 							}
 						}
 						headline
-						subline
+						excerpt
 						slug
 						body {
 							json
@@ -104,8 +104,6 @@ const Tours = () => {
 	const ctaJSON = data.allContentfulHome.edges[0].node.toursMobileButton
 	return (
 		<Section data={{ classes: 'bg-dark-light-700' }}>
-			{/* bg-dark-light-700 */}
-			{/* bg-light-dark-100 */}
 			<Container>
 				<Row>
 					<Col>

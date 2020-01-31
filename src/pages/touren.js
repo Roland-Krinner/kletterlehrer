@@ -49,7 +49,6 @@ const Tours = (props) => {
 						}
 						slug
 						headline
-						subline
 						costs
 						introText {
 							json

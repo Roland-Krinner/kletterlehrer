@@ -26,6 +26,7 @@ export const query = graphql`
 			startDate(formatString: "DD. MMM")
 			endDate(formatString: "DD. MMM YYYY")
 			costs
+			excerpt
 			introText {
 				json
 			}
@@ -53,16 +54,16 @@ const Course = ({ data }) => {
 	const endDate = utils.formatDate(data.contentfulCourseItem.endDate)
 	const prefilledText = `Ich interessiere mich für das Angebot "${headline}" im Zeitraum von ${startDate} bis ${endDate}`
 	const dispatch = useContext(GlobalDispatchContext)
- 
+
 	// Metdata
 	const slug = data.contentfulCourseItem.slug
 	const url = `/kurse/${slug}`
-
 	const sharerTitle = `${headline} / ${location}`
+	const excerpt = data.contentfulTourItem.excerpt
 
 	return (
 		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
-			<Head title={headline} staticURL={url} sharerTitle={sharerTitle} sharerImage={imageURL}/>
+			<Head title={headline} staticURL={url} sharerTitle={sharerTitle} sharerImage={imageURL} sharerDescription={excerpt} />
 			<section className={`pt-5 pb-8 pb-sm-10 ${Styles.detailView}`}>
 				<Container className={Styles.mobileContainer}>
 					<Row>

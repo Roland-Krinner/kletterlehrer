@@ -21,7 +21,7 @@ export const query = graphql`
 			}
 			slug
 			headline
-			subline
+			excerpt
 			costs
 			introText {
 				json
@@ -37,9 +37,6 @@ export const query = graphql`
 	}
 `
 const Tour = ({ data }) => {
-	const slug = data.contentfulTourItem.slug
-const url = `/touren/${slug}`
-
 	const imageURL = data.contentfulTourItem.image.file.url
 	const imageAlt = data.contentfulTourItem.image.title
 	const headline = data.contentfulTourItem.headline
@@ -50,9 +47,16 @@ const url = `/touren/${slug}`
 	const formTextJSON = data.contentfulTourItem.formText.json
 	const prefilledText = `Ich interessiere mich für das Angebot "${headline}"`
 	const dispatch = useContext(GlobalDispatchContext)
+	
+	// Metdata
+	const slug = data.contentfulTourItem.slug
+	const url = `/touren/${slug}`
+	const sharerTitle = headline
+	const excerpt = data.contentfulTourItem.excerpt
+
 	return (
 		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
-		<Head title={headline} staticURL={url}/>
+		<Head title={headline} staticURL={url} sharerTitle={sharerTitle} sharerImage={imageURL} sharerDescription={excerpt}/>
 			<section className={`pt-5 pb-8 pb-sm-10 ${Styles.detailView}`}>
 				<Container className={Styles.mobileContainer}>
 					<Row>
