@@ -45,7 +45,7 @@ const Head = ({ props, staticURL, title, sharerTitle, sharerDescription, sharerI
 	const hotSpot = 'top_right'
 	const twitterSizes = '1200x628'
 	const ogSizes = '1200x630'
-	const sharerImageBaseUrl = data.allContentfulSiteMetadata.edges[0].node.socialSharerImage.file.url
+	const sharerImageBaseUrl = sharerImage ? sharerImage : data.allContentfulSiteMetadata.edges[0].node.socialSharerImage.file.url
 	const twitter_image = `https:${sharerImageBaseUrl}?fit=thumb&f=${hotSpot}&w=${twitterSizes.split('x')[0]}&h=${twitterSizes.split('x')[1]}`
 	const og_image = `https:${sharerImageBaseUrl}?fit=thumb&f=${hotSpot}&w=${ogSizes.split('x')[0]}&h=${ogSizes.split('x')[1]}`
 

@@ -58,11 +58,11 @@ const Course = ({ data }) => {
 	const slug = data.contentfulCourseItem.slug
 	const url = `/kurse/${slug}`
 
-	const sharerTitle = `${headline} in ${location}`
+	const sharerTitle = `${headline} / ${location}`
 
 	return (
 		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
-			<Head title={headline} staticURL={url} sharerTitle={sharerTitle} />
+			<Head title={headline} staticURL={url} sharerTitle={sharerTitle} sharerImage={imageURL}/>
 			<section className={`pt-5 pb-8 pb-sm-10 ${Styles.detailView}`}>
 				<Container className={Styles.mobileContainer}>
 					<Row>
