@@ -38,7 +38,7 @@ export const query = graphql`
 		}
 	}
 `
-const Course = (props, { data }) => {
+const Course = ({ data }) => {
 	const imageURL = data.contentfulCourseItem.image.file.url
 	const imageAlt = data.contentfulCourseItem.image.title
 	const headline = data.contentfulCourseItem.headline
@@ -54,7 +54,7 @@ const Course = (props, { data }) => {
 	const dispatch = useContext(GlobalDispatchContext)
 	return (
 		<Layout pageInfo={{ pageName: 'kurse', pageType: 'subPage' }}>
-			<Head title={headline} props={props}/>
+			<Head title={headline} props={'props'}/>
 			<section className={`pt-5 pb-8 pb-sm-10 ${Styles.detailView}`}>
 				<Container className={Styles.mobileContainer}>
 					<Row>

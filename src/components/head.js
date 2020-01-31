@@ -23,7 +23,7 @@ const Head = ({ props , title }) => {
 		}
 	`)
 
-	const currentURL = props.location.href
+	const currentURL = 'props.location.href'
 
 	const hotSpot = 'top_right'
 	const twitterSizes = '1200x628'

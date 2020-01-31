@@ -35,7 +35,7 @@ export const query = graphql`
 		}
 	}
 `
-const Tour = (props, { data }) => {
+const Tour = ({ data }) => {
 	const imageURL = data.contentfulTourItem.image.file.url
 	const imageAlt = data.contentfulTourItem.image.title
 	const headline = data.contentfulTourItem.headline
@@ -48,7 +48,7 @@ const Tour = (props, { data }) => {
 	const dispatch = useContext(GlobalDispatchContext)
 	return (
 		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
-			<Head title={headline} props={props}/>
+			<Head title={headline} props={'props'}/>
 			<section className={`pt-5 pb-8 pb-sm-10 ${Styles.detailView}`}>
 				<Container className={Styles.mobileContainer}>
 					<Row>
