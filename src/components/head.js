@@ -32,10 +32,10 @@ const Head = ({ props , staticURL, title }) => {
 	const siteName = data.allContentfulSiteMetadata.edges[0].node.siteName
 	const siteDescription = data.allContentfulSiteMetadata.edges[0].node.siteDescription
 	const baseUrl = data.allContentfulSiteMetadata.edges[0].node.baseUrl
-	const socialSharerImageBaseUrl = data.allContentfulSiteMetadata.edges[0].node.socialSharerImage.file.url
+	const sharerImageBaseUrl = data.allContentfulSiteMetadata.edges[0].node.socialSharerImage.file.url
 	
-	const twitterImage = `${socialSharerImageBaseUrl}?fit=thumb&f=${hotSpot}&w=${twitterSizes.split('x')[0]}&h=${twitterSizes.split('x')[1]}`
-	const ogImage = `${socialSharerImageBaseUrl}?fit=thumb&f=${hotSpot}&w=${ogSizes.split('x')[0]}&h=${ogSizes.split('x')[1]}`
+	const twitterImage = `https:${sharerImageBaseUrl}?fit=thumb&f=${hotSpot}&w=${twitterSizes.split('x')[0]}&h=${twitterSizes.split('x')[1]}`
+	const ogImage = `https:${sharerImageBaseUrl}?fit=thumb&f=${hotSpot}&w=${ogSizes.split('x')[0]}&h=${ogSizes.split('x')[1]}`
 	
 	const concatTitle = title !== '' ? `${title} | ${baseTitle}` : baseTitle
 	const url = props && props.location ? props.location.href : staticURL ? `${baseUrl}${staticURL}` : `${baseUrl}`
