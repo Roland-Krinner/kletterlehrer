@@ -33,7 +33,7 @@ const Head = ({ props, staticURL, title, sharerTitle, sharerDescription, sharerI
 
 	// Page URL
 	const baseUrl = data.allContentfulSiteMetadata.edges[0].node.baseUrl
-	const og_url = props && props.location ? props.location.href : staticURL ? `${baseUrl}${staticURL}` : `${baseUrl}`
+	const og_url = props && props.location.pathname ? `${baseUrl}${props.location.pathname}` : staticURL ? `${baseUrl}${staticURL}` : `${baseUrl}`
 
 	// Sharer Title
 	const og_title = sharerTitle ? sharerTitle : pageTitle
