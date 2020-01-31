@@ -2,7 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { useStaticQuery, graphql } from 'gatsby'
 
-const Head = ({ props , title }) => {
+const Head = ({ props , staticURL, title }) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulSiteMetadata {
@@ -23,7 +23,7 @@ const Head = ({ props , title }) => {
 		}
 	`)
 
-	const currentURL = 'props.location.href'
+	const url = props ? props.location.href : staticURL ? staticURL : 'xxx'
 
 	const hotSpot = 'top_right'
 	const twitterSizes = '1200x628'
@@ -58,7 +58,7 @@ const Head = ({ props , title }) => {
 			<meta property="og:locale" content="de_DE" />
 			<meta property="og:site_name" content={siteName} />
 			<meta property="og:title" content={concatTitle} />
-			<meta property="og:url" content={currentURL} />
+			<meta property="og:url" content={url} />
 			<meta property="og:description" content={siteDescription} />
 			<meta property="og:type" content="website" />
 			<meta property="og:image" content={ogImage} />

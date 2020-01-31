@@ -19,6 +19,7 @@ export const query = graphql`
 					url
 				}
 			}
+			slug
 			headline
 			subline
 			costs
@@ -36,6 +37,9 @@ export const query = graphql`
 	}
 `
 const Tour = ({ data }) => {
+	const slug = data.contentfulTourItem.slug
+const url = `/touren/${slug}`
+
 	const imageURL = data.contentfulTourItem.image.file.url
 	const imageAlt = data.contentfulTourItem.image.title
 	const headline = data.contentfulTourItem.headline
@@ -48,7 +52,7 @@ const Tour = ({ data }) => {
 	const dispatch = useContext(GlobalDispatchContext)
 	return (
 		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
-			<Head title={headline} props={'props'}/>
+		<Head title={headline} staticURL={url}/>
 			<section className={`pt-5 pb-8 pb-sm-10 ${Styles.detailView}`}>
 				<Container className={Styles.mobileContainer}>
 					<Row>
