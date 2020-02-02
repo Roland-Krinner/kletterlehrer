@@ -35,7 +35,7 @@ const Hero = () => {
 	const heroSlides = data.allContentfulHome.edges[0].node.heroSlides
 	return (
 		<section className="hero-section">
-			<Flickity options={{ lazyLoad: 1, wrapAround: true, pageDots: true, prevNextButtons: false, autoPlay: 2500 }}>
+			<Flickity options={{ lazyLoad: 1, wrapAround: true, pageDots: true, prevNextButtons: false, adaptiveHeight:true, autoPlay: 2500 }}>
 				{heroSlides.map((slide, idx) => {
 					const defaultImage = slide.image.file.url
 					const alt = slide.image.title
