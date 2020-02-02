@@ -42,14 +42,22 @@ const Hero = () => {
 		<section className="hero-section">
 			<Flickity options={{ wrapAround: true, pageDots: true, prevNextButtons: false, adaptiveHeight: true, autoPlay: 2500 }}>
 				{heroSlides.map((slide, idx) => {
+					// const fluidURL = slide.image.fluid.src
+					
+					const srcSet = slide.image.fluid.srcSet
+					const sizes = slide.image.fluid.sizes
 					const alt = slide.image.title
-					const fluidURL = slide.image.fluid.src
+					const imageURL = slide.image.file.url
+					
 					const headline = slide.headline
 					const subline = slide.subline
 					const excerpt = slide.excerpt.excerpt
+
+
 					return (
 						<div className="hero-slide" key={idx}>
-							<img src={fluidURL} style={{ width: '100%' }} kry={idx} alt={alt} />
+							{/* <img src={fluidURL} style={{ width: '100%' }} key={idx} alt={alt} /> */}
+							<img srcset={srcSet} sizes={sizes} src={`${imageURL}?w=800`} alt={alt}/>
 							<div className="hero-slide-content">
 								<div className="hero-slide-gradient"></div>
 								<Container className="hero-slide-container">
