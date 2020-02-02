@@ -15,12 +15,12 @@ const IndexPage = (props) => {
 			<Head title="" props={props} />
 			<SectionHero />
 			<main>
-				<SectionIntro />
-				<SectionFeatureProfile />
+				 <SectionIntro />
+				{/*<SectionFeatureProfile />
 				<SectionCourses />
-				<SectionTours />
+				<SectionTours />*/}
 				<SectionQuotes />
-				<SectionFAQs />
+				<SectionFAQs /> 
 			</main>
 		</Layout>
 	)
