@@ -3,8 +3,8 @@ import { navigate } from 'gatsby'
 import { Form, Col, Button } from 'react-bootstrap'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { GlobalDispatchContext } from '../context/GlobalContextProvider'
-import '../scss/__form.scss'
 import { utils } from '../utils'
+import Styles from './forms.module.scss'
 
 const textMuted = utils.getColor('textMuted')
 
@@ -141,20 +141,20 @@ const RegisterForm = ({ data: { prefilledText, lgCol } }) => {
 			<Form.Row>
 				<Form.Group as={Col} xs={12} md={12} lg={lgColName} controlId="formName" className="mb-2">
 					<Form.Label className={`h6 no-select mb-1 ${textMuted}`}>Name (Pflichtfeld)</Form.Label>
-					<Form.Control type="text" placeholder="Name" name="name" spellCheck="false" onChange={onFieldChange} className={'border-' + fieldsValidation.name} />
+					<Form.Control type="text" placeholder="Name" name="name" spellCheck="false" onChange={onFieldChange} className={`border-${fieldsValidation.name} ${Styles.formControl}`} />
 				</Form.Group>
 				<Form.Group as={Col} xs={12} md={12} lg={lgColEmail} controlId="formEmail" className="mb-2">
 					<Form.Label className={`h6 no-select mb-1 ${textMuted}`}>E-Mail (Pflichtfeld)</Form.Label>
-					<Form.Control type="email" placeholder="E-Mail Adresse" name="email" spellCheck="false" onChange={onFieldChange} className={'border-' + fieldsValidation.email} />
+					<Form.Control type="email" placeholder="E-Mail Adresse" name="email" spellCheck="false" onChange={onFieldChange} className={`border-${fieldsValidation.email} ${Styles.formControl}`} />
 				</Form.Group>
 			</Form.Row>
 			<Form.Group controlId="formTextarea" className="mb-2">
 				<Form.Label className={`h6 no-select mb-1 ${textMuted}`}>Nachricht (Pflichtfeld)</Form.Label>
-				<Form.Control as="textarea" rows="3" placeholder="Nachricht" name="message" spellCheck="false" value={fieldValue.message} onChange={onFieldChange} className={'border-' + fieldsValidation.message} />
+				<Form.Control as="textarea" rows="3" placeholder="Nachricht" name="message" spellCheck="false" value={fieldValue.message} onChange={onFieldChange} className={`border-${fieldsValidation.message} ${Styles.formControl}`} />
 			</Form.Group>
 			<Form.Group className="mb-4">
 				<Form.Label className={`h6 no-select mb-1 ${textMuted}`}>reCAPTCHA (Pflichtfeld)</Form.Label>
-				<div className="recaptcha-wrapper">
+				<div className={`${Styles.recaptchaWrapper}`}>
 					<ReCAPTCHA sitekey={process.env.GATSBY_SITE_RECAPTCHA_KEY} onChange={setRecaptchaValue} />
 				</div>
 			</Form.Group>

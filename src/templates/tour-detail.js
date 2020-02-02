@@ -7,6 +7,7 @@ import Layout from '../components/layout'
 import Head from '../components/head'
 import ModalDialog from '../components/modal-dialog'
 import { RegisterForm } from '../components/forms'
+import { PictureFixedWidth } from '../components/kletterlehrer'
 import { GlobalDispatchContext } from '../context/GlobalContextProvider'
 import Styles from './tour-detail.module.scss'
 
@@ -17,6 +18,11 @@ export const query = graphql`
 				title
 				file {
 					url
+				}
+				fixed(width: 500, quality: 75) {
+					src
+					srcSet
+					srcSetWebp
 				}
 			}
 			slug
@@ -37,8 +43,11 @@ export const query = graphql`
 	}
 `
 const Tour = ({ data }) => {
-	const imageURL = data.contentfulTourItem.image.file.url
-	const imageAlt = data.contentfulTourItem.image.title
+	const src = data.contentfulTourItem.image.fixed.src
+	const srcSet = data.contentfulTourItem.image.fixed.srcSet
+	const srcSetWebp = data.contentfulTourItem.image.fixed.srcSetWebp
+	const altText = data.contentfulTourItem.image.title
+
 	const headline = data.contentfulTourItem.headline
 	const costs = data.contentfulTourItem.costs
 	const introTextJSON = data.contentfulTourItem.introText.json
@@ -47,23 +56,24 @@ const Tour = ({ data }) => {
 	const formTextJSON = data.contentfulTourItem.formText.json
 	const prefilledText = `Ich interessiere mich für das Angebot "${headline}"`
 	const dispatch = useContext(GlobalDispatchContext)
-	
+
 	// Metdata
 	const slug = data.contentfulTourItem.slug
 	const url = `/touren/${slug}`
 	const sharerTitle = headline
 	const excerpt = data.contentfulTourItem.excerpt
+	const sharerImage = data.contentfulTourItem.image.file.url
 
 	return (
 		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
-		<Head title={headline} staticURL={url} sharerTitle={sharerTitle} sharerImage={imageURL} sharerDescription={excerpt}/>
+			<Head title={headline} staticURL={url} sharerTitle={sharerTitle} sharerImage={sharerImage} sharerDescription={excerpt} />
 			<section className={`pt-5 pb-8 pb-sm-10 ${Styles.detailView}`}>
 				<Container className={Styles.mobileContainer}>
 					<Row>
 						<Col xs={12} lg={7} className="pr-lg-0 pr-lg-3">
 							<Card className="bg-dark overflow-hidden shadow-dark-sm">
 								<div className="card-img-top">
-									<img src={imageURL} alt={imageAlt} className="img-fluid" />
+									<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText, customClass: 'responsive-img' }} />
 									<div className={Styles.cardImgTopDiv}>
 										<div>
 											<h1 className="h3 text-white mb-0">{headline}</h1>

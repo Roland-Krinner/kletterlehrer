@@ -5,17 +5,21 @@ import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
 import { cardBodyTextOptions, defaultTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
 import Head from '../components/head'
-import { SubPage, CTA } from '../components/kletterlehrer'
+import { SubPage, CTA, PictureFixedWidth } from '../components/kletterlehrer'
 import Styles from './touren.module.scss'
 
 const baseURL = '/touren'
 
 const PreviewCard = ({ node, customClass }) => {
 	const classes = customClass || ''
+	const src = node.image.fixed.src
+	const srcSet = node.image.fixed.srcSet
+	const srcSetWebp = node.image.fixed.srcSetWebp
+	const altText = node.image.title
 	return (
 		<Card className={`detail-card content-card overflow-hidden shadow-dark-sm mt-20 mt-sm-7 ${classes}`}>
 			<div className={`card-img-top`}>
-				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
+				<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText, customClass: 'responsive-img' }} />
 				<div className={Styles.cardImgTopDiv}>
 					<div>
 						<h2 className="h3 text-white mb-0">{node.headline}</h2>
@@ -35,7 +39,7 @@ const PreviewCard = ({ node, customClass }) => {
 	)
 }
 
-const Tours = (props) => {
+const Tours = props => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulTourItem {
@@ -45,6 +49,11 @@ const Tours = (props) => {
 							title
 							file {
 								url
+							}
+							fixed(width: 450, quality: 75) {
+								src
+								srcSet
+								srcSetWebp
 							}
 						}
 						slug
@@ -71,7 +80,7 @@ const Tours = (props) => {
 	const introTextJSON = data.allContentfulDynamicPages.edges[0].node.toursIntroText.json
 	return (
 		<Layout pageInfo={{ pageName: 'touren', pageType: 'subPage' }}>
-			<Head title="Touren" props={props}/>
+			<Head title="Touren" props={props} />
 			<SubPage data={{ classes: '' }}>
 				<Container>{documentToReactComponents(introTextJSON, defaultTextOptions)}</Container>
 				<Container className={Styles.mobileContainer}>
