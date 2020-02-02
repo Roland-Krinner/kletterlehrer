@@ -37,7 +37,8 @@
 }
 
 .btn,
-.btn.btn-sm, .card,
+.btn.btn-sm,
+.card,
 .rounded {
 	@include borderRadius;
 }
@@ -45,7 +46,6 @@
 .btn-sm {
 	min-width: 9.882rem;
 }
-
 
 .normalize-first-p {
 	p:first-child {
@@ -86,6 +86,11 @@
 	pointer-events: none;
 }
 
+.responsive-img {
+	width: 100%;
+	height: auto;
+}
+
 // .btn-submit {
 // 	i::before {
 // 		display: inline-block;
@@ -94,19 +99,19 @@
 // }
 
 // .collapse-toggler {
-	// 	position: absolute;
-	// 	top: 1rem;
-	// 	right: 1rem;
-	// 	z-index: 1;
-	// 	color: #fff;
-	// 	border-color: transparent;
-	// 	padding: 0.25rem 0.75rem;
-	// 	font-size: 1.1875rem;
-	// 	line-height: 1;
-	// 	background-color: transparent;
-	// 	border: 1px solid transparent;
-	// 	border-radius: 0.375rem;
-	// }
+// 	position: absolute;
+// 	top: 1rem;
+// 	right: 1rem;
+// 	z-index: 1;
+// 	color: #fff;
+// 	border-color: transparent;
+// 	padding: 0.25rem 0.75rem;
+// 	font-size: 1.1875rem;
+// 	line-height: 1;
+// 	background-color: transparent;
+// 	border: 1px solid transparent;
+// 	border-radius: 0.375rem;
+// }
 
 // .collapse-toggler:hover,
 // .collapse-toggler:active {

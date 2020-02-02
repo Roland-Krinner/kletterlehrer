@@ -29,12 +29,12 @@ const SVG = ({ svg, file, alt }) => {
 	return <img src="" alt={alt} />
 }
 
-const PictureFixedWidth = ({ data: { srcSetWebp, srcSet, src, altText } }) => {
+const PictureFixedWidth = ({ data: { srcSetWebp, srcSet, src, altText, customClass } }) => {
 	return (
 		<picture>
 			<source type="image/webp" srcSet={srcSetWebp} />
 			<source srcSet={srcSet} />
-			<img srcSet={srcSet} src={src} alt={altText} />
+			<img srcSet={srcSet} src={src} alt={altText} className={customClass} />
 		</picture>
 	)
 }

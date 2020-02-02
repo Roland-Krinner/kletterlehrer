@@ -30,7 +30,7 @@ const DesktopCard = ({ node }) => {
 		<Col xs={4}>
 			<Card className="overflow-hidden shadow-dark-sm lift">
 				<Link className="card-img-top" to={url}>
-					<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText }} />
+					<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText, customClass: 'responsive-img' }} />
 				</Link>
 				<Link className="card-body" to={url}>
 					<h3>{node.headline}</h3>
@@ -55,7 +55,7 @@ const MobileCard = ({ customClass, node }) => {
 	return (
 		<div className={`card mobile-card overflow-hidden ${customClass || ''}`}>
 			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
-				<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText }} />
+				<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText, customClass: 'responsive-img' }} />
 			</Link>
 			<Link className="card-body" to={`${baseURL}/${node.slug}`}>
 				<h3 className="mb-2">{node.headline}</h3>

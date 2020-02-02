@@ -31,7 +31,7 @@ const DesktopCard = ({ customClass, node }) => {
 	return (
 		<Card className={`desktop-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
 			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
-				<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText }} />
+				<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText, customClass: 'responsive-img' }} />
 				<div>
 					<p className="text-white h6 mb-0">
 						<i className="fe fe-map-pin mr-1"></i>
@@ -60,7 +60,7 @@ const MobileCard = ({ customClass, node }) => {
 	return (
 		<div className={`card mobile-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
 			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
-				<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText }} />
+				<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText, customClass: 'responsive-img' }} />
 			</Link>
 			<Link className="card-body" to={`${baseURL}/${node.slug}`}>
 				<h3 className="mb-0">{node.headline}</h3>
