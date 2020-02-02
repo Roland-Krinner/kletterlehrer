@@ -79,10 +79,6 @@ const Head = ({ props, staticURL, title, sharerTitle, sharerDescription, sharerI
 			<meta itemprop="image" content={og_image} />
 
 			{/* <link rel="canonical" href={xxx__ToDo} /> */}
-			{/* <link rel="preload" href="//ergo-schober.de/static/media/Feather.65d68bd4.svg" as="font" type="image/svg+xml" crossorigin="" />
-			<link rel="preload" href="//ergo-schober.de/static/media/Feather.d9c23068.woff" as="font" type="font/woff" crossorigin="" />
-			<link rel="preload" href="//ergo-schober.de/static/media/Feather.fe159434.ttf" as="font" type="font/ttf" crossorigin="" />
-			   */}
 		</Helmet>
 	)
 }

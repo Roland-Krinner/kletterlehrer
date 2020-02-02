@@ -1,14 +1,14 @@
 import React, { useContext } from 'react'
 import { Toast } from 'react-bootstrap'
 import { GlobalDispatchContext, GlobalStateContext } from '../context/GlobalContextProvider'
-import '../scss/__notification.scss'
+import Styles from './notification.module.scss'
 
 function Notification() {
 	const dispatch = useContext(GlobalDispatchContext)
 	const state = useContext(GlobalStateContext)
 
 	return (
-		<div className="notification-wrapper">
+		<div className={`${Styles.notificationWrapper}`}>
 			<Toast
 				onClose={() => {
 					dispatch({ type: 'HIDE_NOTIFICATION' })
@@ -20,7 +20,7 @@ function Notification() {
 				className="no-select"
 			>
 				<Toast.Header>
-					<strong className="mr-auto">Achtung</strong>
+					<strong className="mr-auto">Hinweis</strong>
 				</Toast.Header>
 				<Toast.Body>
 					{state.messages.map((message, idx) => {

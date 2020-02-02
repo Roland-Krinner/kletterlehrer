@@ -63,7 +63,7 @@ const RegisterForm = ({ data: { prefilledText, lgCol } }) => {
 					break
 				case 'email':
 					reg = /^(([^<>()[\]\\.,;:\s@]+(\.[^<>()[\]\\.,;:\s@]+)*)|(.+))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-					msg = 'Bitte gültige E-Mail Adresse angeben'
+					msg = 'Bitte eine gültige E-Mail Adresse angeben'
 					break
 				case 'message':
 					reg = /^.+$/
