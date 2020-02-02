@@ -20,12 +20,10 @@ const Hero = () => {
 								title
 								file {
 									url
-									contentType
 								}
-								fluid(maxWidth: 1600, quality: 100) {
+								fluid(maxWidth: 1600, quality: 75) {
 									sizes
 									srcSet
-									srcSetWebp
 								}
 							}
 						}
@@ -35,35 +33,20 @@ const Hero = () => {
 		}
 	`)
 	const heroSlides = data.allContentfulHome.edges[0].node.heroSlides
-
 	return (
 		<section className="hero-section">
-			<Flickity options={{ wrapAround: true, pageDots: true, prevNextButtons: false, adaptiveHeight: true, autoPlay: 2500 }}>
+			<Flickity options={{ lazyLoad: 1, wrapAround: true, pageDots: true, prevNextButtons: false, adaptiveHeight: true, autoPlay: 2500 }}>
 				{heroSlides.map((slide, idx) => {
-				
 					const defaultImage = slide.image.file.url
 					const alt = slide.image.title
-
 					const srcSet = slide.image.fluid.srcSet
-					const srcSetWebp = slide.image.fluid.srcSetWebp
 					const sizes = slide.image.fluid.sizes
-					const contentType = slide.image.file.contentType
-					
 					const headline = slide.headline
 					const subline = slide.subline
 					const excerpt = slide.excerpt.excerpt
-
 					return (
 						<div className="hero-slide" key={idx}>
-							{/* <img src={fluidURL} style={{ width: '100%' }} key={idx} alt={alt} /> */}
-							{/* <img srcset={srcSet} sizes={sizes} src={`${defaultImage}?w=800`} alt={alt} /> */}
-
-							<picture style={{ width: '100%' }} key={idx}>
-								<source type="image/webp" srcSet={srcSetWebp} />
-								<source type={contentType} srcSet={srcSet} />
-								<img src={`${defaultImage}?w=800`} alt={alt} style={{ width: '100%' }}/>
-							</picture>
-
+							<img data-flickity-lazyload-srcset={srcSet} data-flickity-lazyload-src={`${defaultImage}?w=800`} sizes={sizes} alt={alt} />
 							<div className="hero-slide-content">
 								<div className="hero-slide-gradient"></div>
 								<Container className="hero-slide-container">
