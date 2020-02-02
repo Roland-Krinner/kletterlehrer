@@ -70,6 +70,9 @@
 
 .hero-slide {
 	width: 100%;
+	> img {
+		width: 100%;
+	}
 }
 
 .hero-slide-content {
@@ -94,7 +97,7 @@
 
 	// lg
 	@media (min-width: 992px) {
-		@include heroGradient
+		@include heroGradient;
 	}
 }
 
