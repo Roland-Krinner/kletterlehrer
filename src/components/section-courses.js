@@ -2,11 +2,10 @@ import React from 'react'
 import { Container, Card } from 'react-bootstrap'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { Section } from './kletterlehrer'
-import {defaultTextOptions} from './format-options'
-import '../scss/__section-courses.scss'
-
+import { Section, PictureFixedWidth } from './kletterlehrer'
+import { defaultTextOptions } from './format-options'
 import { utils } from '../utils/'
+import '../scss/__section-courses.scss'
 
 const baseURL = '/kurse'
 
@@ -25,10 +24,14 @@ const CtaCard = ({ customClass, ctaJSON }) => {
 
 const DesktopCard = ({ customClass, node }) => {
 	const startDate = utils.formatDate(node.startDate)
+	const src = node.image.fixed.src
+	const srcSet = node.image.fixed.srcSet
+	const srcSetWebp = node.image.fixed.srcSetWebp
+	const altText = node.image.title
 	return (
 		<Card className={`desktop-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
 			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
-				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
+				<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText }} />
 				<div>
 					<p className="text-white h6 mb-0">
 						<i className="fe fe-map-pin mr-1"></i>
@@ -50,10 +53,14 @@ const DesktopCard = ({ customClass, node }) => {
 
 const MobileCard = ({ customClass, node }) => {
 	const startDate = utils.formatDate(node.startDate)
+	const src = node.image.fixed.src
+	const srcSet = node.image.fixed.srcSet
+	const srcSetWebp = node.image.fixed.srcSetWebp
+	const altText = node.image.title
 	return (
 		<div className={`card mobile-card shadow-dark-sm overflow-hidden ${customClass || ''}`}>
 			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
-				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
+				<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText }} />
 			</Link>
 			<Link className="card-body" to={`${baseURL}/${node.slug}`}>
 				<h3 className="mb-0">{node.headline}</h3>
@@ -156,6 +163,11 @@ const Courses = () => {
 							title
 							file {
 								url
+							}
+							fixed(width: 450, quality: 75) {
+								src
+								srcSet
+								srcSetWebp
 							}
 						}
 						headline

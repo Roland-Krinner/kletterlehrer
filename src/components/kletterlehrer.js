@@ -29,4 +29,14 @@ const SVG = ({ svg, file, alt }) => {
 	return <img src="" alt={alt} />
 }
 
-export { SubPage, Section, CTA, SVG }
+const PictureFixedWidth = ({ data: { srcSetWebp, srcSet, src, altText } }) => {
+	return (
+		<picture>
+			<source type="image/webp" srcSet={srcSetWebp} />
+			<source srcSet={srcSet} />
+			<img srcSet={srcSet} src={src} alt={altText} />
+		</picture>
+	)
+}
+
+export { SubPage, Section, CTA, SVG, PictureFixedWidth }

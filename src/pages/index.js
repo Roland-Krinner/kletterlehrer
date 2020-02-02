@@ -9,18 +9,18 @@ import SectionQuotes from '../components/section-quotes'
 import SectionFeatureProfile from '../components/section-feature-profile'
 import SectionFAQs from '../components/section-faqs'
 
-const IndexPage = (props) => {
+const IndexPage = props => {
 	return (
 		<Layout pageInfo={{ pageName: 'startseite', pageType: 'homePage' }}>
 			<Head title="" props={props} />
 			<SectionHero />
 			<main>
-				 <SectionIntro />
-				{/*<SectionFeatureProfile />
+				<SectionIntro />
+				<SectionFeatureProfile />
 				<SectionCourses />
-				<SectionTours />*/}
+				<SectionTours />
 				<SectionQuotes />
-				<SectionFAQs /> 
+				<SectionFAQs />
 			</main>
 		</Layout>
 	)

@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Card } from 'react-bootstrap'
 import { Link, useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { Section } from './kletterlehrer'
+import { Section, PictureFixedWidth } from './kletterlehrer'
 import { defaultTextOptions } from './format-options'
 
 const baseURL = '/touren'
@@ -22,11 +22,15 @@ const CtaCard = ({ customClass, ctaJSON }) => {
 
 const DesktopCard = ({ node }) => {
 	const url = `${baseURL}/${node.slug}`
+	const src = node.image.fixed.src
+	const srcSet = node.image.fixed.srcSet
+	const srcSetWebp = node.image.fixed.srcSetWebp
+	const altText = node.image.title
 	return (
 		<Col xs={4}>
 			<Card className="overflow-hidden shadow-dark-sm lift">
 				<Link className="card-img-top" to={url}>
-					<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
+					<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText }} />
 				</Link>
 				<Link className="card-body" to={url}>
 					<h3>{node.headline}</h3>
@@ -44,10 +48,14 @@ const DesktopCard = ({ node }) => {
 }
 
 const MobileCard = ({ customClass, node }) => {
+	const src = node.image.fixed.src
+	const srcSet = node.image.fixed.srcSet
+	const srcSetWebp = node.image.fixed.srcSetWebp
+	const altText = node.image.title
 	return (
 		<div className={`card mobile-card overflow-hidden ${customClass || ''}`}>
 			<Link className="card-img-top" to={`${baseURL}/${node.slug}`}>
-				<img src={node.image.file.url} alt={node.image.title} className="img-fluid" />
+				<PictureFixedWidth data={{ srcSetWebp, srcSet, src, altText }} />
 			</Link>
 			<Link className="card-body" to={`${baseURL}/${node.slug}`}>
 				<h3 className="mb-2">{node.headline}</h3>
@@ -86,6 +94,11 @@ const Tours = () => {
 							title
 							file {
 								url
+							}
+							fixed(width: 450, quality: 75) {
+								src
+								srcSet
+								srcSetWebp
 							}
 						}
 						headline
