@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useStaticQuery, graphql } from 'gatsby'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { defaultTextOptions } from '../components/format-options'
+import { legalTextOptions } from '../components/format-options'
 import Layout from '../components/layout'
 import Head from '../components/head'
 import { SubPage } from '../components/kletterlehrer'
@@ -29,7 +29,7 @@ const Imprint = (props) => {
 				<Container>
 					<Row>
 						<Col xs={12} md={8}>
-							{documentToReactComponents(bodyJSON, defaultTextOptions)}
+							{documentToReactComponents(bodyJSON, legalTextOptions)}
 						</Col>
 					</Row>
 				</Container>

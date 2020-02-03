@@ -6,7 +6,7 @@ import { utils } from '../utils'
 
 const textMuted = utils.getColor('textMuted')
 
-const BrandData = ({ data: { searchStr } }) => {
+const BrandData = ({ data: { searchStr, customClasses } }) => {
 	const data = useStaticQuery(graphql`
 		query {
 			allContentfulPersonalData {
@@ -35,10 +35,13 @@ const BrandData = ({ data: { searchStr } }) => {
 	const phone = data.allContentfulPersonalData.edges[0].node.phone
 	const phonePlain = data.allContentfulPersonalData.edges[0].node.phonePlain
 	const websiteName = data.allContentfulPersonalData.edges[0].node.websiteName
+
+		const paragraphClasses = customClasses ? customClasses : `${textMuted}`
+
 	if (searchStr === '$$contactData$$') {
 		return (
 			<>
-				<p className={`${textMuted}`}>
+				<p className={`${paragraphClasses}`}>
 					{name}
 					<br />
 					{street}
@@ -47,7 +50,7 @@ const BrandData = ({ data: { searchStr } }) => {
 					<br />
 					{country}
 				</p>
-				<p className={`${textMuted}`}>
+				<p className={`${paragraphClasses}`}>
 					Telefon:{' '}
 					<a href={`tel:${phonePlain}`} className={`text-success text-decoration-none`}>
 						{phone}
@@ -62,7 +65,7 @@ const BrandData = ({ data: { searchStr } }) => {
 		)
 	} else if (searchStr === '$$imprintAddress$$') {
 		return (
-			<p className={`${textMuted}`}>
+			<p className={`${paragraphClasses}`}>
 				{name}
 				<br />
 				{street}
@@ -74,7 +77,7 @@ const BrandData = ({ data: { searchStr } }) => {
 		)
 	} else if (searchStr === '$$imprintContact$$') {
 		return (
-			<p className={`${textMuted}`}>
+			<p className={`${paragraphClasses}`}>
 				Telefon: {phone}
 				<br />
 				E-Mail: {eMail}
@@ -88,7 +91,7 @@ const BrandData = ({ data: { searchStr } }) => {
 
 const defaultTextOptions = {
 	renderNode: {
-		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-1`}>{children}</h1>,
+		[BLOCKS.HEADING_1]: (node, children) => <h1 className={`mb-0 mb-sm-1`}>{children}</h1>,
 		[BLOCKS.HEADING_6]: (node, children) => <p className={`font-size-lg mb-4 mb-lg-5 ${textMuted}`}>{children}</p>,
 		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`font-weight-bold`}>{children}</h3>,
 		[BLOCKS.PARAGRAPH]: (node, children) => {
@@ -110,6 +113,37 @@ const defaultTextOptions = {
 				<span className={`mb-2`}>{children}</span>
 			</div>
 		),
+		[INLINES.HYPERLINK]: (node, children) => {
+			if (node.data.uri && node.data.uri.startsWith('/')) {
+				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
+			} else {
+				return (
+					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
+						{children}
+					</a>
+				)
+			}
+		},
+	},
+	renderMark: {
+		[MARKS.BOLD]: text => <span className={`font-weight-bold`}>{text}</span>,
+	},
+}
+
+const legalTextOptions = {
+	renderNode: {
+		[BLOCKS.PARAGRAPH]: (node, children) => {
+			if (node.content.length === 1 && node.content[0].value === '') {
+				return ''
+			} else if (node.content[0].value.indexOf('$$') !== -1) {
+				return <BrandData data={{ searchStr: node.content[0].value, customClasses: 'mb-4 mb-md-6' }} />
+			} else {
+				return <p className={`mb-4 mb-md-6`}>{children}</p>
+			}
+		},
+		[BLOCKS.HR]: (node, children) => <hr className={`border-dark my-6`} />,
+		[BLOCKS.UL_LIST]: (node, children) => <ul className={`pl-4 pb-5`}>{children}</ul>,
+		[BLOCKS.LIST_ITEM]: (node, children) => <li className={`normalize-last-p`}>{children}</li>,
 		[INLINES.HYPERLINK]: (node, children) => {
 			if (node.data.uri && node.data.uri.startsWith('/')) {
 				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
@@ -150,31 +184,6 @@ const faqTextOptions = {
 		},
 	},
 }
-
-// const introTextOptions = {
-// 	renderNode: {
-// 		[BLOCKS.HEADING_2]: (node, children) => <h2 className={`mb-1`}>{children}</h2>,
-// 		[BLOCKS.HEADING_3]: (node, children) => <h3 className={`mb-5 ${textMuted}`}>{children}</h3>,
-// 		[BLOCKS.PARAGRAPH]: (node, children) => {
-// 			if (node.content.length === 1 && node.content[0].value === '') {
-// 				return ''
-// 			} else {
-// 				return <p className={`font-size-lg ${textMuted}`}>{children}</p>
-// 			}
-// 		},
-// 		[INLINES.HYPERLINK]: (node, children) => {
-// 			if (node.data.uri && node.data.uri.startsWith('/')) {
-// 				return <CTA data={{ to: node.data.uri, classes: '' }}>{children}</CTA>
-// 			} else {
-// 				return (
-// 					<a href={node.data.uri} target="_blank" rel="noopener noreferrer" className={`text-success text-decoration-none`}>
-// 						{children}
-// 					</a>
-// 				)
-// 			}
-// 		},
-// 	},
-// }
 
 const options = {
 	renderNode: {
@@ -237,4 +246,4 @@ const formTextOptions = {
 	},
 }
 
-export { defaultTextOptions, faqTextOptions, formTextOptions, options, cardBodyTextOptions }
+export { defaultTextOptions, faqTextOptions, formTextOptions, options, cardBodyTextOptions, legalTextOptions }
